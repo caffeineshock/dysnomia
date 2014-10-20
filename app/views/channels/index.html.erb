@@ -1,0 +1,24 @@
+<h1>Chats</h1>
+<table id="chats">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Name</th>
+      <th class="hide_on_phone">Letzte Nachricht</th>
+      <th class="hide_on_phone">Öffentlich</th>
+      <th class="hide_on_phone">Stumm</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% channels.each do |channel| %>
+      <tr>
+        <td><%= channel.unread_messages_icon %></td>
+        <td><%= link_to channel.title, channel_messages_path(channel) %></td>
+        <td class="hide_on_phone"><%= datetime_column channel.last_message_at, relative: true %></td>
+        <td class="hide_on_phone"><i class="fi-<%= channel.public? ? "check" : "minus" %>"></i></td>
+        <td class="hide_on_phone"><i class="fi-<%= channel.muted_by?(current_user) ? "check" : "minus" %>"></i></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= will_paginate @channels %>

@@ -1,0 +1,9 @@
+<% if activity.trackable %>
+	<% if activity.owner == activity.trackable %>
+      hat den eigenen Account aktualisiert.
+	<% else %>
+      hat den Benutzer <%= link_to activity.trackable.username, activity.trackable %> aktualisiert.
+	<% end %>
+<% else %>
+  hat einen Benutzer, der in der Zwischenzeit gelöscht wurde, aktualisiert.
+<% end %>

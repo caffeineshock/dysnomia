@@ -1,0 +1,13 @@
+@import "application";
+
+body {
+  background: linear-gradient(
+    rgba($primary-color, 0), 
+    rgba($primary-color, 0.1)
+  ), url(image_path('background_devise.jpg')) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  background-attachment: fixed;
+}

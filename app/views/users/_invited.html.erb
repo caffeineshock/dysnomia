@@ -1,0 +1,23 @@
+<%= form_tag destroy_multiple_users_path, method: :delete do %>
+<table id="invited_users">
+  <thead>
+    <tr>
+      <th></th>
+      <th>E-Mail-Adresse</th>
+      <th>Eingeladen von</th>
+      <th>Einladung</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% users.each do |user| %>
+      <tr>
+        <td><%= check_box_tag "user_ids[]", user.id %></td>
+        <td><%= user.link %></td>
+        <td><%= user.invited_by.link %></td>
+        <td><%= datetime_column user.created_at, relative: true %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= submit_tag 'Löschen', class: "small button alert" %>
+<% end %>

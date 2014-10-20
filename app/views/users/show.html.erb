@@ -1,0 +1,56 @@
+<% content_for :contextnav do %>
+	<ul class="side-nav">
+	  <li class="active"><%= link_to 'Permalink', user_path(user) %></li>
+	  <li><%= link_to 'Editieren', edit_user_path(user) if current_user.can_edit? user %></li>
+	  <li><%= link_to 'Löschen', user, method: :delete, data: { confirm: 'ORLY?' } if current_user.can_edit? user %></li>
+	  <li class="divider"></li>
+	  <li><%= link_to "Aktivitäten", activities_path(:filter => "user") %></li>
+      <li><%= link_to "Startseite", user_path(1) %></li>
+      <li><%= link_to "Liste", users_path %></li>
+	</ul>
+<% end %>
+<h1><%= image_tag user.avatar.url(:medium), class: "avatar" %> <%= user.username %></h1>
+<table>
+  <tr>
+    <td>E-Mail-Adresse</td>
+    <td><%= mail_to user.email %></td>
+  </tr>
+  <tr>
+    <td>Jabber-ID</td>
+    <td><%= link_to user.jabber_id, "xmpp:#{user.jabber_id}" %></td>
+  </tr>
+  <tr>
+    <td>Jabber-OTR-Finbgerprint</td>
+    <td>
+    	<% if user.jabber_otr_fingerprint.blank? %>
+    		-
+    	<% else %>
+    		<pre class="embedded" id="otr_fingerprint"><%= user.jabber_otr_fingerprint %></pre><%= clipboard_button("otr_fingerprint") %>
+		<% end %>
+    </td>
+  </tr>
+<% if current_user.can_edit? user %>
+  <tr>
+    <td>Access Token</td>
+    <td><pre class="embedded secret" id="access_token"><%= user.access_token %></pre><%= clipboard_button("access_token") %></td>
+  </tr>
+<% end %>
+  <tr>
+    <td>Rolle</td>
+    <td><%= user.role_icon %></i>
+  </tr>
+<% if current_user.admin? %>
+  <td>Organisationen</td>
+    <td>
+      <ul class="inline-table-list inline-list">
+        <% user.tenants.each do |t| %>
+          <li><%= t.link %></li>
+        <% end %>
+      </ul>
+    </td>
+<% end %>
+  <tr>
+    <td>Letzter Login</td>
+    <td><% if user.current_sign_in_at.nil? %>Noch nie eingeloggt<% else %><%= l user.current_sign_in_at %><% end %></td>
+  </tr>
+</table>

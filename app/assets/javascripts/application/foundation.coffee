@@ -1,0 +1,1 @@
+$.turboInit -> $(document).foundation()

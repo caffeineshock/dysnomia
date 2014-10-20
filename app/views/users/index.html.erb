@@ -1,0 +1,18 @@
+<% content_for :contextnav do %>
+  <ul class="side-nav">
+    <li><%= link_to "Aktivitäten", activities_path(:filter => "user") %></li>
+    <li><%= link_to "Eigenes Profil", current_user %></li>
+    <li class="divider"></li>
+    <li><%= link_to "Eigenes Profil bearbeiten", edit_user_path(current_user) %></li>
+  </ul>
+<% end %>
+<h1>Benutzer</h1>
+<% if current_user.moderator_or_admin? %>
+  <dl class="sub-nav">
+    <dd<% unless @filter %> class="active"<% end %>><%= link_to "Bestätigte", users_path %></dd>
+    <dd<% if @filter == "unapproved" %> class="active"<% end %>><%= link_to "Unbestätigte", users_path(filter: "unapproved") %></dd>
+    <dd<% if @filter == "invited" %> class="active"<% end %>><%= link_to "Eingeladene", users_path(filter: "invited") %></dd>
+  </dl>
+<% end %>
+<%= render(@filter.nil? ? "approved" : @filter) %>
+<%= will_paginate @users %>

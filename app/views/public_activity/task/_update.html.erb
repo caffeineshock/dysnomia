@@ -1,0 +1,5 @@
+<% if activity.trackable %>
+  hat eine Aufgabe <%= link_to activity.trackable.title, activity.trackable %> aktualisiert.
+<% else %>
+  hat eine Aufgabe, die in der Zwischenzeit gelöscht wurde, aktualisiert.
+<% end %>

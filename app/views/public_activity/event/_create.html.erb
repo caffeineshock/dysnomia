@@ -1,0 +1,5 @@
+<% if activity.trackable %>
+  hat den Termin <%= link_to activity.trackable.title, activity.trackable %> erstellt.
+<% else %>
+  hat einen Termin, der in der Zwischenzeit gelöscht wurde, erstellt.
+<% end %>

@@ -1,0 +1,36 @@
+<% content_for :contextnav do %>
+	<ul class="side-nav">
+	  <li class="active"><%= link_to 'Permalink', task %></li>
+	  <li class="divider"></li>
+	  <li><%= link_to 'Editieren', edit_task_path(task) %></li>
+	  <li><%= link_to 'Löschen', task, method: :delete, data: { confirm: 'ORLY?' } %></li>
+	  <li class="divider"></li>
+	  <li><%= link_to "Aktivitäten", activities_path(:filter => "task") %></li>
+      <li><%= link_to "Liste", tasks_path %></li>
+	</ul>
+<% end %>
+<h1><%= task.title %></h1>
+<table>
+  <tr>
+    <td>Erledigt</td>
+    <td><i class="fi-<%= task.completed? ? "check" : "minus" %>"></i></td>
+  </tr>
+  <tr>
+    <td>Pünktlich</td>
+    <td><i class="fi-<%= task.overdue? ? "minus" : "check" %>"></i>
+  </tr>
+  <tr>
+    <td>Fällig</td>
+    <td><%= datetime_column task.due_at, time: false %></td>
+  </tr>
+  <tr>
+    <td>Aufgabe von</td>
+    <td>
+      <ul class="inline-table-list inline-list">
+        <% task.users.each do |u| %>
+          <li><%= u.link %></li>
+        <% end %>
+      </ul>
+    </td>
+  </tr>
+</table>

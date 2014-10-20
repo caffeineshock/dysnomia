@@ -1,0 +1,20 @@
+<table id="users">
+  <thead>
+    <tr>
+      <th class="hide_on_phone"></th>
+      <th>Benutzername</th>
+      <th class="hide_on_phone">Rolle</th>
+      <th class="hide_on_phone">Letzter Login</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% users.each do |user| %>
+      <tr>
+        <td class="avatar-cell hide_on_phone"><%= image_tag user.avatar.url(:small), class: "avatar small" %></td>
+        <td><%= user.link %></td>
+        <td class="hide_on_phone"><%= user.role_icon %></td>
+        <td class="hide_on_phone"><%= datetime_column user.current_sign_in_at, relative: true %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

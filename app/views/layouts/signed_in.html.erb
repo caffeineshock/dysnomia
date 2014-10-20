@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if lt IE 7 ]> <html class="ie6" lang="de"> <![endif]-->
+<!--[if IE 7 ]>    <html class="ie7" lang="de"> <![endif]-->
+<!--[if IE 8 ]>    <html class="ie8" lang="de"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--> <html lang="de"> <!--<![endif]-->
+  <head>
+  	<meta charset="utf-8" />
+  	<!-- Uncomment to make IE8 render like IE7 -->
+  	<!-- <meta http-equiv="X-UA-Compatible" content="IE=7" /> -->
+  	<!-- Set the viewport width to device width for mobile -->
+  	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  	<title><%= current_tenant.name %> &ndash; Dysnomia<% if content_for?(:title) %> &ndash; <%= yield(:title) %><% end %></title>
+  	<%= stylesheet_link_tag    "application" %>
+  	<%= javascript_include_tag "vendor/modernizr" %>
+    <%= javascript_include_tag "application" %>
+    <%= javascript_tag do %>
+      window.connection_id = "<%= SecureRandom.uuid %>";
+      window.current_user = <%= current_user.id %>;
+      window.current_tenant = <%= current_tenant.id %>;
+      window.onlinestatus_channel = "/onlinestatus/<%= current_tenant.id %>";
+    <% end %>
+    <%= csrf_meta_tags %>
+    <%= subscribe_to "/unread/#{current_tenant.id}" %>
+    <%= subscribe_to "/onlinestatus/#{current_tenant.id}", publish: true %>
+  </head>
+  <body>
+    <%= render "shared/help" %>
+    <%= render "shared/version" %>
+    <%= render "shared/navigation" %>
+    <div id="container">
+      <div class="row">
+        <div class="large-12 columns">
+          <% flash.each do |name, msg| %>
+            <div data-alert class="alert-box <%= name %>">
+              <%= msg %>
+              <a href="#" class="close"><i class="fi-x-circle"></i></a>
+            </div>
+          <% end %>
+        </div>
+      </div>
+      <% unless content_for? :custom_body %>
+      <div class="row">
+        <div id="content">
+          <div id="main" class="<%= content_for?(:contextnav) ? "large-9" : "large-12" %> columns">
+              <%= yield %>
+          </div>
+          <% if content_for? :contextnav %>
+          <div id="contextnav" class="large-3 columns" >
+            <%= yield :contextnav %>
+          </div>
+          <% end %>
+        </div>
+      </div>
+      <% else %>
+        <%= yield :custom_body %>
+      <% end %>
+    </div>
+    <%= javascript_tag do %>
+      window.unread = <%= raw unread_objs.to_json %>;
+      window.muted_channels = <%= raw muted_channels.to_json %>;
+      window.current_chat = null;
+
+      <%= yield :javascript if content_for? :javascript  %>
+    <% end %>
+    <%= javascript_include_tag "controllers/" + params[:controller] %>
+  </body>
+</html>

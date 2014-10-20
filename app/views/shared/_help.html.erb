@@ -1,0 +1,63 @@
+<div id="help" class="reveal-modal" data-reveal>
+  <h2>Hilfe</h2>
+  <p class="lead">Die folgenden Shortcuts können außerhalb von Formularfeldern benutzt werden</p>
+  <table>
+    <tr>
+      <td><kbd>h</kbd></td>
+      <td>Hilfeseite öffnen</td>
+    </tr>
+    <tr>
+      <td><kbd>s</kbd></td>
+      <td>Startseite/Aktivitäten anzeigen</td>
+    </tr>
+    <tr>
+      <td><kbd>f</kbd></td>
+      <td>Forum anzeigen</td>
+    </tr>
+    <tr>
+      <td><kbd>c</kbd></td>
+      <td>Chats anzeigen</td>
+    </tr>
+    <tr>
+      <td><kbd>d</kbd></td>
+      <td>Dateien anzeigen</td>
+    </tr>
+    <tr>
+      <td><kbd>w</kbd></td>
+      <td>Wiki anzeigen</td>
+    </tr>
+    <tr>
+      <td><kbd>t</kbd></td>
+      <td>Termine anzeigen</td>
+    </tr>
+  </table>
+  <table>
+    <tr>
+      <td><kbd>a</kbd></td>
+      <td>Aufgaben anzeigen</td>
+    </tr>
+    <tr>
+      <td><kbd>b</kbd></td>
+      <td>Benutzer anzeigen</td>
+    </tr>
+    <tr>
+      <td><kbd>l</kbd></td>
+      <td>Logout</td>
+    </tr>
+    <% if current_user.admin? %>
+    <tr>
+      <td><kbd>Shift</kbd> + <kbd>v</kbd></td>
+      <td>Versionsinformationen anzeigen</td>
+    </tr>
+    <tr>
+      <td><kbd>Shift</kbd> + <kbd>t</kbd></td>
+      <td>Organisationen verwalten</td>
+    </tr>
+    <tr>
+      <td><kbd>Shift</kbd> + <kbd>s</kbd></td>
+      <td>Sidekiq-Dashboard öffnen</td>
+    </tr>
+    <% end %>
+  </table>
+  <a class="close-reveal-modal">&#215;</a>
+</div>

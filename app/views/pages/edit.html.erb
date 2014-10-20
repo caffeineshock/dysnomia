@@ -1,0 +1,11 @@
+<% content_for :contextnav do %>
+	<ul class="side-nav">
+	  <li><%= link_to 'Zurück', @page %></li>
+	  <li class="divider"></li>
+	  <li><%= link_to "Aktivitäten", activities_path(:filter => "page") %></li>
+      <li><%= link_to "Startseite", page_path(1) %></li>
+      <li><%= link_to "Liste", pages_path %></li>
+	</ul>
+<% end %>
+<h1>Seite bearbeiten</h1>
+<%= render 'form' %>

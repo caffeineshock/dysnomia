@@ -1,0 +1,5 @@
+<% if activity.trackable %>
+  hat die Seite <%= link_to activity.trackable.title, activity.trackable %> erstellt.
+<% else %>
+  hat eine Seite, die in der Zwischenzeit gelöscht wurde, erstellt.
+<% end %>

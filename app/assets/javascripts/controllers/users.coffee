@@ -1,0 +1,1 @@
+$("#user_tenant_ids").select2();

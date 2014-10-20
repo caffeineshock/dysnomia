@@ -1,0 +1,29 @@
+ de:
+   devise:
+      mailer:
+        invitation_instructions:
+          subject: 'Einladung'
+          hello: 'Hi %{email},'
+          someone_invited_you: 'jemand hat dich eingeladen %{url} beizutreten, du kannst durch den Link unten die Einladung annehmen.'
+          accept: 'Einladung akzeptieren'
+          ignore: "Wenn du die Einladung nicht annehmen möchtest, dann ignoriere einfach diese Mail.<br />Dein Account wird nicht erstellt, bis du den Anweisungen unter dem Link gefolgt bist."
+      invitations:
+        user:
+          send_instructions: 'Eine Einladungsmail wurde an %{email} gesendet.'
+          added_user_to_tenant: 'Der Benutzer wurde für diese Organisation freigeschaltet.'
+          invitation_token_invalid: 'Der Einladungsschlüssel ist nicht gültig!'
+          updated: 'Dein Passwort und Benutzername wurden gespeichert. Du bist jetzt eingeloggt.'
+          subject: 'Du hast eine Einladung!'
+        edit:
+          header: 'Benutzerdetails'
+          submit_button: 'Account erstellen'
+        new:
+          header: 'Neuer Benutzer'
+          submit_button: 'Benutzer hinzufügen'    
+      registrations:
+        user:
+          signed_up_but_not_approved: 'Du hast dich erfolgreich registriert, dein Account wurde aber noch nicht von einem Moderator bestätigt.'
+      failure:
+        user:
+          not_approved: 'Dein Account wurde noch nicht von einem Moderator bestätigt.'
+          not_part_of_organization: 'Dein Account ist noch nicht von einem Moderator für diese Organisation berechtigt worden.'

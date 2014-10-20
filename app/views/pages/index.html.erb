@@ -1,0 +1,28 @@
+<% content_for :contextnav do %>
+  <ul class="side-nav">
+    <li><%= link_to "Aktivitäten", activities_path(:filter => "page") %></li>
+    <li><%= link_to "Startseite", page_path(1) %></li>
+    <li class="divider"></li>
+    <li><%= link_to 'Neue Seite', new_page_path %></li>
+  </ul>
+<% end %>
+<h1>Seiten</h1>
+<table id="pages">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Titel</th>
+      <th class="hide_on_phone">Letzte &Auml;nderung</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% pages.each do |page| %>
+      <tr>
+        <td><%= page.unread_icon %></td>
+        <td><%= link_to page.title, page %></td>
+        <td class="hide_on_phone"><%= datetime_column page.updated_at, relative: true %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= will_paginate @pages %>

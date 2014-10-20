@@ -1,0 +1,7 @@
+de:
+  events:
+    recurring_type:
+      weekly: Wöchentlich
+      monthly: Monatlich
+      yearly: Jährlich
+      none: Keine Wiederholung

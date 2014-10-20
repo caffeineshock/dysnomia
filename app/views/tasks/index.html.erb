@@ -1,0 +1,42 @@
+<% content_for :contextnav do %>
+  <ul class="side-nav">
+    <li><%= link_to "Aktivitäten", activities_path(:filter => "task") %></li>
+    <li class="divider"></li>
+    <li><%= link_to "Neue Aufgabe", new_task_path %></li>
+  </ul>
+<% end %>
+<h1>Aufgaben</h1>
+<dl class="sub-nav">
+  <dd<% unless params[:completed] %> class="active"<% end %>><%= link_to "Offen", tasks_path %></dd>
+  <dd<% if params[:completed] %> class="active"<% end %>><%= link_to "Erledigt", tasks_path(:completed => "yes") %></dd>
+</dl>
+<%= form_tag *(params[:completed] ? [destroy_multiple_tasks_path, method: :delete] : [complete_tasks_path, method: :put]) do %>
+<table id="tasks">
+  <thead>
+    <tr>
+      <th></th>
+      <th></th>
+      <th>Titel</th>
+      <th class="hide_on_phone">Fällig</th>
+      <th class="hide_on_phone">Meine Aufgabe?</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% tasks.each do |task| %>
+      <tr<% if task.overdue? %> class="overdue"<% end %>>
+        <td><%= check_box_tag "task_ids[]", task.id %></td>
+        <td><%= task.unread_icon %></td>
+        <td><%= link_to task.title, task %></td>
+        <td class="hide_on_phone"><%= datetime_column task.due_at, time: false %></td>
+        <td class="hide_on_phone"><i class="fi-<%= task.assigned?(current_user) ? "check" : "minus" %>"></i></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= will_paginate @tasks %>
+<% if params[:completed] %>
+<%= submit_tag 'Löschen', class: "small button alert" %>
+<% else %>
+<%= submit_tag 'Erledigt markieren', class: "small button" %>
+<% end %>
+<% end %>

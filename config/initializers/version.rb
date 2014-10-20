@@ -1,0 +1,1 @@
+Dysnomia::Application.config.version = `git describe --always`

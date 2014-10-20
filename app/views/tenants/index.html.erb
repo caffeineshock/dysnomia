@@ -1,0 +1,22 @@
+<% content_for :contextnav do %>
+  <ul class="side-nav">
+    <li><%= link_to "Neue Organisation", new_tenant_path %></li>
+  </ul>
+<% end %>
+<h1>Organisationen</h1>
+<table id="tenants">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Hostname</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @tenants.each do |tenant| %>
+      <tr>
+        <td><%= link_to tenant.name, tenant %></td>
+        <td><a href="<%= tenant.url %>"><%= tenant.hostname %></a></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

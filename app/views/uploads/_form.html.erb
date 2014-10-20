@@ -1,0 +1,6 @@
+<%= simple_form_for(@upload) do |f| %>
+  <%= f.error_notification %>
+  <%= f.input :file %>
+  <%= f.input :note %>
+  <%= f.button :submit %>
+<% end %>

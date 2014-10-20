@@ -1,0 +1,13 @@
+<%= simple_form_for @user do |f| %>
+  <%= f.error_notification %>
+  <%= f.input :username if current_user.moderator_or_admin? %>
+  <%= f.input :email %>
+  <%= f.input :password %>
+  <%= f.input :password_confirmation %>
+  <%= f.input :jabber_id %>
+  <%= f.input :jabber_otr_fingerprint %>
+  <%= f.input :role, collection: User.roles.keys.map { |k| k.to_sym }, include_blank: false if current_user.admin? and current_user != @user %>
+  <%= f.association :tenants, label_method: :name, collection: Tenant.all if current_user.admin? %>
+  <%= f.input :avatar %>
+  <%= f.button :submit, @user == current_user ? 'Profil aktualisieren' : nil %>
+<% end %>

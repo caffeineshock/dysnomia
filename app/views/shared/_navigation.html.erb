@@ -1,0 +1,118 @@
+<div class="fixed">
+  <div id="navigation">
+    <div class="row">
+      <nav class="top-bar" data-options="back_text: Zurück" data-topbar>
+        <ul class="title-area">
+          <li class="name"></li>
+          <li class="toggle-topbar"><a href="#"><i class="fi-list"></i></a></li>
+        </ul>
+        <section class="top-bar-section">
+          <ul>
+            <li<% unless other_tenants.empty? %> class="has-dropdown"<% end %>>
+              <%= navbar_link current_tenant.name, {path: root_path, unread: "activity", shortcut: 's'} %>
+              <% unless other_tenants.empty? %>
+              <ul class="dropdown">
+                <% other_tenants.each do |t| %>
+                  <li><a href="<%= t.url %>"><%= icon :alert unless current_user.tenants.include? t %> <%= t.name %></a></li>
+                <% end %>
+              </ul>
+              <% end %>
+            </li>
+          </ul>
+          <ul class="right">
+            <% unless forum_url.blank? %>
+            <li<% if params[:controller].eql? "forum" %> class="active"<% end %>><%= navbar_link "Forum", {icon: :comment, path: forum_path, shortcut: 'f'} %></li>
+            <li class="divider"></li>
+            <% end %>
+            <li class="has-dropdown<% if %w{channels messages}.include? params[:controller] %> active<% end %>">
+              <%= navbar_link "Chats", {icon: :comments, path: channels_path, unread: "message", shortcut: 'c'} %>
+              <ul class="dropdown">
+                <li><label>Ansicht</label></li>
+                <li><%= link_to "Liste", channels_path %></li>
+                <li class="divider"></li>
+                <li><label>Bearbeiten</label></li>
+                <li><%= link_to "Neuer Chat", new_channel_path %></li>
+              </ul>
+            </li>
+            <li class="divider"></li>
+            <li class="has-dropdown<% if params[:controller].eql? "uploads" %> active<% end %>">
+              <%= navbar_link "Dateien", {icon: "download", path: uploads_path, unread: "upload", shortcut: 'd'} %>
+              <ul class="dropdown">
+                <li><label>Ansicht</label></li>
+                <li><%= link_to "Aktivitäten", activities_path(filter: "upload") %></li>
+                <li><%= link_to "Liste", uploads_path %></li>
+                <li class="divider"></li>
+                <li><label>Bearbeiten</label></li>
+                <li><%= link_to "Datei Hochladen", new_upload_path %></li>
+              </ul>
+            </li>
+            <li class="divider"></li>
+            <li class="has-dropdown<% if params[:controller].eql? "pages" %> active<% end %>">
+              <%= navbar_link "Wiki", {icon: "page-edit", path: start_pages_path, unread: "page", shortcut: 'w'} %>
+              <ul class="dropdown">
+                <li><label>Ansicht</label></li>
+                <li><%= link_to "Aktivitäten", activities_path(filter: "page") %></li>
+                <li><%= link_to "Startseite", start_pages_path %></li>
+                <li><%= link_to "Liste", pages_path %></li>
+                <li class="divider"></li>
+                <li><label>Bearbeiten</label></li>
+                <li><%= link_to "Neue Seite", new_page_path %></li>
+              </ul>
+            </li>
+            <li class="divider"></li>
+            <li class="has-dropdown<% if %w{events calendar}.include? params[:controller] %> active<% end %>">
+              <%= navbar_link "Termine", {icon: :calendar, path: calendar_path, unread: "event", shortcut: 't'} %>
+              <ul class="dropdown">
+                <li><label>Ansicht</label></li>
+                <li><%= link_to "Aktivitäten", activities_path(filter: "event") %></li>
+                <li><%= link_to "Kalendar", calendar_path %></li>
+                <li><%= link_to "Liste", events_path %></li>
+                <li class="divider"></li>
+                <li><label>Bearbeiten</label></li>
+                <li><%= link_to "Neuer Termin", new_event_path %></li>
+                <% if current_user.moderator_or_admin? %>
+                  <li class="divider"></li>
+                  <li><label>Admin</label></li>
+                  <li><%= link_to "Liste von Kategorien", categories_path %></li>
+                  <li><%= link_to 'Neue Kategorie', new_category_path %></li>
+                <% end %>
+              </ul>
+            </li>
+            <li class="divider"></li>
+            <li class="has-dropdown<% if params[:controller].eql? "tasks" %> active<% end %>">
+              <%= navbar_link "Aufgaben", {icon: :checkbox, path: tasks_path, unread: "task", shortcut: 'a'} %>
+              <ul class="dropdown">
+                <li><label>Ansicht</label></li>
+                <li><%= link_to "Aktivitäten", activities_path(filter: "task") %></li>
+                <li><%= link_to "Liste", tasks_path %></li>
+                <li class="divider"></li>
+                <li><label>Bearbeiten</label></li>
+                <li><%= link_to "Neue Aufgabe", new_task_path %></li>
+              </ul>
+            </li>
+            <li class="divider"></li>
+            <li class="has-dropdown<% if params[:controller].eql? "users" %> active<% end %>">
+              <%= navbar_link "Benutzer", {icon: :torsos, path: users_path, shortcut: 'b'} %>
+              <ul class="dropdown">
+                <li><label>Ansicht</label></li>
+                <li><%= link_to "Aktivitäten", activities_path(filter: "user") %></li>
+                <li><%= link_to "Liste", users_path %></li>
+                <li><%= link_to "Eigenes Profil", current_user %></li>
+                <li class="divider"></li>
+                <li><label>Bearbeiten</label></li>
+                <li><%= link_to "Profil", edit_user_path(current_user) %></li>
+                <% if current_user.moderator_or_admin? %>
+                  <li class="divider"></li>
+                  <li><label>Admin</label></li>
+                  <li><%= link_to "Neuer Benutzer", new_user_invitation_path %></li>
+                <% end %>
+              </ul>
+            </li>
+            <li class="divider"></li>
+            <li class="has-form"><%= link_to icon(:power), destroy_user_session_path, method: :delete, class: "button alert small", id: "logout" %></li>
+          </ul>
+        </section>
+      </nav>
+    </div>
+  </div>
+</div>

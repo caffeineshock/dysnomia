@@ -1,0 +1,9 @@
+<% if activity.trackable %>
+  <% if activity.trackable.recurring? %>
+    hat für den <%= l activity.parameters[:date].to_datetime, { format: '%d.%m.%Y' } %> eine Ausnahme zum Serien-Termin <%= link_to activity.trackable.title, activity.trackable %> hinzugefügt.
+  <% else %>
+    hat eine Ausnahme zum Termin <%= link_to activity.trackable.title, activity.trackable %> hinzugefügt, der mittlerweile aber kein Serien-Termin mehr ist.
+  <% end %>
+<% else %>
+  hat eine Ausnahme zu einem Termin, der in der Zwischenzeit gelöscht wurde, hinzugefügt.
+<% end %>

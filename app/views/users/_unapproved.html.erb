@@ -1,0 +1,21 @@
+<%= form_tag approve_users_path, method: :put do %>
+<table id="unapproved_users">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Benutzername</th>
+      <th>Registrierung</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% users.each do |user| %>
+      <tr>
+        <td><%= check_box_tag "user_ids[]", user.id %></td>
+        <td><%= user.link %></td>
+        <td><%= datetime_column user.created_at, relative: true %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= submit_tag 'Freischalten', class: "small button" %>
+<% end %>

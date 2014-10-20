@@ -1,0 +1,8 @@
+$('#activities').append('<%= j render(@activities) %>');
+hideSpinner();
+removeUnread('activity', <%= raw @activities.map { |a| a.id }.to_json %>);
+<% if @activities.next_page %>
+  $('.actvty-pagination').replaceWith('<%= j will_paginate(@activities, class: "actvty-pagination pagination") %>');
+<% else %>
+  $('.actvty-pagination').remove();
+<% end %>

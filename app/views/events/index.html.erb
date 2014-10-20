@@ -1,0 +1,32 @@
+<% content_for :contextnav do %>
+  <ul class="side-nav">
+    <li><%= link_to 'Exportieren als .ics', events_path(format: :ics, access_token: current_user.access_token) %></li>
+    <li class="divider"></li>
+    <li><%= link_to "Aktivitäten", activities_path(:filter => "event") %></li>
+    <li><%= link_to "Kalendar", calendar_path %></li>
+    <li class="divider"></li>
+    <li><%= link_to 'Neuer Termin', new_event_path %></li>
+  </ul>
+<% end %>
+<h1>Termine</h1>
+<table id="events">
+  <thead>
+    <tr>
+      <th></th>
+      <th></th>
+      <th>Titel</th>
+      <th>Anfang</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% events.each do |event| %>
+      <tr>
+        <td><%= event.category.indicator %></td>
+        <td><%= event.unread_icon %></td>
+        <td><%= link_to event.title, event %></td>
+        <td><%= datetime_column event.starts_at, time: true %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= will_paginate @events %>

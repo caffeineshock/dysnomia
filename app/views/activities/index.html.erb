@@ -1,0 +1,12 @@
+<h1>Aktivitäten</h1>
+<dl class="sub-nav">
+	<dd<% unless params[:filter] and %w{user page event task upload}.include? params[:filter] %> class="active"<% end %>><%= link_to "Alle", activities_path %></dd>
+	<dd<% if params[:filter] and params[:filter].eql? "upload" %> class="active"<% end %>><%= link_to "Dateien", activities_path(:filter => "upload") %></dd>
+	<dd<% if params[:filter] and params[:filter].eql? "page" %> class="active"<% end %>><%= link_to "Wiki", activities_path(:filter => "page") %></dd>
+	<dd<% if params[:filter] and params[:filter].eql? "event" %> class="active"<% end %>><%= link_to "Termine", activities_path(:filter => "event") %></dd>
+	<dd<% if params[:filter] and params[:filter].eql? "task" %> class="active"<% end %>><%= link_to "Aufgaben", activities_path(:filter => "task") %></dd>
+</dl>
+<table id="activities">
+	<%= render @activities %>
+</table>
+<%= will_paginate @activities, class: "actvty-pagination pagination" %>

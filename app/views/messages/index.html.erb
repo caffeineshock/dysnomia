@@ -1,0 +1,56 @@
+<% content_for :contextnav do %>
+  <ul class="side-nav">
+    <li class="active"><%= link_to 'Permalink', @channel %></li>
+    <li><%= link_to @channel.muted_by?(current_user) ? 'Nicht mehr stumm schalten' : 'Stumm schalten', toggle_muted_channel_path(@channel), method: :put %></li>
+    <li><%= link_to 'Channel verlassen', unsubscribe_channel_path(@channel), method: :put %></li>
+    <% if current_user.admin? %>
+      <li class="divider"></li>
+      <li><%= link_to 'Editieren', edit_channel_path(@channel) %></li>
+      <li><%= link_to 'Löschen', @channel, method: :delete, data: { confirm: 'ORLY?' } %></li>
+      <li><%= link_to 'Nachrichten löschen', channel_messages_path(@channel), method: :delete, data: { confirm: 'ORLY?' } %></li>
+    <% end %>
+    <li class="divider"></li>
+    <li><%= link_to "Liste", channels_path %></li>
+  </ul>
+
+  <ul class="side-nav subscribers">
+    <% channel.users.each do |user| %>
+    <li id="subscriber-<%= user.id %>"><%= user.link %><span class="typing">tippt</span></li>
+    <% end %>
+    <% if @possible_subscribers.any?  %>
+    <li>
+      <%= form_for(@channel, url: subscribe_users_channel_path(@channel), method: :post) do |f| %>
+        <%= f.collection_select :user_ids, @possible_subscribers, :id, :username, {include_hidden: false}, {multiple: true} %><%= f.button content_tag(:i, nil, class: "fi-plus"), {class: :tiny, id: "add_users"} %>
+      <% end %>
+    </li>
+    <% end %>
+  </ul>
+<% end %>
+<% content_for :javascript do %>
+  <% unless @channel.muted_by?(current_user) %>
+    window.muted_channels.push(<%= @channel.id %>);
+  <% end %>
+  window.current_chat = {
+    mark_read_path: '<%= channel_messages_path(@channel) %>',
+    channel: '<%= @channel.faye %>',
+    avatar: '<%= image_tag current_user.avatar.url(:small), class: "avatar small" %>',
+    user_link: '<%= link_to current_user.username, current_user %>'
+  };
+<% end %>
+<%= subscribe_to @channel.faye, publish: true %>
+<h1><%= @channel.title %></h1>
+<div id="messages-container">
+  <table id="messages">
+    <% @messages.each_with_index do |message, i| %>
+      <% if i == 0 || message.different_date(@messages[i - 1]) %>
+        <tr class="date">
+          <td colspan="4"><%= l message.created_at, format: '%d.%m.%Y' %></td>
+        </tr>
+      <% end %>
+      <%= render message, locals: {show_time: (i == 0 or message.distance_between(@messages[i - 1]) > 1.minutes)} %>
+    <% end %>
+  </table>
+</div>
+<%= simple_form_for [@channel, Message.new], remote: true do |f| %>
+  <%= f.text_field :body, {autofocus: true} %>
+<% end %>

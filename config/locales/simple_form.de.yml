@@ -1,0 +1,60 @@
+de:
+  simple_form:
+    yes: Ja
+    no: Nein
+    required:
+      html: <small>Pflichtfeld</small>
+    error_notification:
+      default_message: "Bitte die folgenden Fehler korrigieren:"
+    options:
+      event:
+        recurring_type:
+          weekly: Wöchentlich
+          monthly: Monatlich
+          yearly: Jährlich
+      user:
+        role:
+          user: Benutzer
+          moderator: Moderator
+          admin: Administrator
+    labels:
+      upload:
+        note: Notiz
+        file: Datei
+      channel:
+        title: Name
+        users: Abonnenten
+        public: Öffentlich
+      event:
+        title: Titel   
+        description: Beschreibung
+        category: Kategorie
+        location: Ort
+        starts_at: Anfang
+        ends_at: Ende
+        all_day: Ganztägig
+        users: Teilnehmer
+        recurring_type: Wiederholung
+        schedule_exceptions: Ausnahmen
+      page:
+        title: Titel
+        content: Inhalt
+        startpage: Startseite
+      task:
+        title: Titel
+        due_at: Fälligkeit
+        users: Zugewiesene
+        completed: Erledigt
+      user:
+        username: Benutzername
+        email: E-Mail-Adresse
+        login: Benutzername/E-Mail-Adresse
+        password: Passwort
+        password_confirmation: Passwort bestätigen
+        jabber_id: Jabber ID
+        jabber_otr_fingerprint: Jabber OTR Fingerprint
+        role: Rolle
+        remember_me: Eingeloggt bleiben
+      category:
+        title: Titel
+        color: Farbe

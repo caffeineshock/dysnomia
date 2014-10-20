@@ -1,0 +1,33 @@
+<% content_for :contextnav do %>
+	<ul class="side-nav">
+	  <li class="active"><%= link_to 'Permalink', upload_path(upload) %></li>
+	  <li><%= link_to 'Editieren', edit_upload_path(upload) %></li>
+	  <li><%= link_to 'Löschen', upload, method: :delete, data: { confirm: 'ORLY?' } %></li>
+	  <li class="divider"></li>
+	  <li><%= link_to "Aktivitäten", activities_path(:filter => "upload") %></li>
+      <li><%= link_to "Liste", uploads_path %></li>
+	</ul>
+<% end %>
+<h1><%= upload.file_file_name %></h1>
+<table>
+  <tr>
+    <td>Notiz</td>
+    <td><%= upload.note %></td>
+  </tr>
+  <tr>
+  	<td>Letzer Upload</td>
+    <td><%= l upload.file_updated_at %></td>
+  </tr>
+  <tr>
+  	<td>Dateityp</td>
+    <td><i class="fi-page-filled file-type <%= upload.extension %>"></i></td>
+  </tr>
+  <tr>
+  	<td>Dateigröße</td>
+  	<td><%= number_to_human_size(upload.file_file_size) %></td>
+  </tr>
+  <tr>
+    <td>Download</td>
+    <td><%= link_to icon(:download), upload.file.url %></td>
+  </tr>
+</table>

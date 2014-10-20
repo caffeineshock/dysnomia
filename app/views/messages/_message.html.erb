@@ -1,0 +1,6 @@
+<tr class="message">
+	<td><%= image_tag message.user.avatar.url(:small), class: "avatar small" %></td>
+	<td><%= link_to message.user.username, message.user %></td>
+	<td class="body"><%= message.postprocessed_body %></td>
+	<td class="time<% unless locals[:show_time] %> invisible<% end %>"><span><%= l message.created_at, format: "%H:%M" %></span></td>
+</tr>

@@ -1,0 +1,21 @@
+<%= simple_form_for(@tenant) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :name %>
+    <%= f.input :hostname %>
+
+    <h2>Forumseinstellungeen</h2>
+    <label>URL</label>
+    <input id="tenant_settings_discourse_url" class="string" type="text" value="<%= @tenant.settings(:discourse).url %>" name="tenant[new_settings][discourse][url]">
+
+    <label>API-Schlüssel</label>
+    <input id="tenant_settings_discourse_api_key" class="string" type="text" value="<%= @tenant.settings(:discourse).api_key %>" name="tenant[new_settings][discourse][api_key]">
+
+    <label>Single-Sign-On-Geheimnis</label>
+    <input id="tenant_settings_discourse_sso_secret" class="string" type="text" value="<%= @tenant.settings(:discourse).sso_secret %>" name="tenant[new_settings][discourse][sso_secret]">
+  </div>
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

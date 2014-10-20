@@ -1,0 +1,48 @@
+<% content_for :contextnav do %>
+	<ul class="side-nav">
+	  <li class="active"><%= link_to 'Permalink', event %></li>
+    <li><%= link_to 'Exportieren als .ics', event_path(event, format: :ics) %></li>
+	  <li class="divider"></li>
+    <li><%= link_to 'Ausnahme hinzufügen', add_exception_event_path(event, params), method: :put if event.recurring? and params.include?(:date) %></li>
+	  <li><%= link_to 'Editieren', edit_event_path(event) %></li>
+	  <li><%= link_to 'Löschen', event, method: :delete, data: { confirm: 'ORLY?' } %></li>
+	  <li class="divider"></li>
+	  <li><%= link_to "Aktivitäten", activities_path(:filter => "event") %></li>
+      <li><%= link_to "Kalendar", calendar_path %></li>
+      <li><%= link_to "Liste", events_path %></li>
+	</ul>
+<% end %>
+<h1><%= event.title %></h1>
+<div class="markdown"><%= event.postprocessed_description %></div>
+<table>
+  <tr>
+    <td>Kategorie</td>
+    <td><%= event.category.indicator %><%= event.category.title %></td>
+  </tr>
+  <tr>
+    <td>Ort</td>
+    <td><%= event.location %></td>
+  </tr>
+  <tr>
+    <td>Anfang</td>
+    <td><%= l event.starts_at, event.recurring? ? {format: '%A, %H:%M'} : {} %></td>
+  </tr>
+  <tr>
+    <td>Ende</td>
+    <td><%= l event.ends_at, event.recurring? ? {format: '%A, %H:%M'} : {} %></td>
+  </tr>
+  <tr>
+    <td>Wiederholung</td>
+    <td><%= t (event.recurring? ? event.recurring_type : :none), scope: 'events.recurring_type' %></td>
+  </tr>
+  <tr>
+    <td>Teilnehmer</td>
+    <td>
+      <ul class="inline-list inline-table-list">
+        <% event.users.each do |u| %>
+          <li><%= u.link %></li>
+        <% end %>
+      </ul>
+    </td>
+  </tr>
+</table>

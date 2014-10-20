@@ -1,0 +1,5 @@
+<% if activity.trackable %>
+  hat die Datei <%= link_to activity.trackable.file_file_name, activity.trackable %> hochgeladen.
+<% else %>
+  hat eine Datei, die in der Zwischenzeit gelöscht wurde, hochgeladen.
+<% end %>

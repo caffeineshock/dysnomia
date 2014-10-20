@@ -1,0 +1,37 @@
+$.turboInit(function() {
+	$('textarea').each(function () {
+		var opts = {
+		  container: 'epiceditor',
+		  textarea: $(this).attr('id'),
+		  basePath: '',
+		  parser: postprocess,
+		  clientSideStorage: false,
+		  theme: {
+		    base: '<%= asset_path 'epiceditor/base.css' %>',
+		    preview: '<%= asset_path 'epiceditor/preview.css' %>',
+		    editor: '<%= asset_path 'epiceditor/editor.css' %>'
+		  },
+		  button: {
+		    preview: true,
+		    fullscreen: true,
+		    bar: "auto"
+		  },
+		  focusOnLoad: false,
+		  shortcut: {
+		    modifier: 18,
+		    fullscreen: 70,
+		    preview: 80
+		  },
+		  string: {
+		    togglePreview: 'Vorschau',
+		    toggleEdit: 'Bearbeitung',
+		    toggleFullscreen: 'Vollbild'
+		  },
+		  autogrow: false,
+		};
+		
+		var editor = new EpicEditor(opts);
+		editor.load();
+		$(this).hide();
+	});
+});

@@ -1,0 +1,163 @@
+$("#channel_user_ids").select2();
+$('#messages-container').scrollTop($('#messages-container')[0].scrollHeight);
+
+var currentlyTyping = false;
+var typingTimeout;
+var lastNotification;
+
+function sendStartedNotification() {
+  lastNotification = +new Date();
+  currentlyTyping = true;
+
+  PrivatePub.publish(window.current_chat.channel, {
+    type: "startedTyping",
+    user_id: window.current_user
+  });
+}
+
+$("#new_message").on('keydown', function (event) {
+  if (event.which == 13) {
+    return;
+  } else if (currentlyTyping) {
+    if (+new Date() - lastNotification > 1000) {
+      sendStartedNotification();
+    } 
+
+    clearTimeout(typingTimeout);
+  } else {
+    sendStartedNotification();
+  }
+
+  typingTimeout = setTimeout(function () {
+    currentlyTyping = false;
+
+    PrivatePub.publish(window.current_chat.channel, {
+      type: "stoppedTyping",
+      user_id: window.current_user
+    });
+  }, 1000);
+})
+
+$("#new_message").on('submit', function () {
+  if ($("#message_body").val().length == 0) {
+    return;
+  }
+
+	PrivatePub.publish(window.current_chat.channel, {
+    type: "message",
+    user_id: window.current_user,
+    user_link: window.current_chat.user_link,
+    avatar: window.current_chat.avatar,
+    message: postprocess($("#message_body").val())
+  });
+  $.rails.handleRemote($(this));
+  $("#message_body").val('');
+});
+
+var readMarkTimerRunning = false;
+var currentMarkReadPath = window.current_chat.mark_read_path;
+
+function markReadEventually() {
+  if (readMarkTimerRunning) {
+    return;
+  }
+
+  readMarkTimerRunning = true;
+
+  setTimeout(function () {
+    readMarkTimerRunning = false;
+    $.ajax({
+      type: "PUT",
+      dataType: "JSON",
+      url: currentMarkReadPath,
+      contentType: 'application/json'
+    });
+  }, 5000);
+}
+
+Number.prototype.pad = function () {
+  return ("0" + this).slice(-2);
+};
+
+var unreadMessageCount = 0;
+
+function handleMessage(data) {
+  var current_date = new Date();
+  $("#messages").append('<tr class="message' + (windowFocused ? "" : " unread") + '">\
+    <td>' + data.avatar + '</td>\
+    <td>' + data.user_link + '</td>\
+    <td class="body">' + data.message + '</td>\
+    <td class="time"><span>' + current_date.getHours().pad() + ':' + current_date.getMinutes().pad() + '</span></td>\
+  </tr>');
+  $('#messages-container').scrollTop($('#messages-container')[0].scrollHeight);
+
+  if (data.user_id != window.current_user) {
+    new Audio('<%= audio_path("notification.ogg") %>').play();
+
+    if (windowFocused) {
+      markReadEventually(); 
+    } else {
+      unreadMessageCount += 1;
+    }
+    
+    $.titleAlert(unreadMessageCount + " neue Nachricht" + (unreadMessageCount > 1 ? "en" : ""), {
+      requireBlur: true,
+      stopOnFocus: true,
+      duration: 10000,
+      interval: 500
+    });
+  }
+}
+
+var typingTimeouts = {};
+
+function handleStartedTypingNotification(data) {
+  $("#subscriber-" + data.user_id + " .typing").show();
+  clearTimeout(typingTimeouts[data.user_id]);
+  typingTimeouts[data.user_id] = setTimeout(function () {
+    $("#subscriber-" + data.user_id + " .typing").fadeOut();
+  }, 2500);
+}
+
+function handleStoppedTypingNotification(data) {
+  clearTimeout(typingTimeouts[data.user_id]);
+  $("#subscriber-" + data.user_id + " .typing").fadeOut();
+}
+
+PrivatePub.subscribe(window.current_chat.channel, function (data, channel) {
+  switch (data.type) {
+    case "message":
+      handleMessage(data);
+
+    break;
+
+    case "startedTyping":
+      handleStartedTypingNotification(data);
+
+    break;
+
+    case "stoppedTyping":
+      handleStoppedTypingNotification(data);
+
+    break;
+  }
+});
+
+var windowFocused = true;
+
+$(window).on('focus', function () {
+  windowFocused = true;
+  unreadMessageCount = 0;
+  $('.message.unread').toggleClass('unread', 2000);
+});
+
+$(window).on('blur', function () {
+  windowFocused = false;
+  unreadMessageCount = 0;
+});
+
+$(document).on("page:before-change", function () {
+  if (window.current_chat != null) {
+    PrivatePub.unsubscribe(window.current_chat.channel);
+  }
+});

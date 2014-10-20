@@ -1,0 +1,5 @@
+<% if activity.trackable %>
+  hat den Benutzer <%= link_to activity.trackable.username, activity.trackable %> erstellt.
+<% else %>
+  hat einen Benutzer, der in der Zwischenzeit gelöscht wurde, erstellt.
+<% end %>

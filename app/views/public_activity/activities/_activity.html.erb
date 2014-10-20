@@ -1,0 +1,6 @@
+<tr class="activity">
+	<td class="avatar-cell hide_on_phone"><%= image_tag activity.owner.avatar.url(:small), class: "avatar small" %></td>
+	<td><% if @unread_activities.include? activity.id %><i class="fi-asterisk unread"></i><% end %></td>
+	<td class="description"><%= link_to activity.owner.username, activity.owner %> <%= render_activity activity %></td>
+	<td class="date hide_on_phone">Ist <%= time_ago_in_words(activity.created_at) %> her</td>
+</tr>

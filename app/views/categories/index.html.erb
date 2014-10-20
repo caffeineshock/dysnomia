@@ -1,0 +1,25 @@
+<% content_for :contextnav do %>
+  <ul class="side-nav">
+    <li><%= link_to "Liste", categories_path %></li>
+    <li class="divider"></li>
+    <li><%= link_to "Neue Kategorie", new_category_path %></li>
+  </ul>
+<% end %>
+<h1>Liste aller Kategorien</h1>
+<table>
+  <thead>
+    <tr>
+      <th>Farbe</th>
+      <th>Name</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% categories.each do |category| %>
+      <tr>
+        <td><%= category.indicator %></td>
+        <td><%= link_to category.title, edit_category_path(category) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= will_paginate @categories %>

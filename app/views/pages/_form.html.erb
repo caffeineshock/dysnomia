@@ -1,0 +1,8 @@
+<%= simple_form_for @page do |f| %>
+  <%= f.error_notification %>
+  <%= f.input :title %>
+  <%= f.input :content %>
+  <div id="epiceditor"></div>
+  <%= f.input :startpage if current_user.moderator_or_admin? %>
+  <%= f.button :submit %>
+<% end %>

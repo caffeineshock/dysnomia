@@ -1,0 +1,50 @@
+###
+class MessageReceiver
+  @markReadPath: window.current_chat.mark_read_path
+  typingTimeouts: {}
+  windowFocused: true
+  readMarkTimerRunning: false;
+
+  constructor: (@channel) ->
+    PrivatePub.subscribe window.current_chat.channel, this.handleMessage
+
+  handleMessage: (data, channel) =>
+    switch data.type
+        when "message"
+          this.handleChatMessage data
+        when "startedTyping"
+          this.handleStartedTypingNotification data
+        when "stoppedTyping"
+          this.handleStoppedTypingNotification data
+
+  handleChatMessage: (data) ->
+    current_date = new Date()
+    $("#messages").append "<tr class=\"message" + ((if windowFocused then "" else " unread")) + "\">    <td>" + data.avatar + "</td>    <td>" + data.user_link + "</td>    <td class=\"body\">" + data.message + "</td>    <td class=\"time\"><span>" + current_date.getHours().pad() + ":" + current_date.getMinutes().pad() + "</span></td>  </tr>"
+    $("#messages-container").scrollTop $("#messages-container")[0].scrollHeight
+    unless data.user_id is window.current_user
+      new Audio("<%= audio_path("notification.ogg") %>").play()
+      if windowFocused
+        markReadEventually()
+      else
+        unreadMessageCount += 1
+      $.titleAlert unreadMessageCount + " neue Nachricht" + ((if unreadMessageCount > 1 then "en" else "")),
+        requireBlur: true
+        stopOnFocus: true
+        duration: 10000
+        interval: 500
+
+  markReadEventually = ->
+    return  if @readMarkTimerRunning
+    @readMarkTimerRunning = true
+    setTimeout (->
+      @readMarkTimerRunning = false
+      $.ajax
+        type: "PUT"
+        dataType: "JSON"
+        url: @@markReadPath
+        contentType: "application/json"
+
+      return
+    ), 5000
+    return
+###

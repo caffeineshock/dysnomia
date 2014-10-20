@@ -1,0 +1,36 @@
+<h1>
+	<%= @code %>
+	<small>
+		<% case @code.to_i %>
+		<% when 404 %>
+			Seite nicht gefunden!
+		<% when 500 %>
+			Interner Server-Fehler!
+		<% else %>
+			Fehler!
+		<% end %>		
+	</small>
+</h1>
+<p>Das hätte nicht passieren sollen! Falls dieser Fehler weiterhin auftritt und du dir sicher bist, dass du die Anwendung richtig benutzt, dann mache bitte das folgende:</p>
+<ul>
+	<li>Notiere alle Schritte die nötig sind, um den Fehler zu reproduzieren.</li>
+	<% unless forum_url.blank? %>
+		<li>Erstelle einen Thread im <%= link_to 'Forum', forum_path %> mit der Fehlerbeschreibung.</li>
+	<% end %>
+	<% unless @moderators.nil? or @admins.nil? %>
+		<li>Falls der Fehler dringend ist, weil ...
+			<ul>
+				<li>
+					<strong>... dringend benötigte Funktionalität gestört ist,</strong>
+					<%= render "moderators" %>
+				</li>
+				<li>
+					<strong>... die Sicherheit der Anwendung beinträchtigt sein könnte,</strong>
+					<%= render "admins" %>
+				</li>
+			</ul>
+		</li>
+	<% else %>
+		<li><strong>Falls der Fehler dringend ist,</strong> <%= render @admins.nil? ? "moderators" : "admins" %></li>
+	<% end %>
+</ul>

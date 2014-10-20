@@ -1,0 +1,7 @@
+<%= simple_form_for(@channel) do |f| %>
+  <%= f.error_notification %>
+  <%= f.input :title %>
+  <%= f.input :public, default: true %>
+  <%= f.association :users, label_method: :username, collection: User.approved %>
+  <%= f.button :submit %>
+<% end %>

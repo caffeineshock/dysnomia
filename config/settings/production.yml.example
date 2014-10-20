@@ -1,0 +1,2 @@
+hostname_scheme: "http://%{hostname}:3000"
+redis_url: "redis://localhost:6379/5"
