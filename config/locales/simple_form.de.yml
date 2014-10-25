@@ -35,6 +35,7 @@ de:
         all_day: Ganztägig
         users: Teilnehmer
         recurring_type: Wiederholung
+        recurring_until: Ende der Wiederholung
         schedule_exceptions: Ausnahmen
       page:
         title: Titel

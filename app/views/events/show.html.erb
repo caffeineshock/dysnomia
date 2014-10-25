@@ -33,7 +33,12 @@
   </tr>
   <tr>
     <td>Wiederholung</td>
-    <td><%= t (event.recurring? ? event.recurring_type : :none), scope: 'events.recurring_type' %></td>
+    <td>
+      <%= t (event.recurring? ? event.recurring_type : :none), scope: 'events.recurring_type' %>
+      <% unless event.recurring_until.nil? %>
+      bis zum <%= l event.recurring_until, format: '%d.%m.%Y' %>
+      <% end %>
+    </td>
   </tr>
   <tr>
     <td>Teilnehmer</td>

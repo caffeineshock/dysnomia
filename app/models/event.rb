@@ -25,6 +25,8 @@ class Event < ActiveRecord::Base
   serialize :schedule, Hash
   attr_reader :schedule_obj
 
+  composed_of :recurring_until, class_name: 'Date', mapping: %w(Date to_s), constructor: proc{ |o| o }, converter: proc{ |o| o }
+
   # need to override the json view to return what full_calendar is expecting.
   # http://arshaw.com/fullcalendar/docs/event_data/Event_Object/
   def as_json(options = {})
@@ -112,12 +114,28 @@ class Event < ActiveRecord::Base
   end
 
   def recurring_type
-    @recurring_type ||= @schedule_obj.recurrence_rules.first.to_s.downcase.to_sym if recurring?
+    if recurring?
+      rule = @schedule_obj.recurrence_rules.first
+
+      %w(weekly daily monthly).each do |type|
+        @recurring_type ||= type if rule.is_a? "IceCube::#{type.camelcase}Rule".constantize
+      end
+    end
+
     @recurring_type
   end
 
   def recurring_type= type
     @recurring_type = type
+    generate_schedule
+  end
+
+  def recurring_until
+    @recurring_until ||= recurring? ? @schedule_obj.recurrence_rules.first.until_time : nil
+  end
+
+  def recurring_until= recurring_until
+    @recurring_until = recurring_until
     generate_schedule
   end
 
@@ -139,7 +157,9 @@ class Event < ActiveRecord::Base
   def generate_schedule
     new_schedule = unless recurring_type.nil? or recurring_type.empty?
       Schedule.new(starts_at) do |s|
-        s.add_recurrence_rule(Rule.send(recurring_type))
+        rule = Rule.send(recurring_type)
+        rule = rule.until(@recurring_until) unless @recurring_until.nil?
+        s.add_recurrence_rule(rule)
         schedule_exceptions.map do |e|
           e.to_s
         end.each do |e|
