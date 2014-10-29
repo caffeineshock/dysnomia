@@ -20,8 +20,8 @@ class ApplicationController < ActionController::Base
   end
 
   def authenticate_inviter!
-    super
     authorize_moderator
+    super
   end
 
   def configure_permitted_parameters
