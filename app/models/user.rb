@@ -25,6 +25,7 @@ class User < ActiveRecord::Base
   has_many :events, through: :participations
   has_many :subscriptions, dependent: :destroy
   has_many :channels, through: :subscriptions
+  has_many :messages, dependent: :destroy
   has_many :tenants, through: :memberships
   has_many :memberships, dependent: :destroy
   has_many :activities, class_name: 'PublicActivity::Activity', foreign_key: 'owner_id', dependent: :destroy
