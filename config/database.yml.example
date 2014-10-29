@@ -20,6 +20,6 @@ test:
 
 production:
   adapter: postgresql
-  database: collaboration
-  username: collaboration
+  database: dysnomia
+  username: dysnomia
   password: <password>

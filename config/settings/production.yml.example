@@ -1,2 +1,3 @@
-hostname_scheme: "http://%{hostname}:3000"
+hostname_scheme: "http://%{hostname}"
 redis_url: "redis://localhost:6379/5"
+mail_address: "dysnomia@example.net"
