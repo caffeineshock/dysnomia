@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141030185637) do
+ActiveRecord::Schema.define(version: 20141030191208) do
 
   create_table "activities", force: true do |t|
     t.integer  "trackable_id"
@@ -55,6 +55,7 @@ ActiveRecord::Schema.define(version: 20141030185637) do
     t.integer  "tenant_id"
     t.string   "slug"
     t.datetime "last_message_at"
+    t.integer  "messages_count",  default: 0
   end
 
   add_index "channels", ["slug"], name: "index_channels_on_slug"

@@ -4,6 +4,7 @@
     <tr>
       <th></th>
       <th>Name</th>
+      <th class="hide_on_phone">Anzahl an Nachrichten</th>
       <th class="hide_on_phone">Letzte Nachricht</th>
       <th class="hide_on_phone">Öffentlich</th>
       <th class="hide_on_phone">Stumm</th>
@@ -14,6 +15,7 @@
       <tr>
         <td><%= channel.unread_messages_icon %></td>
         <td><%= link_to channel.title, channel_messages_path(channel) %></td>
+        <td><%= channel.messages_count %></td>
         <td class="hide_on_phone"><%= datetime_column channel.last_message_at, relative: true %></td>
         <td class="hide_on_phone"><i class="fi-<%= channel.public? ? "check" : "minus" %>"></i></td>
         <td class="hide_on_phone"><i class="fi-<%= channel.muted_by?(current_user) ? "check" : "minus" %>"></i></td>

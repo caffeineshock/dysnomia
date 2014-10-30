@@ -4,7 +4,7 @@ class Message < ActiveRecord::Base
   acts_as_processable :body
 
   belongs_to :user
-  belongs_to :channel
+  belongs_to :channel, counter_cache: true
 
   after_create :update_channel_timestamp
 
