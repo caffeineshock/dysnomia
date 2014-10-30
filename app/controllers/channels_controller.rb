@@ -6,7 +6,7 @@ class ChannelsController < ApplicationController
   # GET /channels
   # GET /channels.json
   def index
-    @channels = Channel.visible_for(current_user).includes(:messages).order("messages.created_at desc").page(params[:page])
+    @channels = Channel.visible_for(current_user).order(last_message_at: :desc, created_at: :desc).page(params[:page])
   end
 
   # GET /channels/new

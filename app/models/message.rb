@@ -6,6 +6,8 @@ class Message < ActiveRecord::Base
   belongs_to :user
   belongs_to :channel
 
+  after_create :update_channel_timestamp
+
   # Unread
   acts_as_readable on: :created_at
 
@@ -18,5 +20,11 @@ class Message < ActiveRecord::Base
 
   def self.last_in_channel(channel)
   	where(channel: channel).order(created_at: :desc).limit(1).pluck(:created_at).first
+  end
+
+  private
+
+  def update_channel_timestamp
+    channel.touch(:last_message_at)
   end
 end

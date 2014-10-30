@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140716191605) do
+ActiveRecord::Schema.define(version: 20141030185637) do
 
   create_table "activities", force: true do |t|
     t.integer  "trackable_id"
@@ -51,9 +51,10 @@ ActiveRecord::Schema.define(version: 20140716191605) do
     t.string   "title"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "public",     default: true
+    t.boolean  "public",          default: true
     t.integer  "tenant_id"
     t.string   "slug"
+    t.datetime "last_message_at"
   end
 
   add_index "channels", ["slug"], name: "index_channels_on_slug"
@@ -134,10 +135,10 @@ ActiveRecord::Schema.define(version: 20140716191605) do
   add_index "read_marks", ["user_id", "readable_type", "readable_id"], name: "index_read_marks_on_user_id_and_readable_type_and_readable_id"
 
   create_table "settings", force: true do |t|
-    t.string   "var",         limit: nil, null: false
+    t.string   "var",         null: false
     t.text     "value"
-    t.integer  "target_id",               null: false
-    t.string   "target_type", limit: nil, null: false
+    t.integer  "target_id",   null: false
+    t.string   "target_type", null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -189,8 +190,8 @@ ActiveRecord::Schema.define(version: 20140716191605) do
 
   create_table "users", force: true do |t|
     t.string   "username"
-    t.string   "email",                              default: "",    null: false
-    t.string   "encrypted_password",                 default: ""
+    t.string   "email",                  default: "",    null: false
+    t.string   "encrypted_password",     default: ""
     t.datetime "created_at"
     t.datetime "updated_at"
     t.datetime "last_sign_in_at"
@@ -204,20 +205,20 @@ ActiveRecord::Schema.define(version: 20140716191605) do
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",                      default: 0,     null: false
+    t.integer  "sign_in_count",          default: 0,     null: false
     t.datetime "current_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.boolean  "approved",                           default: false
-    t.integer  "role",                               default: 0
-    t.string   "invitation_token",       limit: nil
+    t.boolean  "approved",               default: false
+    t.integer  "role",                   default: 0
+    t.string   "invitation_token"
     t.datetime "invitation_created_at"
     t.datetime "invitation_sent_at"
     t.datetime "invitation_accepted_at"
     t.integer  "invitation_limit"
     t.integer  "invited_by_id"
-    t.string   "invited_by_type",        limit: nil
-    t.integer  "invitations_count",                  default: 0
+    t.string   "invited_by_type"
+    t.integer  "invitations_count",      default: 0
   end
 
   add_index "users", ["access_token"], name: "index_users_on_access_token", unique: true

@@ -25,10 +25,6 @@ class Channel < ActiveRecord::Base
     users.include? user or public?
   end
 
-  def last_message_at
-    @last_message_at ||= Message.last_in_channel(self)
-  end
-
   def muted_by? user
     subscription(user).nil? ? true : subscription(user).muted?
   end
