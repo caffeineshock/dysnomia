@@ -440,7 +440,12 @@ ul.subscribers a {
 /* FullCalendar */
 
 #calendar table {
-  border: 0 none;
+  box-shadow: none;
+  margin: 0;
+}
+
+#calendar th, .fc-week-number, .fc-day-number {
+  font-weight: normal;
 }
 
 a.fc-event {

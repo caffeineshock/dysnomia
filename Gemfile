@@ -1,22 +1,22 @@
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.1.4'
+gem 'rails'
 
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
 
 # Use edge version of sprockets-rails
-gem 'sprockets-rails', github: 'rails/sprockets-rails'
+gem 'sprockets-rails'
 
 # Use SCSS for stylesheets
-gem 'sass-rails', github: 'rails/sass-rails'
+gem 'sass-rails'
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 
 # Use CoffeeScript for .js.coffee assets and views
-gem 'coffee-rails', github: 'rails/coffee-rails'
+gem 'coffee-rails'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
@@ -66,7 +66,7 @@ gem 'rails-erd', require: false, group: :development
 gem 'fullcalendar-rails'
 
 # JQuery UI
-gem 'jquery-ui-rails'
+gem 'jquery-ui-rails', '~>4.2'
 
 # Validations for datetimes
 gem 'validates_timeliness', '~> 3.0'
@@ -102,7 +102,7 @@ gem 'ice_cube'
 gem 'will_paginate'
 
 # Spinner without images or css
-gem 'spinjs-rails'
+gem 'spinjs-rails', '1.3'
 
 # Glue between Rails and Faye server for asynchronous pub/sub
 gem 'private_pub', github: 'caffeineshock/private_pub', branch: 'js_publish'
@@ -220,4 +220,7 @@ gem 'wisper'
 gem 'friendly_id'
 
 # Cron jobs
-gem 'whenever', :require => false
+gem 'whenever', require: false
+
+# momentjs is needed by fullcalendar
+gem 'momentjs-rails'

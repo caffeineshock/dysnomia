@@ -20,6 +20,8 @@
 //= require select2
 //= require select2_locale_de
 //= require foundation
+//= require moment
+//= require moment/de.js
 //= require fullcalendar
 //= require zeroclipboard
 //= require js-routes

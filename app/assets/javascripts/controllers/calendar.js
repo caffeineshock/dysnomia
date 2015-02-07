@@ -52,28 +52,13 @@ $('#calendar').fullCalendar({
 
   weekNumberTitle: "KW",
 
-  titleFormat: {
-    month: "MMMM yyyy",  
-    week: "d.[ MMMM][ yyyy]{ - d. MMMM yyyy}",
-    day: "dddd, d.MMMM yyyy"
-  },
-
-  columnFormat: {
-    month: "ddd",
-    week: "ddd d.M.",
-    day: "dddd d.M."
-  },
-
-  timeFormat: {
-    agenda: 'HH:mm',
-    "":"HH:mm"
-  },
-
   axisFormat: 'HH:mm',
 
   weekNumbers: true,
 
   firstDay: 1,
+
+  lang: "de",
 
   // a future calendar might have many sources.
   eventSources: [{
@@ -104,10 +89,8 @@ var updateEvent = function(the_event) {
     contentType: 'application/json',
     data: JSON.stringify({
       event: {
-        title: the_event.title,
-        starts_at: "" + the_event.start,
-        ends_at: "" + the_event.end,
-        description: the_event.description
+        starts_at: "" + the_event.start.toISOString(),
+        ends_at: "" + the_event.end.toISOString()
       }
     }),
     dataType: 'json'

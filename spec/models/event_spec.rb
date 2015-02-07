@@ -5,9 +5,10 @@ describe Event, "#between" do
 
   it "should only return events in specified timespan" do
   	all_events = (0..3).map { |i| create(:event, starts_at: (i + 1).days.ago, ends_at: i.days.ago) }
-  	events = Event.between 3.days.ago, 1.day.ago  
-    expected_events = all_events.reject { |e| e.starts_at < 3.days.ago or e.starts_at > 1.day.ago }
 
+  	events = Event.between 3.days.ago.to_s, 1.day.ago.to_s
+    events.each { |e| puts "#{e.starts_at}-#{e.ends_at}"}
+    expected_events = all_events.reject { |e| e.starts_at < 3.days.ago or e.starts_at > 1.day.ago }
 
   	expect(events).to match_array(expected_events)
   end

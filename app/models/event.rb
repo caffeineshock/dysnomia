@@ -86,13 +86,14 @@ class Event < ActiveRecord::Base
   end
   
   def self.between after, before
-    after, before = [after, before].map! { |d| Time.at(d.to_i) }
+    after, before = [after, before].map! { |d| Date.parse(d) }
     events = self.where("starts_at BETWEEN :after AND :before OR ends_at BETWEEN :after AND :before", {
       after: after.to_formatted_s(:db),
       before: before.to_formatted_s(:db)
-    }).reject { |e| e.recurring? } + self.where.not(schedule: {}.to_yaml).map do |e|
+    }).reject { |e| e.recurring? } + self.where.not(schedule: {}).map do |e|
       e.occurences_between(after, before)
     end.flatten
+    events.each { |e| "#{e.starts_at}"}
   end
 
   def occurences_between(after, before)
