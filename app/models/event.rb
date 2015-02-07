@@ -90,10 +90,9 @@ class Event < ActiveRecord::Base
     events = self.where("starts_at BETWEEN :after AND :before OR ends_at BETWEEN :after AND :before", {
       after: after.to_formatted_s(:db),
       before: before.to_formatted_s(:db)
-    }).reject { |e| e.recurring? } + self.where.not(schedule: {}).map do |e|
+    }).reject { |e| e.recurring? } + self.where("starts_at < :before", {before: before.to_formatted_s(:db)}).select { |e| e.recurring? }.map do |e|
       e.occurences_between(after, before)
     end.flatten
-    events.each { |e| "#{e.starts_at}"}
   end
 
   def occurences_between(after, before)
