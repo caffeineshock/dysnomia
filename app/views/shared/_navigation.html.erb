@@ -33,6 +33,7 @@
               <li><%= link_to "Neues Pad", new_pad_path %></li>
             </ul>
           </li>
+          <li class="divider"></li>
           <li class="has-dropdown<% if %w{channels messages}.include? params[:controller] %> active<% end %>">
             <%= navbar_link "Chats", {icon: :comments, path: channels_path, unread: "message", shortcut: 'c'} %>
             <ul class="dropdown">
