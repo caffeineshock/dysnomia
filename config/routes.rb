@@ -1,6 +1,8 @@
 require 'sidekiq/web'
 
 Dysnomia::Application.routes.draw do
+  resources :pads
+
   devise_for :users, :controllers => { :invitations => 'users/invitations' }
   resources :uploads
 

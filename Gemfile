@@ -221,3 +221,6 @@ gem 'whenever', require: false
 
 # momentjs is needed by fullcalendar
 gem 'momentjs-rails'
+
+# Etherpad API
+gem 'etherpad-lite'

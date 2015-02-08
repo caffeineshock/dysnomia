@@ -5,7 +5,7 @@ class ActivitiesController < ApplicationController
   def index
   	filter = {}
 
-  	if params[:filter] and %w{page event task upload}.include? params[:filter]
+  	if params[:filter] and %w{page event task upload pad}.include? params[:filter]
 		  filter = PublicActivity::Activity.arel_table[:key].matches("#{params[:filter]}.%")
 	  end
 	

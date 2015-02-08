@@ -1,0 +1,22 @@
+<% content_for :contextnav do %>
+  <ul class="side-nav">
+    <li><%= link_to "Aktivitäten", activities_path(:filter => "pad") %></li>
+    <li class="divider"></li>
+    <li><%= link_to "Neues Pad", new_pad_path %></li>
+  </ul>
+<% end %>
+<h1>Pads</h1>
+<table>
+  <thead>
+    <tr>
+      <th>Titel</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @pads.each do |pad| %>
+      <tr>
+        <td><%= link_to pad.title, pad %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

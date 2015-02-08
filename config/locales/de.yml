@@ -223,3 +223,6 @@ de:
       tenant:
         one: "Organisation"
         other: "Tenants"
+      pad:
+        one: "Pad"
+        other: "Pads"

@@ -1,0 +1,14 @@
+<% content_for :contextnav do %>
+	<ul class="side-nav">
+	  <li class="active"><%= link_to 'Permalink', pad %></li>
+	  <li><%= link_to 'Direktlink', pad.url, target: "_blank" %></li>
+	  <li class="divider"></li>
+	  <li><%= link_to 'Editieren', edit_pad_path(pad) %></li>
+	  <li><%= link_to 'Löschen', pad, method: :delete, data: { confirm: 'ORLY?' } %></li>
+	  <li class="divider"></li>
+	  <li><%= link_to "Aktivitäten", activities_path(:filter => "pad") %></li>
+      <li><%= link_to "Liste", pads_path %></li>
+	</ul>
+<% end %>
+<h1><%= pad.title %></h1>
+<iframe id="etherpad" src="<%= pad.embed_url %>"></iframe>

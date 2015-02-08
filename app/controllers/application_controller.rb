@@ -63,7 +63,7 @@ class ApplicationController < ActionController::Base
   end
 
   def unread_objs
-    @unread ||= %w{PublicActivity::Activity Task Event Page Message Upload}.each_with_object({}) do |m,u|
+    @unread ||= %w{PublicActivity::Activity Task Event Page Message Upload Pad}.each_with_object({}) do |m,u|
       u[model_short_name m] = m.constantize.unread_by(current_user).pluck(:id)
     end
   end
