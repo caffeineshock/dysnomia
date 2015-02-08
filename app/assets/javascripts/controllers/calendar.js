@@ -60,10 +60,11 @@ $('#calendar').fullCalendar({
 
   lang: "de",
 
+  timezone: 'UTC',
+
   // a future calendar might have many sources.
   eventSources: [{
-    url: '/events',
-    ignoreTimezone: false
+    url: '/events'
   }],
 
   //http://arshaw.com/fullcalendar/docs/event_ui/eventDrop/
