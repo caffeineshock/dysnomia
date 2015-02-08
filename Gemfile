@@ -179,9 +179,6 @@ gem 'devise-i18n'
 gem 'devise-async'
 gem 'devise_invitable'
 
-# Code metrics
-gem 'metric_fu'
-
 # Model decorators
 gem 'draper'
 
