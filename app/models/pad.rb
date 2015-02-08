@@ -8,5 +8,5 @@ class Pad < ActiveRecord::Base
   acts_as_readable on: :created_at
 
   validates :title, uniqueness: {scope: :tenant_id}, presence: true, length: { maximum: 500 }
-  attr_accessor :initial_text
+  attr_accessor :initial_text, :url
 end

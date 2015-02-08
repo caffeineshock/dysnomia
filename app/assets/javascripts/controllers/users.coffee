@@ -1,1 +1,1 @@
-$("#user_tenant_ids").select2();
+$("#user_tenant_ids").select2()

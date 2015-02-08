@@ -28,11 +28,18 @@ class PadsController < ApplicationController
   # POST /pads
   # POST /pads.json
   def create
-    @pad = etherpad_service.create pad_params[:title], pad_params[:initial_text] 
+    @pad = etherpad_service.create pad_params
 
     respond_to do |format|
       format.html { redirect_to @pad, notice: 'Pad erfolgreich erstellt.' }
       format.json { render action: 'show', status: :created, location: @pad }
+    end
+  rescue ActiveRecord::RecordInvalid => e
+    @pad = e.record
+
+    respond_to do |format|
+      format.html { render action: 'new' }
+      format.json { render json: @pad.errors, status: :unprocessable_entity }
     end
   end
 
@@ -73,7 +80,7 @@ class PadsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def pad_params
-    params.require(:pad).permit(:title, :initial_text)
+    params.require(:pad).permit(:title, :initial_text, :url)
   end
 
   def etherpad_service

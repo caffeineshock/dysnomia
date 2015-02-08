@@ -1,0 +1,2 @@
+class UrlInvalidException < StandardError
+end
