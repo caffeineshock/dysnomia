@@ -61,3 +61,4 @@ de:
         color: Farbe
       pad:
         title: Titel
+        initial_text: Anfangstext

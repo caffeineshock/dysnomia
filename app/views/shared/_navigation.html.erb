@@ -23,6 +23,7 @@
           <li<% if params[:controller].eql? "forum" %> class="active"<% end %>><%= navbar_link "Forum", {icon: :comment, path: forum_path, shortcut: 'f'} %></li>
           <li class="divider"></li>
           <% end %>
+          <% if etherpad_available? %>
           <li class="has-dropdown<% if params[:controller].eql? "pads" %> active<% end %>">
             <%= navbar_link "Pads", {icon: :pencil, path: pads_path, unread: "pad", shortcut: 'p'} %>
             <ul class="dropdown">
@@ -34,6 +35,7 @@
             </ul>
           </li>
           <li class="divider"></li>
+          <% end %>
           <li class="has-dropdown<% if %w{channels messages}.include? params[:controller] %> active<% end %>">
             <%= navbar_link "Chats", {icon: :comments, path: channels_path, unread: "message", shortcut: 'c'} %>
             <ul class="dropdown">

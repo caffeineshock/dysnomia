@@ -1,5 +1,6 @@
 class PadsController < ApplicationController
   include CrudListeners
+  before_action :check_availability
   before_action :set_pad, only: [:show, :edit, :update, :destroy]
   decorates_assigned :pad
 
@@ -27,7 +28,7 @@ class PadsController < ApplicationController
   # POST /pads
   # POST /pads.json
   def create
-    @pad = etherpad_service.create pad_params[:title]
+    @pad = etherpad_service.create pad_params[:title], pad_params[:initial_text] 
 
     respond_to do |format|
       format.html { redirect_to @pad, notice: 'Pad erfolgreich erstellt.' }
@@ -60,21 +61,26 @@ class PadsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_pad
-      @pad = Pad.friendly.find(params[:id])
-    end
+  
+  def check_availability
+    unauthorized_access unless etherpad_available?
+  end    
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def pad_params
-      params.require(:pad).permit(:title)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_pad
+    @pad = Pad.friendly.find(params[:id])
+  end
 
-    def etherpad_service
-      @etherpad_service ||= EtherpadService.new(
-        url: Settings.etherpad_address,
-        version: Settings.etherpad_api_version,
-        api_key: Rails.application.secrets.etherpad_api_key
-      )
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def pad_params
+    params.require(:pad).permit(:title, :initial_text)
+  end
+
+  def etherpad_service
+    @etherpad_service ||= EtherpadService.new(
+      url: Settings.etherpad_address,
+      version: Settings.etherpad_api_version,
+      api_key: Rails.application.secrets.etherpad_api_key
+    )
+  end
 end

@@ -100,6 +100,12 @@ class ApplicationController < ActionController::Base
 
   helper_method :forum_url
 
+  def etherpad_available?
+    Settings.etherpad_address.present? and Rails.application.secrets.etherpad_api_key.present? and Settings.etherpad_api_version.present?
+  end
+
+  helper_method :etherpad_available?
+
   private 
 
   def unauthorized_access

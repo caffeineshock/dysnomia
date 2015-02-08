@@ -31,7 +31,7 @@ class EtherpadService
   def create_remote_pad initial_text
     @internal_name = generate_secret
     remote_pad = ether.pad(@internal_name)
-    remote_pad.text(initial_text) unless initial_text.blank?
+    remote_pad.text = initial_text unless initial_text.blank?
   end
 
   def generate_secret

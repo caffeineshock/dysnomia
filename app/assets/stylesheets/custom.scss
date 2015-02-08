@@ -627,6 +627,10 @@ textarea {
   display: none;
 }
 
+textarea.disable-epic-editor {
+  display: block;
+}
+
 /* Minicolors */
 
 .minicolors input {

@@ -1,5 +1,6 @@
 <%= simple_form_for(@pad) do |f| %>
   <%= f.error_notification %>
   <%= f.input :title %>
+  <%= f.input :initial_text, as: :text, input_html: { class: :"disable-epic-editor" } %>
   <%= f.button :submit %>
 <% end %>
