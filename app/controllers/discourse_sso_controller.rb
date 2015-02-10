@@ -4,7 +4,8 @@ class DiscourseSsoController < ApplicationController
         secret: current_tenant.settings(:discourse).sso_secret,
         query_string: request.query_string,
         user: current_user,
-        base_url: "#{current_tenant.settings(:discourse).url}/session/sso_login"
+        discourse_base_url: "#{current_tenant.settings(:discourse).url}/session/sso_login",
+        dysnomia_base_url: current_tenant.url
     )
 
     redirect_to sso.redirect_url
