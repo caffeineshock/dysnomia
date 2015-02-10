@@ -8,7 +8,7 @@ class DiscourseSynchronizationWorker
   	  unless settings_missing? t
   	    DiscourseApi::Client.new(t.settings(:discourse).url, t.settings(:discourse).api_key, 'system').tap do |c|
       	  c.update_email(username, user.email)
-          c.update_avatar(username: username, file: user.avatar.url)
+          c.update_avatar(username: username, file: t.url + user.avatar.url)
           c.update_username(username, user.username)
         end
       else
