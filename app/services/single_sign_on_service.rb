@@ -1,5 +1,5 @@
 class SingleSignOnService
-  ACCESSORS = [:nonce, :name, :username, :email, :about_me, :external_email, :external_username, :external_name, :external_id]
+  ACCESSORS = [:nonce, :name, :username, :email, :avatar_url, :avatar_force_update, :about_me, :external_id, :return_sso_url, :admin, :moderator]
   FIXNUMS = []
   NONCE_EXPIRY_TIME = 10.minutes
 
@@ -49,7 +49,12 @@ class SingleSignOnService
   def map_user_to_discourse user
     @email = user.email
     @name = user.username
-    @username = user.email
+    @username = user.username
+    @email = user.email
+    @avatar_url = user.avatar.url
+    @avatar_force_update = 'true'
+    @admin = boolean(user.admin?)
+    @moderator = boolean(user.moderator?)
     @external_id = user.id
   end
 
@@ -75,5 +80,11 @@ class SingleSignOnService
     end
 
     Rack::Utils.build_query(payload)
+  end
+
+  private 
+
+  def boolean value
+    value ? 'true' : 'false'
   end
 end
