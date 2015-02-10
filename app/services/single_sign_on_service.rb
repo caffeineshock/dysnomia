@@ -51,7 +51,7 @@ class SingleSignOnService
     @name = user.username
     @username = user.username
     @email = user.email
-    @avatar_url = user.avatar.url
+    @avatar_url = current_tenant.url + user.avatar.url
     @avatar_force_update = 'true'
     @admin = boolean(user.admin?)
     @moderator = boolean(user.moderator?)
