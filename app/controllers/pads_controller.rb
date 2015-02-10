@@ -2,7 +2,7 @@ class PadsController < ApplicationController
   include CrudListeners
   before_action :check_availability
   before_action :set_pad, only: [:show, :edit, :update, :destroy]
-  decorates_assigned :pad
+  decorates_assigned :pad, :pads
 
   # GET /pads
   # GET /pads.json

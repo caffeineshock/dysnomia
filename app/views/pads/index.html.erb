@@ -10,13 +10,16 @@
   <thead>
     <tr>
       <th>Titel</th>
+      <th class="hide_on_phone">Letzte &Auml;nderung</th>
     </tr>
   </thead>
   <tbody>
-    <% @pads.each do |pad| %>
+    <% pads.each do |pad| %>
       <tr>
         <td><%= link_to pad.title, pad %></td>
+        <td class="hide_on_phone"><%= datetime_column pad.updated_at, relative: true %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
+<%= will_paginate @pads %>
