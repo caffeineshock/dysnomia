@@ -4,14 +4,15 @@ class SingleSignOnService
   NONCE_EXPIRY_TIME = 10.minutes
 
   attr_accessor(*ACCESSORS)
-  attr_accessor :secret, :query_string, :user, :base_url
+  attr_accessor :secret, :query_string, :user, :discourse_base_url, :dysnomia_base_url
 
   def initialize(opts = {})
     {
       secret: "",
       query_string: "",
       user: nil,
-      base_url: ""
+      discourse_base_url: "",
+      dysnomia_base_url: ""
     }.merge(opts).each do |k,v|
       send("#{k}=", v)
     end
@@ -51,7 +52,7 @@ class SingleSignOnService
     @name = user.username
     @username = user.username
     @email = user.email
-    @avatar_url = current_tenant.url + user.avatar.url
+    @avatar_url = @dysnomia_base_url + user.avatar.url
     @avatar_force_update = 'true'
     @admin = boolean(user.admin?)
     @moderator = boolean(user.moderator?)
@@ -63,7 +64,7 @@ class SingleSignOnService
   end
 
   def to_url
-    "#{@base_url}?#{payload}"
+    "#{@discourse_base_url}?#{payload}"
   end
 
   def payload
