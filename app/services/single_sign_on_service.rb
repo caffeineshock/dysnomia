@@ -52,11 +52,14 @@ class SingleSignOnService
     @name = user.username
     @username = user.username
     @email = user.email
-    @avatar_url = @dysnomia_base_url + user.avatar.url
-    @avatar_force_update = 'true'
     @admin = boolean(user.admin?)
     @moderator = boolean(user.moderator?)
     @external_id = user.id
+
+    if user.avatar.exists?
+      @avatar_url = @dysnomia_base_url + user.avatar.url
+      @avatar_force_update = 'true'
+    end
   end
 
   def sign(payload)
