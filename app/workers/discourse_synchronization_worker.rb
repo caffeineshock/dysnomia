@@ -1,24 +1,16 @@
-class DiscourseSynchronizationWorker
+class DiscourseSynchronizationWorker < DiscourseWorker
   include Sidekiq::Worker
 
   def perform(user_id, username)
-  	user = User.find(user_id)
-
-    user.tenants.each do |t|
-  	  unless settings_missing? t
-  	    DiscourseApi::Client.new(t.settings(:discourse).url, t.settings(:discourse).api_key, 'system').tap do |c|
-      	  c.update_email(username, user.email)
-          c.update_avatar(username: username, file: t.url + user.avatar.url)
-          c.update_username(username, user.username)
-        end
-      else
-    	  logger.warn "User '#{username}' was not synchronized for tenant #{t.name} as some settings were nil"
+  	for_each_tenant(user_id) do |u,t|
+      client(t) do |c|
+      	c.update_email(username, u.email)
+        c.update_avatar(username: username, file: t.url + u.avatar.url)
+        c.update_username(username, u.username)
       end
     end
   rescue DiscourseApi::Error
     logger.warn "User '#{username}' couldn't be saved by discourse (does a discourse account exist?)"
-  rescue ActiveRecord::RecordNotFound
-    logger.warn "User '#{username}' doesn't exist in our database anymore (or the ID has changed)"
   end
 
   private 

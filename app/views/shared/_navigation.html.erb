@@ -78,16 +78,12 @@
               <li><label>Ansicht</label></li>
               <li><%= link_to "Aktivitäten", activities_path(filter: "event") %></li>
               <li><%= link_to "Kalendar", calendar_path %></li>
-              <li><%= link_to "Liste", events_path %></li>
+              <li><%= link_to "Liste von Terminen", events_path %></li>
+              <li><%= link_to "Liste von Kategorien", categories_path %></li>
               <li class="divider"></li>
               <li><label>Bearbeiten</label></li>
               <li><%= link_to "Neuer Termin", new_event_path %></li>
-              <% if current_user.moderator_or_admin? %>
-                <li class="divider"></li>
-                <li><label>Admin</label></li>
-                <li><%= link_to "Liste von Kategorien", categories_path %></li>
-                <li><%= link_to 'Neue Kategorie', new_category_path %></li>
-              <% end %>
+              <li><%= link_to 'Neue Kategorie', new_category_path %></li>
             </ul>
           </li>
           <li class="divider"></li>

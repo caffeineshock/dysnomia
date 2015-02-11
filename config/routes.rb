@@ -3,7 +3,7 @@ require 'sidekiq/web'
 Dysnomia::Application.routes.draw do
   resources :pads
 
-  devise_for :users, :controllers => { :invitations => 'users/invitations' }
+  devise_for :users, :controllers => { :invitations => 'users/invitations', :sessions => 'users/sessions' }
   resources :uploads
 
   resources :tasks do
