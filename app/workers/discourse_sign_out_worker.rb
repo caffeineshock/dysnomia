@@ -4,7 +4,7 @@ class DiscourseSignOutWorker < DiscourseWorker
   def perform(user_id)
     for_each_tenant(user_id) do |u,t|
   	  client(t) do |c|
-        c.logout(user_id)
+        c.log_out(user_id)
       end
     end
   rescue DiscourseApi::Error
