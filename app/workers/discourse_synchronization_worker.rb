@@ -11,7 +11,7 @@ class DiscourseSynchronizationWorker < DiscourseWorker
           email: u.email,
           external_id: user_id
         )
-        c.update_avatar(username: u.username, file: t.url + u.avatar.url)
+        c.update_avatar(username: u.username, file: t.url + u.avatar.url) if u.avatar.exists?
       end
     end
   rescue DiscourseApi::Error
