@@ -5,10 +5,10 @@ class DiscourseSynchronizationWorker < DiscourseWorker
   	for_each_tenant(user_id) do |u,t|
       client(t) do |c|
         c.sso_sync(
-          sso_secret: t.settings(:discourse).sso_secret
-          name: u.username
-          username: u.username
-          email: u.email
+          sso_secret: t.settings(:discourse).sso_secret,
+          name: u.username,
+          username: u.username,
+          email: u.email,
           external_id: user_id
         )
         c.update_avatar(username: username, file: t.url + u.avatar.url)
