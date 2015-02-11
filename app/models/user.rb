@@ -114,7 +114,7 @@ class User < ActiveRecord::Base
   private
 
   def synchronize_with_discourse
-    DiscourseSynchronizationWorker.perform_async(id, username_was)
+    DiscourseSynchronizationWorker.perform_async(id)
   end
 
   def add_current_tenant
