@@ -4,7 +4,7 @@ class DiscourseSynchronizationWorker < DiscourseWorker
   def perform(user_id)
   	for_each_tenant(user_id) do |u,t|
       client(t) do |c|
-        c.sso_sync(
+        c.sync_sso(
           sso_secret: t.settings(:discourse).sso_secret,
           name: u.username,
           username: u.username,
