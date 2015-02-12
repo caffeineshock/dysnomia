@@ -15,10 +15,12 @@
 <h1><%= event.title %></h1>
 <div class="markdown"><%= event.postprocessed_description %></div>
 <table>
+  <% unless event.category.nil? %>
   <tr>
     <td>Kategorie</td>
     <td><%= event.category.indicator %><%= event.category.title %></td>
   </tr>
+  <% end %>
   <tr>
     <td>Ort</td>
     <td><%= event.location %></td>

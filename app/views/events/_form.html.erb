@@ -3,7 +3,7 @@
   <%= f.input :title %>
   <%= f.input :description %>
   <div id="epiceditor"></div>
-  <%= f.association :category, include_blank: false, collection: Category.order(:title).map { |c| [c.title, c.id, {'data-color' => c.color}] } %>
+  <%= f.association :category, include_blank: true, collection: Category.order(:title).map { |c| [c.title, c.id, {'data-color' => c.color}] } %>
   <%= f.input :location %>
   <%= f.association :users, label_method: :username, collection: User.approved %>
   <%= f.input :all_day %>

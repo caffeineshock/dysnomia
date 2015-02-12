@@ -13,7 +13,6 @@ class Event < ActiveRecord::Base
   validates :starts_at, timeliness: { :type => :datetime } 
   validates :ends_at, timeliness: { :after => :starts_at, :type => :datetime } 
   validates :title, presence: true, length: { maximum: 500 }
-  validates :category_id, presence: true
 
   has_many :participations
   has_many :users, through: :participations
@@ -31,15 +30,15 @@ class Event < ActiveRecord::Base
   # http://arshaw.com/fullcalendar/docs/event_data/Event_Object/
   def as_json(options = {})
     {
-      :id => self.id,
-      :title => self.title,
-      :description => self.description || "",
-      :start => starts_at.rfc822,
-      :end => ends_at.rfc822,
-      :allDay => all_day?,
-      :recurring => recurring?,
-      :color => category.color,
-      :url => relative_url
+      id: id,
+      title: title,
+      description: description || "",
+      start: starts_at.rfc822,
+      end: ends_at.rfc822,
+      allDay: all_day?,
+      recurring: recurring?,
+      color: category.nil? ? "" : category.color,
+      url: relative_url
     }
   end
 
@@ -67,7 +66,7 @@ class Event < ActiveRecord::Base
         ce.description = e.postprocessed_description
         ce.location = e.location
         ce.ip_class = "CONFIDENTIAL"
-        ce.categories = [e.category.title]
+        ce.categories = [e.category.title] unless e.category.nil?
         ce.url = e.absolute_url
         ce.uid = e.absolute_url
 

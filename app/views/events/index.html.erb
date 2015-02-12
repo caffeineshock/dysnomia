@@ -21,7 +21,7 @@
   <tbody>
     <% events.each do |event| %>
       <tr>
-        <td><%= event.category.indicator %></td>
+        <td><%= event.category_indicator %></td>
         <td><%= event.unread_icon %></td>
         <td><%= link_to event.title, event %></td>
         <td><%= datetime_column event.starts_at, time: true %></td>
