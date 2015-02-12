@@ -1,6 +1,17 @@
 $("#channel_user_ids").select2();
 $('#messages-container').scrollTop($('#messages-container')[0].scrollHeight);
 
+var scrollhandler = function () {
+  url = $(".pagination .next_page a").attr("href");
+  if (url && $('#messages-container').scrollTop() < 100) {
+    showSpinner();
+    $('#messages-container').off("scroll", scrollhandler);
+    $.getScript(url);
+  }
+}
+
+$('#messages-container').scroll(scrollhandler);
+
 var currentlyTyping = false;
 var typingTimeout;
 var lastNotification;

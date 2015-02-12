@@ -382,6 +382,10 @@ ul.subscribers a {
   margin: 0;
 }
 
+.message-pagination {
+  display: none !important;
+}
+
 .message.unread {
   background-color: darken($table-bg-color-even, 30%);
 }

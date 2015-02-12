@@ -41,16 +41,10 @@
 <h1><%= @channel.title %></h1>
 <div id="messages-container">
   <table id="messages">
-    <% @messages.each_with_index do |message, i| %>
-      <% if i == 0 || message.different_date(@messages[i - 1]) %>
-        <tr class="date">
-          <td colspan="4"><%= l message.created_at, format: '%d.%m.%Y' %></td>
-        </tr>
-      <% end %>
-      <%= render message, locals: {show_time: (i == 0 or message.distance_between(@messages[i - 1]) > 1.minutes)} %>
-    <% end %>
+    <%= render "messages" %>
   </table>
 </div>
 <%= simple_form_for [@channel, Message.new], remote: true do |f| %>
   <%= f.text_field :body, {autofocus: true} %>
 <% end %>
+<%= will_paginate @messages, class: "message-pagination pagination" %>

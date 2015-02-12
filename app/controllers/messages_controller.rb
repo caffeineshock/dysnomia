@@ -2,15 +2,20 @@ class MessagesController < ApplicationController
   before_action :set_message, only: [:show, :edit, :update, :destroy]
   before_action :set_channel
   before_action :authorize_moderator, only: [:destroy, :destroy_all]
-  decorates_assigned :channel
+  decorates_assigned :channel, :messages
 
   # GET /messages
   # GET /messages.json
   def index
     @channel.users << current_user unless @channel.users.include? current_user
-    @messages = Message.where(channel: @channel).order(created_at: :desc).limit(50).decorate.reverse
+    @messages = Message.where(channel: @channel).order(created_at: :desc).page(params[:page]).per_page(30)
     @possible_subscribers = User.not_subscribed_to @channel
     @channel.mark_messages_read_for current_user
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.js # index.js.erb
+    end
   end
 
   # POST /messages

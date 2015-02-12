@@ -1,0 +1,9 @@
+$('#messages').prepend('<%= j render "messages" %>');
+hideSpinner();
+removeUnread('message', <%= raw @messages.map { |a| a.id }.to_json %>);
+<% if @messages.next_page %>
+  $('.pagination').replaceWith('<%= j will_paginate(@messages, class: "message-pagination pagination") %>');
+<% else %>
+  $('.pagination').remove();
+<% end %>
+$('#messages-container').scroll(scrollhandler);

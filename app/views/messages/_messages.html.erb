@@ -1,0 +1,8 @@
+<% messages.reverse.each_with_index do |message, i| %>
+  <% if i == 0 || message.different_date(@messages[i - 1]) %>
+    <tr class="date">
+      <td colspan="4"><%= l message.created_at, format: '%d.%m.%Y' %></td>
+    </tr>
+  <% end %>
+  <%= render message, locals: {show_time: (i == 0 or message.distance_between(@messages[i - 1]) > 1.minutes)} %>
+<% end %>
