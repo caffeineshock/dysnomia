@@ -40,7 +40,7 @@ erd.pdf
 gemsurance_report.html
 
 # Ignore dump files from local redis
-dump.rdb
+*.rdb
 config/settings.local.yml
 config/settings/*.local.yml
 config/environments/*.local.yml
