@@ -1,7 +1,7 @@
 class PadsController < ApplicationController
   include CrudListeners
   before_action :check_availability
-  before_action :set_pad, only: [:show, :edit, :update, :destroy]
+  before_action :set_pad, only: [:show, :edit, :update]
   decorates_assigned :pad, :pads
 
   # GET /pads
@@ -60,7 +60,7 @@ class PadsController < ApplicationController
   # DELETE /pads/1
   # DELETE /pads/1.json
   def destroy
-    @pad.destroy
+    etherpad_service.destroy params[:id]
     respond_to do |format|
       format.html { redirect_to pads_url }
       format.json { head :no_content }
