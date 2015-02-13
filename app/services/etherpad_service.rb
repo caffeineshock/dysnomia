@@ -30,8 +30,8 @@ class EtherpadService
     raise ActiveRecord::RecordInvalid.new(@pad)
   end
 
-  def destroy params
-    @pad = Pad.friendly.find(params[:id])
+  def destroy id
+    @pad = Pad.friendly.find(id)
 
     if @pad.destroy
       remote_pad = ether.pad(@pad.internal_name)
