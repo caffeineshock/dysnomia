@@ -30,7 +30,7 @@ class EtherpadService
     raise ActiveRecord::RecordInvalid.new(@pad)
   end
 
-  def destroy
+  def destroy params
     @pad = Pad.friendly.find(params[:id])
 
     if @pad.destroy
