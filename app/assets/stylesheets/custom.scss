@@ -214,6 +214,11 @@ form {
   border-color: scale-color($primary-color, $lightness: -25%);
 }
 
+#impersonation {
+  padding-left: 1.3em;
+  padding-right: 1.3em;
+}
+
 #main {
   background: #fff;
   border-right: 1px solid rgba(0, 0, 0, 0.13);

@@ -117,10 +117,13 @@
             </ul>
           </li>
           <li class="divider"></li>
-          <% if current_user != true_user %>
-          <li class="has-form"><%= link_to icon(:power), stop_impersonating_users_path, method: :put, class: "button small", id: "logout" %></li>
-          <% end %>
-          <li class="has-form"><%= link_to icon(:power), destroy_user_session_path, method: :delete, class: "button alert small", id: "logout" %></li>
+          <li class="has-form">
+            <ul class="button-group">
+              <% if current_user != true_user %>
+                <li><%= link_to icon(:stop), stop_impersonating_users_path, method: :put, class: "button warning small", id: "impersonation" %></li>
+              <% end %>
+              <li><%= link_to icon(:power), destroy_user_session_path, method: :delete, class: "button alert small", id: "logout" %></li>
+            </ul>
         </ul>
       </section>
     </nav>
