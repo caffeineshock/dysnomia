@@ -1,7 +1,9 @@
 <%= simple_form_for(@pad) do |f| %>
   <%= f.error_notification %>
   <%= f.input :title %>
-  <%= f.input :url %>
-  <%= f.input :initial_text, as: :text, input_html: { class: :"disable-epic-editor" } %>
+  <% if params[:action].eql? "new" %>
+    <%= f.input :url %>
+    <%= f.input :initial_text, as: :text, input_html: { class: :"disable-epic-editor" } %>
+  <% end %>
   <%= f.button :submit %>
 <% end %>
