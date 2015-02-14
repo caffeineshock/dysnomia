@@ -3,7 +3,7 @@
 	  <li class="active"><%= link_to 'Permalink', page_path(@page) %></li>
 	  <li class="divider"></li>
 	  <li><%= link_to 'Editieren', edit_page_path(@page) %></li>
-	  <li><%= link_to 'Löschen', @page, method: :delete, data: { confirm: 'ORLY?' } %></li>
+	  <li><%= link_to 'Löschen', @page, method: :delete, data: { confirm: 'ORLY?' } unless @page.startpage %></li>
 	  <li class="divider"></li>
 	  <li><%= link_to "Aktivitäten", activities_path(:filter => "page") %></li>
       <li><%= link_to "Startseite", page_path(1) %></li>

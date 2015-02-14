@@ -13,6 +13,7 @@ class Page < ActiveRecord::Base
   validates :title, uniqueness: {scope: :tenant_id}, presence: true, length: { maximum: 500 }
 
   before_save :highlander_check
+  before_destroy :startpage_undeletable
 
   def self.startpage
   	self.where(startpage: true).take!
@@ -25,4 +26,8 @@ class Page < ActiveRecord::Base
       Page.where(tenant_id: tenant_id).where().not(id: id).update_all(startpage: false)
     end
   end  
+
+  def startpage_undeletable
+    !startpage
+  end
 end
