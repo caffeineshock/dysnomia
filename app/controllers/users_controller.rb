@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_action :authorize_moderator, only: [:destroy, :new, :create]
   before_action :authorize_moderator, only: [:edit, :update], unless: :concerns_self 
-  prepend_before_action :set_user, only: [:show, :edit, :update, :destroy]
+  prepend_before_action :set_user, only: [:show, :edit, :update, :destroy, :impersonate]
   decorates_assigned :user, :users
 
   # GET /users
@@ -28,6 +28,20 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
+  end
+
+  # PATCH/PUT /users/impersonate/1
+  # PATCH/PUT /users/impersonate/1.json
+  def impersonate
+    impersonate_user(@user)
+    redirect_to root_url
+  end
+
+  # PATCH/PUT /users/stop_impersonate/1
+  # PATCH/PUT /users/stop_impersonate/1.json
+  def stop_impersonating
+    stop_impersonating_user
+    redirect_to root_path
   end
 
   # PATCH/PUT /users/approve

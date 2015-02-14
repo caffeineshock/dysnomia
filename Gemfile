@@ -224,3 +224,6 @@ gem 'momentjs-rails'
 
 # Etherpad API
 gem 'etherpad-lite'
+
+# Impersonate other users
+gem 'pretender'

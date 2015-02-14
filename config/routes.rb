@@ -4,6 +4,7 @@ Dysnomia::Application.routes.draw do
   resources :pads
 
   devise_for :users, :controllers => { :invitations => 'users/invitations', :sessions => 'users/sessions' }
+
   resources :uploads
 
   resources :tasks do
@@ -29,8 +30,13 @@ Dysnomia::Application.routes.draw do
   end
 
   resources :users do
+    member do
+      put :impersonate
+    end
+
     collection do
       put :approve
+      put :stop_impersonating
       delete :destroy_multiple
     end
   end

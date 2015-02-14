@@ -3,10 +3,13 @@
 	  <li class="active"><%= link_to 'Permalink', user_path(user) %></li>
 	  <li><%= link_to 'Editieren', edit_user_path(user) if current_user.can_edit? user %></li>
 	  <li><%= link_to 'Löschen', user, method: :delete, data: { confirm: 'ORLY?' } if current_user.can_edit? user %></li>
+    <% if current_user.admin? and current_user != user %>
+    <li><%= link_to 'Berechtigungen testen', impersonate_user_path(user), method: :put %></li>
+    <% end %>
 	  <li class="divider"></li>
 	  <li><%= link_to "Aktivitäten", activities_path(:filter => "user") %></li>
-      <li><%= link_to "Startseite", user_path(1) %></li>
-      <li><%= link_to "Liste", users_path %></li>
+    <li><%= link_to "Startseite", user_path(1) %></li>
+    <li><%= link_to "Liste", users_path %></li>
 	</ul>
 <% end %>
 <h1><%= image_tag user.avatar.url(:medium), class: "avatar" %> <%= user.username %></h1>

@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/caffeineshock/private_pub.git
-  revision: 441aba74ebd5fe1b7c5bc53be32e7db90694a880
+  revision: 5c7dc6d2e0cefc7b6773ee6349014199f3a551a0
   branch: js_publish
   specs:
     private_pub (1.0.3)
@@ -329,6 +329,7 @@ GEM
       cocaine (~> 0.5.3)
       mime-types
     pg (0.18.1)
+    pretender (0.1.0)
     pry (0.10.1)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
@@ -577,6 +578,7 @@ DEPENDENCIES
   normalize-rails
   paperclip
   pg
+  pretender
   private_pub!
   public_activity!
   quiet_assets

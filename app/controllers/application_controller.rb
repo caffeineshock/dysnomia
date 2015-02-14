@@ -11,6 +11,8 @@ class ApplicationController < ActionController::Base
   before_filter :configure_permitted_parameters, if: :devise_controller?
   prepend_around_filter :scope_current_tenant
 
+  impersonates :user
+
   layout Proc.new { |controller| "#{controller.user_signed_in? ? '' : 'not_'}signed_in" }
 
   protected
