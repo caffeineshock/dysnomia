@@ -88,6 +88,17 @@ class TasksController < ApplicationController
     end
   end
 
+  # DELETE /tasks/1
+  # DELETE /tasks/1.json
+  def destroy
+    @task.destroy
+    respond_to do |format|
+      format.html { redirect_to tasks_url }
+      format.json { head :no_content }
+    end
+  end
+  
+
   private
   
   def set_instance
