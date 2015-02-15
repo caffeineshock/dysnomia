@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/caffeineshock/private_pub.git
-  revision: 5c7dc6d2e0cefc7b6773ee6349014199f3a551a0
+  revision: 5473ca85d2565652a061617e11d2d50cecbfde18
   branch: js_publish
   specs:
     private_pub (1.0.3)
@@ -173,7 +173,7 @@ GEM
     erubis (2.7.0)
     etherpad-lite (0.3.0)
       rest-client (>= 1.6)
-    eventmachine (1.0.6)
+    eventmachine (1.0.7)
     exception_notification (4.0.1)
       actionmailer (>= 3.0.4)
       activesupport (>= 3.0.4)
