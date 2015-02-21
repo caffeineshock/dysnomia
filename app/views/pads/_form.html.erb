@@ -2,7 +2,7 @@
   <%= f.error_notification %>
   <%= f.input :title %>
   <% if params[:action].eql? "new" %>
-    <%= f.input :url %>
+    <%= f.input :url, placeholder: "z.B. #{Settings.etherpad_address}/p/XYZ" %>
     <%= f.input :initial_text, as: :text, input_html: { class: :"disable-epic-editor" } %>
   <% end %>
   <%= f.button :submit %>
