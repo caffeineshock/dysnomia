@@ -15,7 +15,7 @@ class User < ActiveRecord::Base
   # Unread
   acts_as_reader
 
-  has_attached_file :avatar, styles: { medium: "48x48#", small: "24x24#", navbar: "27x27#" }, default_url: "avatar_missing_:style.png"
+  has_attached_file :avatar, styles: { medium: "48x48#", small: "24x24#" }, default_url: "avatar_missing_:style.png"
   
   validates_attachment :avatar, content_type: {content_type: /\Aimage\/.*\Z/}, size: {in: 0..200.kilobytes}
   validates :username, uniqueness: {case_sensitive:  false }, presence: true, length: { maximum: 20 }, format: { with: /\A[a-zA-Z0-9]+\Z/ }
