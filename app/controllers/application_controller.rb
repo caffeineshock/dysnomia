@@ -41,7 +41,7 @@ class ApplicationController < ActionController::Base
   helper_method :current_tenant
 
   def other_tenants
-    @choosable_tenants ||= Tenant.accessable(current_user).decorate.reject { |t| t.id = current_tenant.id }
+    @choosable_tenants ||= Tenant.accessable(current_user).decorate.reject { |t| t.id == current_tenant.id }
   end
 
   helper_method :other_tenants
