@@ -35,14 +35,13 @@ class ApplicationController < ActionController::Base
   private
 
   def current_tenant
-    Tenant.find_by_hostname! request.host
+    @current_tenant ||= Tenant.find_by_hostname!(request.host).decorate
   end
 
   helper_method :current_tenant
 
   def other_tenants
-    choosable_tenants = Tenant.accessable current_user
-    choosable_tenants - [current_tenant]
+    @choosable_tenants ||= Tenant.accessable(current_user).decorate.reject { |t| t.id = current_tenant.id }
   end
 
   helper_method :other_tenants

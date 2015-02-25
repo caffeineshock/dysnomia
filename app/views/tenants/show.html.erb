@@ -10,6 +10,33 @@
     <td>Hostname</td>
     <td><a href="<%= @tenant.url %>"><%= @tenant.hostname %></a></td>
   </tr>
+  <tr>
+    <td>Logo</td>
+    <td>
+      <% unless @tenant.logo.exists? %>
+        <em>Nicht gesetzt</em>
+      <% else %>
+        <%= image_tag @tenant.logo.url(:navbar) %>
+        <%= form_for(@tenant, url: logo_tenant_path(@tenant), method: :delete) do |f| %>
+          <%= f.button content_tag(:i, nil, class: "fi-trash"), {class: "tiny alert"} %>
+        <% end %>
+      <% end %>
+    </td>
+  </tr>
+
+  <tr>
+    <td>Background</td>
+    <td>
+    <% unless @tenant.background.exists? %>
+        <em>Nicht gesetzt</em>
+      <% else %>
+        <%= image_tag @tenant.background.url %>
+        <%= form_for(@tenant, url: background_tenant_path(@tenant), method: :delete) do |f| %>
+          <%= f.button content_tag(:i, nil, class: "fi-trash"), {class: "tiny alert"} %>
+        <% end %>
+      <% end %>  
+    </td>
+  </tr>
 </table>
 <h2>Forumseinstellungeen</h2>
 <table>

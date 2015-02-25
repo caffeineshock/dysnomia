@@ -63,3 +63,5 @@ de:
         title: Titel
         initial_text: Anfangstext
         url: URL von existierendem Pad
+      tenant:
+        background: Hintergrundbild

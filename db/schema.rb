@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150208102250) do
+ActiveRecord::Schema.define(version: 20150225115001) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "trackable_id"
@@ -182,10 +182,18 @@ ActiveRecord::Schema.define(version: 20150208102250) do
   add_index "tasks", ["tenant_id"], name: "index_tasks_on_tenant_id"
 
   create_table "tenants", force: :cascade do |t|
-    t.string   "name",       limit: 255
-    t.string   "hostname",   limit: 255
+    t.string   "name",                    limit: 255
+    t.string   "hostname",                limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "background_file_name"
+    t.string   "background_content_type"
+    t.integer  "background_file_size"
+    t.datetime "background_updated_at"
+    t.string   "logo_file_name"
+    t.string   "logo_content_type"
+    t.integer  "logo_file_size"
+    t.datetime "logo_updated_at"
   end
 
   create_table "uploads", force: :cascade do |t|

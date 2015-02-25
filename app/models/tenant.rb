@@ -5,6 +5,12 @@ class Tenant < ActiveRecord::Base
   has_many :users, through: :memberships
   has_many :memberships, dependent: :destroy
 
+  has_attached_file :logo, styles: { navbar: "x27" }
+  has_attached_file :background
+
+  validates_attachment_content_type :logo, content_type: /\Aimage/
+  validates_attachment_content_type :background, content_type: /\Aimage/
+
   validates :name, uniqueness: {case_sensitive:  false }, presence: true, length: { maximum: 100 }
   validates :hostname, uniqueness: {case_sensitive:  false }, presence: true, length: { maximum: 200 }
 
@@ -25,6 +31,11 @@ class Tenant < ActiveRecord::Base
 
   def url
     Settings.hostname_scheme % {hostname: hostname}
+  end
+
+  def remove_attachment! type
+    send(type).clear
+    save
   end
 
   private

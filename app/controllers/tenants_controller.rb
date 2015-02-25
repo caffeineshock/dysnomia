@@ -1,6 +1,6 @@
 class TenantsController < ApplicationController
   before_action :authorize_admin
-  before_action :set_tenant, only: [:show, :edit, :update, :destroy]
+  before_action :set_tenant, only: [:show, :edit, :update, :destroy, :remove_logo, :remove_background]
 
   # GET /tenants
   # GET /tenants.json
@@ -62,6 +62,24 @@ class TenantsController < ApplicationController
     end
   end
 
+  def remove_logo
+    @tenant.remove_attachment! :logo
+
+    respond_to do |format|
+      format.html { redirect_to @tenant, notice: 'Logo wurde erfolgreich entfernt.' }
+      format.json { head :no_content }
+    end
+  end
+
+  def remove_background
+    @tenant.remove_attachment! :background
+
+    respond_to do |format|
+      format.html { redirect_to @tenant, notice: 'Hintergrundbild wurde erfolgreich entfernt.' }
+      format.json { head :no_content }
+    end
+  end
+
   private
     
   # Use callbacks to share common setup or constraints between actions.
@@ -71,6 +89,6 @@ class TenantsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def tenant_params
-    params.require(:tenant).permit(:name, :hostname, :new_settings => {:discourse => [:url, :sso_secret, :api_key]})
+    params.require(:tenant).permit(:name, :hostname, :logo, :background, :new_settings => {:discourse => [:url, :sso_secret, :api_key]})
   end
 end

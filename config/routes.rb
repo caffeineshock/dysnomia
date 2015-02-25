@@ -20,7 +20,13 @@ Dysnomia::Application.routes.draw do
     end
   end
 
-  resources :tenants
+  resources :tenants do
+    member do
+      delete :logo, to: 'tenants#remove_logo'
+      delete :background, to: 'tenants#remove_background'
+    end
+  end
+
   resources :categories
   
   resources :pages do

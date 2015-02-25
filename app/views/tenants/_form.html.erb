@@ -5,6 +5,11 @@
     <%= f.input :name %>
     <%= f.input :hostname %>
 
+    <h2>Erscheinung</h2>
+
+    <%= f.input :logo %>
+    <%= f.input :background %>
+
     <h2>Forumseinstellungeen</h2>
     <label>URL</label>
     <input id="tenant_settings_discourse_url" class="string" type="text" value="<%= @tenant.settings(:discourse).url %>" name="tenant[new_settings][discourse][url]">

@@ -8,11 +8,11 @@
       <section class="top-bar-section">
         <ul>
           <li<% unless other_tenants.empty? %> class="has-dropdown"<% end %>>
-            <%= navbar_link current_tenant.name, {path: root_path, unread: "activity", shortcut: 's'} %>
+            <%= navbar_link current_tenant.title, {path: root_path, unread: "activity", shortcut: 's'} %>
             <% unless other_tenants.empty? %>
             <ul class="dropdown">
               <% other_tenants.each do |t| %>
-                <li><a href="<%= t.url %>"><%= icon :alert unless current_user.tenants.include? t %> <%= t.name %></a></li>
+                <li><a href="<%= t.url %>"><%= icon :alert unless current_user.tenants.include? t %> <%= t.title %></a></li>
               <% end %>
             </ul>
             <% end %>

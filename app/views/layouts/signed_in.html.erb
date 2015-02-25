@@ -11,7 +11,14 @@
   	<!-- Set the viewport width to device width for mobile -->
   	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
   	<title><%= current_tenant.name %> &ndash; Dysnomia<% if content_for?(:title) %> &ndash; <%= yield(:title) %><% end %></title>
-  	<%= stylesheet_link_tag    "application" %>
+  	<%= stylesheet_link_tag "application" %>
+    <% if current_tenant.background.exists? %>
+    <style type="text/css">
+      body {
+        background: url("<%= current_tenant.background.url %>");
+      }
+    </style>
+    <% end %>
   	<%= javascript_include_tag "vendor/modernizr" %>
     <%= javascript_include_tag "application" %>
     <%= javascript_tag do %>
