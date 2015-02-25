@@ -227,3 +227,6 @@ gem 'etherpad-lite'
 
 # Impersonate other users
 gem 'pretender'
+
+# Clever eager loading
+gem 'goldiloader'
