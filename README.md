@@ -8,16 +8,25 @@ Currently Dysnomia encompasses:
 
  - A calendar
  - Todo lists
- - A forum
  - File uploads
  - Chats
  - A wiki
 
-Instead of a custom forum module, the app is designed to utilize an existing [Discourse](http://www.discourse.org) instance (because it's awesome): Dysnomia will function as a single-sign on endpoint and synchronizes changes to users with Discourse.
-
 The app also supports multi-tenancy with a catch: User accounts can be linked with multiple tenants at once.
 
-**But wait!** There's more: The app is mostly only available in german - though that will hopefully change in the near future.
+**But wait!** There's more: The app is only available in german at the moment - though that will hopefully change in the near future.
+
+## 3rd party software
+
+Instead of a reinventing the wheel and say providing a forum module, *Dysnomia* instead comes with some glue for existing 3rd-party products:
+
+### Forum
+
+Tenants can be configured to use an existing [Discourse](http://www.discourse.org) instance: *Dysnomia* will then function as a single-sign on/off endpoint and synchronizes changes to users with Discourse.
+
+### Collaborative editor
+
+*Dysnomia* can be configured to use an existing [Etherpad](http://www.etherpad.org) instance. Pads can be created, deleted and edited (via IFRAME) from the app.
 
 ## Installation
 
