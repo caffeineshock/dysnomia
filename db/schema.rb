@@ -15,13 +15,13 @@ ActiveRecord::Schema.define(version: 20150225115001) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "trackable_id"
-    t.string   "trackable_type", limit: 255
+    t.string   "trackable_type"
     t.integer  "owner_id"
-    t.string   "owner_type",     limit: 255
-    t.string   "key",            limit: 255
+    t.string   "owner_type"
+    t.string   "key"
     t.text     "parameters"
     t.integer  "recipient_id"
-    t.string   "recipient_type", limit: 255
+    t.string   "recipient_type"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "tenant_id"
@@ -40,22 +40,22 @@ ActiveRecord::Schema.define(version: 20150225115001) do
   add_index "assignments", ["user_id"], name: "index_assignments_on_user_id"
 
   create_table "categories", force: :cascade do |t|
-    t.string  "color",     limit: 255
-    t.string  "title",     limit: 255
+    t.string  "color"
+    t.string  "title"
     t.integer "tenant_id"
   end
 
   add_index "categories", ["tenant_id"], name: "index_categories_on_tenant_id"
 
   create_table "channels", force: :cascade do |t|
-    t.string   "title",           limit: 255
+    t.string   "title"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "public",                      default: true
+    t.boolean  "public",          default: true
     t.integer  "tenant_id"
-    t.string   "slug",            limit: 255
+    t.string   "slug"
     t.datetime "last_message_at"
-    t.integer  "messages_count",              default: 0
+    t.integer  "messages_count",  default: 0
   end
 
   add_index "channels", ["slug"], name: "index_channels_on_slug"
@@ -63,7 +63,7 @@ ActiveRecord::Schema.define(version: 20150225115001) do
   add_index "channels", ["title"], name: "index_channels_on_title", unique: true
 
   create_table "events", force: :cascade do |t|
-    t.string   "title",       limit: 255
+    t.string   "title"
     t.text     "description"
     t.datetime "starts_at"
     t.datetime "created_at"
@@ -71,7 +71,7 @@ ActiveRecord::Schema.define(version: 20150225115001) do
     t.datetime "ends_at"
     t.boolean  "all_day"
     t.integer  "category_id"
-    t.string   "location",    limit: 255
+    t.string   "location"
     t.text     "schedule"
     t.integer  "tenant_id"
   end
@@ -115,13 +115,13 @@ ActiveRecord::Schema.define(version: 20150225115001) do
   add_index "pads", ["tenant_id"], name: "index_pads_on_tenant_id"
 
   create_table "pages", force: :cascade do |t|
-    t.string   "title",      limit: 255
+    t.string   "title"
     t.text     "content"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "tenant_id"
-    t.boolean  "startpage",              default: false
-    t.string   "slug",       limit: 255
+    t.boolean  "startpage",  default: false
+    t.string   "slug"
   end
 
   add_index "pages", ["created_at"], name: "index_pages_on_created_at"
@@ -148,10 +148,10 @@ ActiveRecord::Schema.define(version: 20150225115001) do
   add_index "read_marks", ["user_id", "readable_type", "readable_id"], name: "index_read_marks_on_user_id_and_readable_type_and_readable_id"
 
   create_table "settings", force: :cascade do |t|
-    t.string   "var",         limit: 255, null: false
+    t.string   "var",         null: false
     t.text     "value"
-    t.integer  "target_id",               null: false
-    t.string   "target_type", limit: 255, null: false
+    t.integer  "target_id",   null: false
+    t.string   "target_type", null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -170,11 +170,11 @@ ActiveRecord::Schema.define(version: 20150225115001) do
   add_index "subscriptions", ["user_id"], name: "index_subscriptions_on_user_id"
 
   create_table "tasks", force: :cascade do |t|
-    t.string   "title",      limit: 255
+    t.string   "title"
     t.date     "due_at"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "completed",              default: false
+    t.boolean  "completed",  default: false
     t.integer  "tenant_id"
   end
 
@@ -182,8 +182,8 @@ ActiveRecord::Schema.define(version: 20150225115001) do
   add_index "tasks", ["tenant_id"], name: "index_tasks_on_tenant_id"
 
   create_table "tenants", force: :cascade do |t|
-    t.string   "name",                    limit: 255
-    t.string   "hostname",                limit: 255
+    t.string   "name"
+    t.string   "hostname"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "background_file_name"
@@ -197,49 +197,49 @@ ActiveRecord::Schema.define(version: 20150225115001) do
   end
 
   create_table "uploads", force: :cascade do |t|
-    t.string   "file_file_name",    limit: 255
-    t.string   "file_content_type", limit: 255
+    t.string   "file_file_name"
+    t.string   "file_content_type"
     t.integer  "file_file_size"
     t.datetime "file_updated_at"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "note",              limit: 255
+    t.string   "note"
     t.integer  "tenant_id"
   end
 
   add_index "uploads", ["tenant_id"], name: "index_uploads_on_tenant_id"
 
   create_table "users", force: :cascade do |t|
-    t.string   "username",               limit: 255
-    t.string   "email",                  limit: 255, default: "",    null: false
-    t.string   "encrypted_password",     limit: 255, default: ""
+    t.string   "username"
+    t.string   "email",                  default: "",    null: false
+    t.string   "encrypted_password",     default: ""
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.datetime "last_sign_in_at"
-    t.string   "jabber_id",              limit: 255
-    t.string   "jabber_otr_fingerprint", limit: 255
-    t.string   "access_token",           limit: 255
-    t.string   "avatar_file_name",       limit: 255
-    t.string   "avatar_content_type",    limit: 255
+    t.datetime "current_sign_in_at"
+    t.string   "jabber_id"
+    t.string   "jabber_otr_fingerprint"
+    t.string   "access_token"
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
-    t.string   "reset_password_token",   limit: 255
+    t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",                      default: 0,     null: false
-    t.datetime "current_sign_in_at"
-    t.string   "current_sign_in_ip",     limit: 255
-    t.string   "last_sign_in_ip",        limit: 255
-    t.boolean  "approved",                           default: false
-    t.integer  "role",                               default: 0
-    t.string   "invitation_token",       limit: 255
+    t.integer  "sign_in_count",          default: 0,     null: false
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+    t.boolean  "approved",               default: false
+    t.integer  "role",                   default: 0
+    t.string   "invitation_token"
     t.datetime "invitation_created_at"
     t.datetime "invitation_sent_at"
     t.datetime "invitation_accepted_at"
     t.integer  "invitation_limit"
     t.integer  "invited_by_id"
-    t.string   "invited_by_type",        limit: 255
-    t.integer  "invitations_count",                  default: 0
+    t.string   "invited_by_type"
+    t.integer  "invitations_count",      default: 0
   end
 
   add_index "users", ["access_token"], name: "index_users_on_access_token", unique: true
