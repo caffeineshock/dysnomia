@@ -83,7 +83,7 @@ gem 'icalendar'
 # WYSIWYG editor for Markdown
 gem 'epic-editor-rails', github: 'zethussuen/epic-editor-rails'
 
-# Gem to create complex forms easily 
+# Gem to create complex forms easily
 gem 'simple_form', '~> 3.0.1'
 
 # Colorpicker
@@ -230,3 +230,6 @@ gem 'pretender'
 
 # Clever eager loading
 gem 'goldiloader'
+
+# Javascript engine
+gem "therubyracer"
