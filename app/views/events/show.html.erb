@@ -27,11 +27,11 @@
   </tr>
   <tr>
     <td>Anfang</td>
-    <td><%= l event.starts_at, event.recurring? ? {format: '%A, %H:%M'} : {} %></td>
+    <td><%= l event.starts_at, event.recurring? ? {format: '%A, %H:%M'} : (event.all_day? ? {format: '%A, %d.%m.%Y'} : {}) %></td>
   </tr>
   <tr>
     <td>Ende</td>
-    <td><%= l event.ends_at, event.recurring? ? {format: '%A, %H:%M'} : {} %></td>
+    <td><%= l event.ends_at, event.recurring? ? {format: '%A, %H:%M'} : (event.all_day? ? {format: '%A, %d.%m.%Y'} : {}) %></td>
   </tr>
   <tr>
     <td>Wiederholung</td>

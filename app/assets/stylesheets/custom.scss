@@ -151,7 +151,7 @@ form {
 
 .close {
   padding: 0 !important;
-  padding-right: 5px !important; 
+  padding-right: 5px !important;
 }
 
 .close i {
@@ -203,10 +203,10 @@ form {
 #navigation nav .active label,
 #navigation nav .active a {
   background: $primary-color;
-  color: #fff; 
+  color: #fff;
 }
 
-#navigation nav .active a:hover { 
+#navigation nav .active a:hover {
   background: scale-color($primary-color, $lightness: -15%);
 }
 
@@ -229,7 +229,7 @@ form {
 #contextnav {
   background: rgba(238, 237, 231, 0.47);
   border-width: 1px 1px 1px 0;
-  padding: 0; 
+  padding: 0;
   display: table-cell;
 }
 
@@ -663,8 +663,8 @@ $datatable-overdue-color-even: darken($datatable-overdue-color-odd, 5%);
   background-color: $datatable-overdue-color-even  !important;
 }
 
-#tasks tr.overdue a { 
-  color: $alert-color;  
+#tasks tr.overdue a {
+  color: $alert-color;
 }
 
 #tasks .overdue.odd {
@@ -822,4 +822,9 @@ footer i {
   box-shadow: 0 0 2px rgba(0, 0, 0, 0.25);
   height: 500px;
   width: 100%;
+}
+
+/* Event forms */
+.time-disabled {
+  color: transparent;
 }

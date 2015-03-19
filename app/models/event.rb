@@ -10,8 +10,8 @@ class Event < ActiveRecord::Base
   # Unread
   acts_as_readable on: :created_at
 
-  validates :starts_at, timeliness: { :type => :datetime } 
-  validates :ends_at, timeliness: { :after => :starts_at, :type => :datetime } 
+  validates :starts_at, timeliness: { :type => :datetime }
+  validates :ends_at, timeliness: { :after => :starts_at, :type => :datetime }
   validates :title, presence: true, length: { maximum: 500 }
 
   has_many :participations
@@ -21,6 +21,7 @@ class Event < ActiveRecord::Base
 
   after_initialize :load_schedule_obj
   before_save :generate_schedule
+  before_save :set_all_day_time
   serialize :schedule, Hash
   attr_reader :schedule_obj
 
@@ -58,8 +59,8 @@ class Event < ActiveRecord::Base
     calendar = Icalendar::Calendar.new
     events.each do |e|
       calendar.event do |ce|
-        ce.dtstart = e.starts_at.strftime("%Y%m%dT%H%M%S")
-        ce.dtend = e.ends_at.strftime("%Y%m%dT%H%M%S")
+        ce.dtstart = e.ical_time(:starts_at)
+        ce.dtend = e.ical_time(:ends_at)
         ce.created = e.created_at.strftime("%Y%m%dT%H%M%S")
         ce.last_modified = e.updated_at.strftime("%Y%m%dT%H%M%S")
         ce.summary = e.title
@@ -83,7 +84,7 @@ class Event < ActiveRecord::Base
     calendar.publish
     calendar.to_ical
   end
-  
+
   def self.between after, before
     after, before = [after, before].map! { |d| Date.parse(d) }
     events = self.where("starts_at BETWEEN :after AND :before OR ends_at BETWEEN :after AND :before", {
@@ -104,6 +105,16 @@ class Event < ActiveRecord::Base
           e.ends_at = o + (e.ends_at - e.starts_at)
         end
       end
+    end
+  end
+
+  def ical_time field
+    datetime = self.attributes[field.to_s]
+
+    if all_day?
+      Icalendar::Values::Date.new(datetime)
+    else
+      datetime.strftime("%Y%m%dT%H%M%S")
     end
   end
 
@@ -164,11 +175,18 @@ class Event < ActiveRecord::Base
         end.each do |e|
           s.add_exception_time e.to_time unless e.empty?
         end
-      end.to_hash 
+      end.to_hash
     else
       {}
     end
     @schedule_obj = Schedule.from_hash(new_schedule)
     write_attribute :schedule, new_schedule
+  end
+
+  def set_all_day_time
+    if all_day?
+      self.starts_at = self.starts_at.beginning_of_day
+      self.ends_at = self.ends_at.end_of_day
+    end
   end
 end
