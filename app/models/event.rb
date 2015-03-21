@@ -34,8 +34,8 @@ class Event < ActiveRecord::Base
       id: id,
       title: title,
       description: description || "",
-      start: starts_at.rfc822,
-      end: ends_at.rfc822,
+      start: (all_day? ? starts_at.beginning_of_day : starts_at).rfc822,
+      end: (all_day? ? (ends_at + 1.day).beginning_of_day : ends_at).rfc822,
       allDay: all_day?,
       recurring: recurring?,
       color: category.nil? ? "" : category.color,
@@ -60,7 +60,7 @@ class Event < ActiveRecord::Base
     events.each do |e|
       calendar.event do |ce|
         ce.dtstart = e.ical_time(:starts_at)
-        ce.dtend = e.ical_time(:ends_at)
+        ce.dtend = e.ical_time(:ends_at, true)
         ce.created = e.created_at.strftime("%Y%m%dT%H%M%S")
         ce.last_modified = e.updated_at.strftime("%Y%m%dT%H%M%S")
         ce.summary = e.title
@@ -108,10 +108,11 @@ class Event < ActiveRecord::Base
     end
   end
 
-  def ical_time field
+  def ical_time field, next_day = false
     datetime = self.attributes[field.to_s]
 
     if all_day?
+      datetime += 1 if next_day
       Icalendar::Values::Date.new(datetime)
     else
       datetime.strftime("%Y%m%dT%H%M%S")
