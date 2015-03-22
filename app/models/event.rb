@@ -112,8 +112,7 @@ class Event < ActiveRecord::Base
     datetime = self.attributes[field.to_s]
 
     if all_day?
-      datetime += 1 if next_day
-      Icalendar::Values::Date.new(datetime)
+      Icalendar::Values::Date.new(next_day ? datetime.to_date + 1.day : datetime)
     else
       datetime.strftime("%Y%m%dT%H%M%S")
     end
