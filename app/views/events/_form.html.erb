@@ -7,8 +7,8 @@
   <%= f.input :location %>
   <%= f.association :users, label_method: :username, collection: User.approved %>
   <%= f.input :all_day %>
-  <%= f.input :starts_at, {minute_step: 15, default: params[:start] ? Time.at(params[:start].to_i) : Time.now, start_year: Date.today.year} %>
-  <%= f.input :ends_at, {minute_step: 15, default: (params[:start] ? Time.at(params[:start].to_i) : Time.now) + 2.hours, start_year: Date.today.year} %>
+  <%= f.input :starts_at, {minute_step: 15, default: params[:start] ? Time.at(params[:start].to_i) : Time.now} %>
+  <%= f.input :ends_at, {minute_step: 15, default: (params[:start] ? Time.at(params[:start].to_i) : Time.now) + 2.hours} %>
   <%= f.input :recurring_type, collection: [:weekly, :monthly, :yearly] %>
   <%= f.input :recurring_until, as: :date, include_blank: true, default: nil, start_year: Date.today.year %>
   <%= f.input :schedule_exceptions, as: :check_boxes, label_method: proc{ |d| l d, format: '%d.%m.%Y' }, collection: @event.schedule_exceptions unless @event.schedule_exceptions.empty? %>
