@@ -233,3 +233,6 @@ gem 'goldiloader'
 
 # Javascript engine
 gem "therubyracer"
+
+# Simpler capistrano output
+gem "airbrussh", :require => false
