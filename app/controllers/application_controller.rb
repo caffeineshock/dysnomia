@@ -84,7 +84,7 @@ class ApplicationController < ActionController::Base
   helper_method :model_short_name
 
   def authorize_miniprofiler
-    Rack::MiniProfiler.authorize_request if Rails.env.development? and user_signed_in? and current_user.admin? 
+    Rack::MiniProfiler.authorize_request if Rails.env.development? and user_signed_in? and current_user.admin?
   end
 
   def authorize_moderator
@@ -107,7 +107,7 @@ class ApplicationController < ActionController::Base
 
   helper_method :etherpad_available?
 
-  private 
+  private
 
   def unauthorized_access
     redirect_to root_url, alert: "Unautorisierter Zugriff"
@@ -116,7 +116,7 @@ class ApplicationController < ActionController::Base
   def authenticate_user_from_token!
     access_token = params[:access_token].presence
     user = access_token && User.find_by_access_token(access_token.to_s)
-     
+
     if user
       sign_in user, store: false
     end

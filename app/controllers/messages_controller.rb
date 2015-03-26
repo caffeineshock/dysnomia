@@ -77,7 +77,7 @@ class MessagesController < ApplicationController
     end
 
     def push_notification type
-      PrivatePub.publish_to '/unread', { 
+      PrivatePub.publish_to '/unread', {
         type: type.to_s,
         source: current_user.id,
         model: "message",

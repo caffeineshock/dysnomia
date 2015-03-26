@@ -8,15 +8,15 @@ class UserDecorator < Draper::Decorator
   end
 
   def link
-    h.content_tag("span", nil, data: {uid: object.id}, class: "onlinestatus") + h.link_to(username, object)  
+    h.content_tag("span", nil, data: {uid: object.id}, class: "onlinestatus") + h.link_to(username, object)
   end
 
   def role_icon
-  	if object.user?
-  	  return
-  	end
+    if object.user?
+      return
+    end
 
-  	icon_with_tooltip(*(object.moderator? ? ['sheriff-badge', 'Moderator'] : ['crown', 'Administrator']))
+    icon_with_tooltip(*(object.moderator? ? ['sheriff-badge', 'Moderator'] : ['crown', 'Administrator']))
   end
 
   private

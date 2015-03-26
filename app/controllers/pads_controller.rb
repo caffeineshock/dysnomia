@@ -68,10 +68,10 @@ class PadsController < ApplicationController
   end
 
   private
-  
+
   def check_availability
     unauthorized_access unless etherpad_available?
-  end    
+  end
 
   # Use callbacks to share common setup or constraints between actions.
   def set_pad

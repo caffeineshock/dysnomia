@@ -14,7 +14,7 @@ class EventsController < ApplicationController
     end
 
     Event.mark_as_read! @events.to_a, :for => current_user
-    
+
     respond_to do |format|
       format.html { @events = @events.page(params[:page]) }
       format.xml { render :xml => @events }

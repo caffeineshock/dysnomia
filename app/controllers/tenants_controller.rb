@@ -81,7 +81,7 @@ class TenantsController < ApplicationController
   end
 
   private
-    
+
   # Use callbacks to share common setup or constraints between actions.
   def set_tenant
     @tenant = Tenant.find(params[:id])

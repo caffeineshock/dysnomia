@@ -10,10 +10,10 @@ class PadDecorator < ApplicationDecorator
   #     end
   #   end
   def embed_url
-  	params = {
-  	  showChat: false,
-  	  userName: Rack::Utils.escape(h.current_user.username)
-  	}
+    params = {
+      showChat: false,
+      userName: Rack::Utils.escape(h.current_user.username)
+    }
 
     "#{url}?#{params.to_query}"
   end

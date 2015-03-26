@@ -12,9 +12,9 @@ class EtherpadService
   end
 
   def create params
-  	@pad = Pad.new(params)
+    @pad = Pad.new(params)
 
-  	if @pad.validate!
+    if @pad.validate!
       if params[:url].present?
         assume_remote_pad params[:url]
       else
@@ -24,7 +24,7 @@ class EtherpadService
       @pad.internal_name = @internal_name
       @pad.save!
       @pad
-  	end
+    end
   rescue UrlInvalidException => e
     @pad.errors.add(:url, e.message)
     raise ActiveRecord::RecordInvalid.new(@pad)
@@ -43,7 +43,7 @@ class EtherpadService
 
   def assume_remote_pad url
     raise UrlInvalidException, "Instanze wird nicht unterstützt!" unless url.starts_with? @url
-    
+
     if match = url.match(/\/p\/(.+)/)
       @internal_name = match[1]
       ether.pad(@internal_name)

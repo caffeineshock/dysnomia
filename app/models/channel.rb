@@ -2,12 +2,12 @@ class Channel < ActiveRecord::Base
   include PublicActivity::Common
   include Tenanted
   extend FriendlyId
-  
+
   friendly_id :title, use: :slugged
 
   validates :title, presence: true, length: { maximum: 500 }, uniqueness: true
   validates :subscriptions, presence: true, unless: :public?
-  
+
   has_many :subscriptions, dependent: :destroy
   has_many :users, through: :subscriptions
   has_many :messages, dependent: :destroy
@@ -38,7 +38,7 @@ class Channel < ActiveRecord::Base
   end
 
   def mark_messages_read_for user
-    Message.mark_as_read! messages.to_a, for: user 
+    Message.mark_as_read! messages.to_a, for: user
   end
 
   def self.visible_for user

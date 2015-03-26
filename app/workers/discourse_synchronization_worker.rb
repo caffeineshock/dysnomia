@@ -2,7 +2,7 @@ class DiscourseSynchronizationWorker < DiscourseWorker
   include Sidekiq::Worker
 
   def perform(user_id)
-  	for_each_tenant(user_id) do |u,t|
+    for_each_tenant(user_id) do |u,t|
       client(t) do |c|
         c.sync_sso(
           sso_secret: t.settings(:discourse).sso_secret,
@@ -18,7 +18,7 @@ class DiscourseSynchronizationWorker < DiscourseWorker
     logger.warn "User with ID '#{user_id}' couldn't be saved by discourse (does a discourse account exist?)"
   end
 
-  private 
+  private
 
   def settings_missing? tenant
     %i(url api_key).any? { |s| tenant.settings(:discourse).send(s).blank? }

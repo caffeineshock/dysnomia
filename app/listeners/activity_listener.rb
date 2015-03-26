@@ -4,7 +4,7 @@ class ActivityListener
   end
 
   def created(subject)
-  	create_activity subject, :create
+    create_activity subject, :create
   end
 
   def updated(subject)
@@ -12,7 +12,7 @@ class ActivityListener
   end
 
   def destroyed(subject)
-  	create_activity subject, :destroy
+    create_activity subject, :destroy
   end
 
   private

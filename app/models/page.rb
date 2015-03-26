@@ -4,7 +4,7 @@ class Page < ActiveRecord::Base
   include Postprocess
   include PublishCrudEvents
   extend FriendlyId
-  
+
   friendly_id :title, use: :slugged
 
   acts_as_processable :content
@@ -16,7 +16,7 @@ class Page < ActiveRecord::Base
   before_destroy :startpage_undeletable
 
   def self.startpage
-  	self.where(startpage: true).take!
+    self.where(startpage: true).take!
   end
 
   private
@@ -25,7 +25,7 @@ class Page < ActiveRecord::Base
     if startpage
       Page.where(tenant_id: tenant_id).where().not(id: id).update_all(startpage: false)
     end
-  end  
+  end
 
   def startpage_undeletable
     !startpage

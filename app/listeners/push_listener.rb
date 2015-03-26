@@ -8,11 +8,11 @@ class PushListener
   end
 
   def created(subject)
-  	@service.push subject, :add
+    @service.push subject, :add
   end
 
   def updated(subject)
-  	@service.push subject, :add
+    @service.push subject, :add
   end
 
   def destroyed(subject)

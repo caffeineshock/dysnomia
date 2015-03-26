@@ -3,7 +3,7 @@ class DiscourseSignOutWorker < DiscourseWorker
 
   def perform(user_id)
     for_each_tenant(user_id) do |u,t|
-  	  client(t) do |c|
+      client(t) do |c|
         discourse_user = c.user(u.username)
         c.log_out(discourse_user['id'])
       end

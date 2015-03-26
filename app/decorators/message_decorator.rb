@@ -9,6 +9,6 @@ class MessageDecorator < Draper::Decorator
   end
 
   def different_date message
-  	message.created_at.to_date != created_at.to_date
+    message.created_at.to_date != created_at.to_date
   end
 end

@@ -28,7 +28,7 @@ class SingleSignOnService
 
   def parse_request(payload)
     parsed = Rack::Utils.parse_query(payload)
-    
+
     unless parsed.has_key?("sso")
       raise RuntimeError, "Missing SSO parameter"
     end
@@ -86,7 +86,7 @@ class SingleSignOnService
     Rack::Utils.build_query(payload)
   end
 
-  private 
+  private
 
   def boolean value
     value ? 'true' : 'false'

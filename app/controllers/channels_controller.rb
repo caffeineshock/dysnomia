@@ -2,7 +2,7 @@ class ChannelsController < ApplicationController
   before_action :set_channel, only: [:edit, :update, :destroy, :toggle_muted, :unsubscribe, :subscribe_users]
   before_action :authorize, only: [:edit, :update, :destroy]
   decorates_assigned :channels
-    
+
   # GET /channels
   # GET /channels.json
   def index

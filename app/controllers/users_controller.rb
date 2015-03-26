@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :authorize_moderator, only: [:destroy, :new, :create]
-  before_action :authorize_moderator, only: [:edit, :update], unless: :concerns_self 
+  before_action :authorize_moderator, only: [:edit, :update], unless: :concerns_self
   prepend_before_action :set_user, only: [:show, :edit, :update, :destroy, :impersonate]
   decorates_assigned :user, :users
 
@@ -90,9 +90,9 @@ class UsersController < ApplicationController
       format.json { head :no_content }
     end
   end
-  
+
   private
-  
+
   def set_user
     @user = User.friendly.find(params[:id])
   end

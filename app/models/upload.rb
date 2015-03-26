@@ -1,5 +1,5 @@
 class Upload < ActiveRecord::Base
-  include PublicActivity::Common 
+  include PublicActivity::Common
   include Tenanted
   include Postprocess
   include PublishCrudEvents
@@ -12,6 +12,6 @@ class Upload < ActiveRecord::Base
   do_not_validate_attachment_file_type :file
 
   def extension
-  	file_file_name.match(/\.(\w+)$/)[1]
+    file_file_name.match(/\.(\w+)$/)[1]
   end
 end

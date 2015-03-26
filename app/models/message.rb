@@ -14,12 +14,12 @@ class Message < ActiveRecord::Base
   validates :body, presence: true
 
   def self.unread_by user
-  	visible = Channel.visible_for user
-  	super(user).where(channel: visible)
+    visible = Channel.visible_for user
+    super(user).where(channel: visible)
   end
 
   def self.last_in_channel(channel)
-  	where(channel: channel).order(created_at: :desc).limit(1).pluck(:created_at).first
+    where(channel: channel).order(created_at: :desc).limit(1).pluck(:created_at).first
   end
 
   private

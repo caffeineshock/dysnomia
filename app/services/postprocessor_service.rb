@@ -2,7 +2,7 @@ require  'singleton'
 
 class PostprocessorService
   include Singleton
-  
+
   def toHTML(text)
     pipeline = HTML::Pipeline.new [
       HTML::Pipeline::MarkdownFilter,

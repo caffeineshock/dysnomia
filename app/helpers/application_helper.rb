@@ -28,21 +28,21 @@ module ApplicationHelper
 
   def navbar_link title, options
     icon_opts = {class: "fi-#{options[:icon]} navbar-icon"}
-  	content = title
+    content = title
 
-  	if options[:unread]
+    if options[:unread]
       model = options[:unread]
       count = unread_objs[model].length
       span_opts = {id: "#{model}_notifications", class: "notification"}
       icon_opts[:id] = "#{model}_icon"
       (count > 0 ? icon_opts : span_opts)[:style] = "display: none"
-  	  content.prepend content_tag("span", count, span_opts)
-  	end
+      content.prepend content_tag("span", count, span_opts)
+    end
 
     content.prepend content_tag("i", nil, icon_opts)
 
     link_options = options[:shortcut].nil? ? {} : {data: { keybinding: options[:shortcut] }}
-  	link_to content.html_safe, options[:path], link_options
+    link_to content.html_safe, options[:path], link_options
   end
 
   def app_version

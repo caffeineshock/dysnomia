@@ -97,10 +97,10 @@ class TasksController < ApplicationController
       format.json { head :no_content }
     end
   end
-  
+
 
   private
-  
+
   def set_instance
     @task = Task.find(params[:id])
   end

@@ -72,7 +72,7 @@ class PagesController < ApplicationController
   end
 
   private
-  
+
   # Never trust parameters from the scary internet, only allow the white list through.
   def page_params
     allowed_params = [:title, :content]

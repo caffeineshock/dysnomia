@@ -2,7 +2,7 @@ class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :invitable, :database_authenticatable, :recoverable, :rememberable, :trackable, :validatable, :registerable, :async, :invitable
-  include PublicActivity::Common 
+  include PublicActivity::Common
   include ActiveModel::Dirty
   extend FriendlyId
 
@@ -16,7 +16,7 @@ class User < ActiveRecord::Base
   acts_as_reader
 
   has_attached_file :avatar, styles: { medium: "48x48#", small: "24x24#" }, default_url: "avatar_missing_:style.png"
-  
+
   validates_attachment :avatar, content_type: {content_type: /\Aimage\/.*\Z/}, size: {in: 0..200.kilobytes}
   validates :username, uniqueness: {case_sensitive:  false }, presence: true, length: { maximum: 20 }, format: { with: /\A[a-zA-Z0-9]+\Z/ }
   validates :email, uniqueness: true, presence: true, length: { maximum: 100 }
@@ -84,18 +84,18 @@ class User < ActiveRecord::Base
     tenants.pluck(:id).include?(Tenant.current_id) or admin?
   end
 
-  def active_for_authentication? 
+  def active_for_authentication?
     super && approved? && access_to_current_tenant?
-  end 
+  end
 
-  def inactive_message 
+  def inactive_message
     if !approved?
       :not_approved
     elsif !access_to_current_tenant?
       :not_part_of_organization
-    else 
-      super # Use whatever other message 
-    end 
+    else
+      super # Use whatever other message
+    end
   end
 
   def moderator_or_admin?

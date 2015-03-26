@@ -6,6 +6,6 @@ class Users::SessionsController < Devise::SessionsController
   end
 
   def impersonate user
-  	raise "yay #{user}"
+    raise "yay #{user}"
   end
 end
