@@ -28,6 +28,7 @@
 //= require application/turbolinks_init
 //= require application/foundation
 //= require application/keybindings
+//= require application/flashes
 //= require private_pub
 //= require_tree ./application
 //= require epiceditor
