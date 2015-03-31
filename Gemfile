@@ -241,4 +241,4 @@ gem "airbrussh", :require => false
 gem 'task_list'
 
 # Wiki-Links einfacher ermöglichen
-gem 'html-pipeline-wiki-link',  github: 'caffeineshock/html-pipeline-wiki-link'
+gem 'html-pipeline-wiki-link',  github: 'caffeineshock/html-pipeline-wiki-link', branch: 'master'
