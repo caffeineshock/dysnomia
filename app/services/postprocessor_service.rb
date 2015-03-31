@@ -1,4 +1,5 @@
-require  'singleton'
+require 'singleton'
+require 'task_list/filter'
 
 class PostprocessorService
   include Singleton
@@ -6,7 +7,7 @@ class PostprocessorService
   def toHTML(text)
     pipeline = HTML::Pipeline.new [
       HTML::Pipeline::MarkdownFilter,
-      HTML::Pipeline::SanitizationFilter,
+      TaskList::Filter,
       HTML::Pipeline::MentionFilter,
       HTML::Pipeline::EmojiFilter
     ], {

@@ -1,6 +1,7 @@
 require File.expand_path('../boot', __FILE__)
 
 require 'rails/all'
+require 'task_list/railtie'
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -25,12 +26,12 @@ module Dysnomia
 
     # Add assets for EpicEditor
     config.assets.precompile += ['epiceditor/base.css', 'epiceditor/editor.css', 'epiceditor/preview.css']
-    
+
     # Add devise layout stylesheet
     config.assets.precompile += ['devise.css']
 
     # Add image assets
-    config.assets.precompile += %w(controllers/*.js *.png *.jpg *.jpeg *.gif *.ogg) 
+    config.assets.precompile += %w(controllers/*.js *.png *.jpg *.jpeg *.gif *.ogg)
 
     # Exception handling through app
     config.exceptions_app = self.routes

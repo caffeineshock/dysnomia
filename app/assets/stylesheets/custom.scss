@@ -179,11 +179,11 @@ form {
 #navigation {
   border-bottom: 3px solid scale-color($primary-color, $lightness: -10%);
   box-shadow: 0 0 7px scale-color($primary-color, $lightness: -15%);
-	background: #333;
+  background: #333;
 }
 
 #navigation nav {
-	margin: 0;
+  margin: 0;
 }
 
 #navigation nav i {
@@ -315,7 +315,7 @@ ul.subscribers a {
 }
 
 .no-padding {
-	padding: 0;
+  padding: 0;
 }
 
 .avatar {
@@ -743,6 +743,13 @@ code {
   margin-bottom: 1.5em;
   padding: 1em;
   white-space: pre;
+}
+
+/* Task_list */
+
+ul.task-list {
+  margin-left: 1em;
+  list-style-type: none;
 }
 
 /* DataTable */

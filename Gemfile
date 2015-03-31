@@ -236,3 +236,6 @@ gem "therubyracer"
 
 # Simpler capistrano output
 gem "airbrussh", :require => false
+
+# Checkboxes in Markdown
+gem 'task_list'

@@ -495,6 +495,8 @@ GEM
       colorize (>= 0.7.0)
       net-scp (>= 1.1.2)
       net-ssh (>= 2.8.0)
+    task_list (1.0.2)
+      html-pipeline
     terminal-table (1.4.5)
     therubyracer (0.12.1)
       libv8 (~> 3.16.14.0)
@@ -614,6 +616,7 @@ DEPENDENCIES
   spring-commands-rspec
   sprockets-rails
   sqlite3
+  task_list
   therubyracer
   thin
   timecop
