@@ -1,5 +1,6 @@
 require 'singleton'
 require 'task_list/filter'
+require 'html/pipeline/wiki_link'
 
 class PostprocessorService
   include Singleton
@@ -8,11 +9,13 @@ class PostprocessorService
     pipeline = HTML::Pipeline.new [
       HTML::Pipeline::MarkdownFilter,
       TaskList::Filter,
+      HTML::Pipeline::WikiLinkFilter,
       HTML::Pipeline::MentionFilter,
       HTML::Pipeline::EmojiFilter
     ], {
-      :asset_root => "/images",
-      :base_url   => "/users/"
+      asset_root:     "/images",
+      base_url:       "/users/",
+      wiki_base_url:  "/pages/"
     }
 
     pipeline.call(text)[:output].to_s

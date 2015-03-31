@@ -1,4 +1,11 @@
 GIT
+  remote: git://github.com/caffeineshock/html-pipeline-wiki-link.git
+  revision: 18c566452742b92960ff4e96eec4b62931ee2ec1
+  specs:
+    html-pipeline-wiki-link (0.0.4)
+      html-pipeline (>= 0.0.8)
+
+GIT
   remote: git://github.com/caffeineshock/private_pub.git
   revision: 5473ca85d2565652a061617e11d2d50cecbfde18
   branch: js_publish
@@ -577,6 +584,7 @@ DEPENDENCIES
   guard-migrate
   guard-rspec
   html-pipeline
+  html-pipeline-wiki-link!
   icalendar
   ice_cube
   jbuilder (~> 1.2)
