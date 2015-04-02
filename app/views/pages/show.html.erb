@@ -27,7 +27,7 @@
   <div class="markdown">
     <%= @page.postprocessed_content %>
   </div>
-  <%= form_for @page, remote: true do |f| %>
+  <%= form_for @page, remote: true, format: :json do |f| %>
     <%= f.text_area :content, class: "disable-epic-editor js-task-list-field" %>
   <% end %>
 </div>
