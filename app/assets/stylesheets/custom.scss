@@ -745,13 +745,6 @@ code {
   white-space: pre;
 }
 
-/* Task_list */
-
-ul.task-list {
-  margin-left: 1em;
-  list-style-type: none;
-}
-
 /* DataTable */
 
 table.dataTable thead th {
@@ -834,4 +827,27 @@ footer i {
 /* Event forms */
 .time-disabled {
   color: transparent;
+}
+
+/* folding */
+
+tr.unfold {
+  background: rgb(169, 202, 209) !important;
+}
+
+tr.unfold td {
+  text-align: center;
+  box-shadow: inset 0px 10px 10px -10px rgba(0,0,0,0.2),
+              inset 0px -10px 10px -10px rgba(0,0,0,0.2);
+  padding: 0;
+  color: #fff;
+}
+
+tr.unfold td:hover {
+  cursor: pointer;
+}
+
+/* task_list */
+.js-task-list-field {
+  display: none !important;
 }

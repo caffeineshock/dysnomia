@@ -1,26 +1,33 @@
 <% content_for :contextnav do %>
-	<ul class="side-nav">
-	  <li class="active"><%= link_to 'Permalink', page_path(@page) %></li>
-	  <li class="divider"></li>
-	  <li><%= link_to 'Editieren', edit_page_path(@page) %></li>
-	  <li><%= link_to 'Löschen', @page, method: :delete, data: { confirm: 'ORLY?' } unless @page.startpage %></li>
-	  <li class="divider"></li>
-	  <li><%= link_to "Aktivitäten", activities_path(:filter => "page") %></li>
+  <ul class="side-nav">
+    <li class="active"><%= link_to 'Permalink', page_path(@page) %></li>
+    <li class="divider"></li>
+    <li><%= link_to 'Editieren', edit_page_path(@page) %></li>
+    <li><%= link_to 'Löschen', @page, method: :delete, data: { confirm: 'ORLY?' } unless @page.startpage %></li>
+    <li class="divider"></li>
+    <li><%= link_to "Aktivitäten", activities_path(:filter => "page") %></li>
       <li><%= link_to "Startseite", page_path(1) %></li>
       <li><%= link_to "Liste", pages_path %></li>
-	</ul>
-	<div id="meta">
-		<table>
-			<tr>
-				<td>Geändert</td>
-				<td><%= datetime_column @page.updated_at, relative: true %></td>
-			</tr>
-			<tr>
-				<td>Erstellt</td>
-				<td><%= datetime_column @page.created_at %></td>
-			</tr>
-		</table>
-	</div>
-	<% end %>
+  </ul>
+  <div id="meta">
+    <table>
+      <tr>
+        <td>Geändert</td>
+        <td><%= datetime_column @page.updated_at, relative: true %></td>
+      </tr>
+      <tr>
+        <td>Erstellt</td>
+        <td><%= datetime_column @page.created_at %></td>
+      </tr>
+    </table>
+  </div>
+  <% end %>
 <h1><%= @page.title %></h1>
-<div class="markdown"><%= @page.postprocessed_content %></div>
+<div class="js-task-list-container">
+  <div class="markdown">
+    <%= @page.postprocessed_content %>
+  </div>
+  <%= form_for @page, remote: true do |f| %>
+    <%= f.text_area :content, class: "disable-epic-editor js-task-list-field" %>
+  <% end %>
+</div>

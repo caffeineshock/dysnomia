@@ -25,6 +25,7 @@
 //= require fullcalendar
 //= require zeroclipboard
 //= require js-routes
+//= require task_list
 //= require application/turbolinks_init
 //= require application/foundation
 //= require application/keybindings
