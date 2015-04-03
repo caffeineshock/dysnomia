@@ -362,11 +362,15 @@ ul.subscribers a {
   min-width: 100%;
 }
 
-.activity-group .date {
+.activity-group .meta {
   color: #555;
   font-size: 0.7em;
   white-space: nowrap;
   margin-top: -5px;
+}
+
+.activity-group .date {
+  cursor: help;
 }
 
 @media all and (max-width: 479px) {

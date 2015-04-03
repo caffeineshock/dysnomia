@@ -5,9 +5,10 @@
       <% group.each do |activity| %>
         <%= render activity %>
       <% end %>
-      <div class="date"><i class="fi-clock"></i> Ist <%= time_ago_in_words(group.first.created_at) %> her
+      <div class="meta">
+        <span data-tooltip aria-haspopup="true" title="<%= l group.first.created_at %>" class="date"><i class="fi-clock"></i> Ist <%= time_ago_in_words(group.first.created_at) %> her</span>
         <% if group.size > 1 %>
-         <span>&#183; <a href="javascript:;" class="show-activities"><%= group.size - 1 %> weitere Aktivitäten anzeigen</a><span>
+         <span>&#183; <a href="javascript:;" class="show-activities"><%= group.size - 1 %> weitere <%= PublicActivity::Activity.model_name.human(count: group.size - 1) %> anzeigen</a><span>
         <% end %>
       </div>
     </div>

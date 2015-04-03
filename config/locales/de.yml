@@ -202,7 +202,7 @@ de:
     errors:
       <<: *errors
     models:
-      activity:
+      public_activity/activity:
         one: "Aktivität"
         other: "Aktivitäten"
       user:
