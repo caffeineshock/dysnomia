@@ -3,13 +3,14 @@ class ActivitiesController < ApplicationController
   before_filter :authenticate_silently
 
   def index
-  	filter = {}
+    filter = {}
 
-  	if params[:filter] and %w{page event task upload pad}.include? params[:filter]
-		  filter = PublicActivity::Activity.arel_table[:key].matches("#{params[:filter]}.%")
-	  end
-	
-    @activities = PublicActivity::Activity.order(created_at: :desc).where(filter).page(params[:page]).per_page(30)
+    if params[:filter] and %w{page event task upload pad}.include? params[:filter]
+      filter = PublicActivity::Activity.arel_table[:key].matches("#{params[:filter]}.%")
+    end
+
+    @activities = PublicActivity::Activity.order(created_at: :desc).where(filter).page(params[:page]).per_page(50)
+    @decorated_activities = PublicActivity::ActivitiesDecorator.decorate(@activities)
     @unread_activities = PublicActivity::Activity.unread_by(current_user).pluck(:id)
     PublicActivity::Activity.mark_as_read! @activities.to_a, :for => current_user
 

@@ -6,9 +6,15 @@ scrollHandler = ->
     $.getScript url
   return
 
-
 if $(".actvty-pagination").length
   $(window).scroll(scrollHandler)
   $(window).scroll()
   $(document).on 'page:load', ->
     $(window).off "scroll", scrollHandler
+
+showActivitiesClickHandler = ->
+  $(this).closest(".grouped-activities").children(".activity").each ->
+    $(this).slideDown()
+  $(this).parent().hide()
+  
+$(".show-activities").click showActivitiesClickHandler

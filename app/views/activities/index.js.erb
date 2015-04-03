@@ -1,4 +1,4 @@
-$('#activities').append('<%= j render(@activities) %>');
+$('#activities').append('<%= j render("activities") %>');
 hideSpinner();
 removeUnread('activity', <%= raw @activities.map { |a| a.id }.to_json %>);
 <% if @activities.next_page %>
@@ -6,3 +6,9 @@ removeUnread('activity', <%= raw @activities.map { |a| a.id }.to_json %>);
 <% else %>
   $('.actvty-pagination').remove();
 <% end %>
+$(".show-activities").click(function () {
+  $(this).closest(".grouped-activities").children(".activity").each(function () {
+    $(this).slideDown();
+  });
+  $(this).parent().hide();
+});

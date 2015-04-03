@@ -335,15 +335,38 @@ ul.subscribers a {
   min-width: 47px;
 }
 
+.activity-group {
+  margin: 10px 0;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 10px;
+}
+
+.activity-group .avatar {
+  vertical-align: top;
+}
+
+.grouped-activities {
+  display: inline-block;
+  margin-left: 1em;
+}
+
+.activity {
+  margin-bottom: 5px;
+}
+
+.activity.hidden {
+  display: none;
+}
+
 .activity .description  {
   min-width: 100%;
 }
 
-.activity .date {
+.activity-group .date {
   color: #555;
   font-size: 0.7em;
   white-space: nowrap;
-  text-align: right;
+  margin-top: -5px;
 }
 
 @media all and (max-width: 479px) {
@@ -850,4 +873,8 @@ tr.unfold td:hover {
 /* task_list */
 .js-task-list-field {
   display: none !important;
+}
+
+dd:nth-of-type(1) {
+  margin-left: 0;
 }

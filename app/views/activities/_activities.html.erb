@@ -1,0 +1,15 @@
+<% @decorated_activities.each_group do |group| %>
+  <div class="activity-group">
+    <%= group.first.avatar %>
+    <div class="grouped-activities">
+      <% group.each do |activity| %>
+        <%= render activity %>
+      <% end %>
+      <div class="date"><i class="fi-clock"></i> Ist <%= time_ago_in_words(group.first.created_at) %> her
+        <% if group.size > 1 %>
+         <span>&#183; <a href="javascript:;" class="show-activities"><%= group.size - 1 %> weitere Aktivitäten anzeigen</a><span>
+        <% end %>
+      </div>
+    </div>
+  </div>
+<% end %>
