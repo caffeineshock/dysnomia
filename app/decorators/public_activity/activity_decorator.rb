@@ -20,7 +20,11 @@ class PublicActivity::ActivityDecorator < Draper::Decorator
 
   def groups_with? other
     !other.nil? and
-    object.created_at - other.created_at < 5.minutes and
+    time_between(other) < 5.minutes and
     object.owner == other.owner
+  end
+
+  def time_between other
+    [object.created_at, other.created_at].sort.tap { |times| return times.second - times.first }
   end
 end
