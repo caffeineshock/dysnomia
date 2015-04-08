@@ -39,7 +39,7 @@ gem 'capistrano-bundler', group: :development
 gem 'capistrano-rbenv', '~> 2.0', group: :development
 
 # Foundation framework
-gem 'foundation-rails'
+gem 'foundation-rails', github:'zurb/foundation-rails', tag:'v5.5.1.2'
 
 # Foundation icon font
 gem 'foundation-icons-sass-rails'

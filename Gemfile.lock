@@ -38,6 +38,15 @@ GIT
     epic-editor-rails (0.2.3)
       railties (>= 3.2, < 5.0)
 
+GIT
+  remote: git://github.com/zurb/foundation-rails.git
+  revision: 6ebd996d1965202bd85bb0aaff4449852f2bc2dd
+  tag: v5.5.1.2
+  specs:
+    foundation-rails (5.5.1.1)
+      railties (>= 3.1.0)
+      sass (>= 3.3.0, < 3.5)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -218,9 +227,6 @@ GEM
     foundation-icons-sass-rails (3.0.0)
       railties (>= 3.1.1)
       sass-rails (>= 3.1.1)
-    foundation-rails (5.5.1.1)
-      railties (>= 3.1.0)
-      sass (>= 3.3.0, < 3.5)
     friendly_id (5.1.0)
       activerecord (>= 4.0.0)
     fullcalendar-rails (2.3.1.0)
@@ -579,7 +585,7 @@ DEPENDENCIES
   font-awesome-rails
   foreman
   foundation-icons-sass-rails
-  foundation-rails
+  foundation-rails!
   friendly_id
   fullcalendar-rails
   gemoji
