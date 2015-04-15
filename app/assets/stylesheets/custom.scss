@@ -756,7 +756,7 @@ pre.embedded {
   top: 48px;
 }
 
-/* Code */
+/* Markdown */
 
 code {
   background: none repeat scroll 0 0 rgba(255, 255, 255, 0.9);
@@ -770,6 +770,14 @@ code {
   margin-bottom: 1.5em;
   padding: 1em;
   white-space: pre;
+}
+
+.markdown img:not(.emoji) {
+  float: right;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+  padding: 1px;
+  margin-left: 1em;
+  margin-bottom: 1em;
 }
 
 /* DataTable */
@@ -885,4 +893,18 @@ tr.unfold td:hover {
 
 dd:nth-of-type(1) {
   margin-left: 0;
+}
+
+/* Mentions */
+
+a.user-mention .at {
+  color: #777;
+}
+
+a.user-mention {
+  display: inline;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background: rgba(0, 0, 0, 0.05);
+  padding: 0 3px;
+  border-radius: 3px;
 }
