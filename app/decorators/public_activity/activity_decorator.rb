@@ -20,7 +20,7 @@ class PublicActivity::ActivityDecorator < Draper::Decorator
 
   def groups_with? other
     !other.nil? and
-    time_between(other) < 5.minutes and
+    time_between(other) < 15.minutes and
     object.owner == other.owner
   end
 
