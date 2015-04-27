@@ -35,7 +35,7 @@ class ApplicationController < ActionController::Base
   private
 
   def current_tenant
-    @current_tenant ||= Tenant.find_by_hostname!(request.host).decorate
+    @current_tenant ||= Tenant.eager.find_by_hostname!(request.host).decorate
   end
 
   helper_method :current_tenant

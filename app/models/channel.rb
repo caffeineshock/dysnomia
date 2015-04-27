@@ -12,6 +12,8 @@ class Channel < ActiveRecord::Base
   has_many :users, through: :subscriptions
   has_many :messages, dependent: :destroy
 
+  scope :eager, -> { includes(:messages, :subscriptions) }
+
   def toggle_muted_for user
     subscription(user).toggle(:muted).save
   end

@@ -14,6 +14,8 @@ class Event < ActiveRecord::Base
   validates :ends_at, timeliness: { :after => :starts_at, :type => :datetime }
   validates :title, presence: true, length: { maximum: 500 }
 
+  scope :eager, -> { includes(:category) }
+
   has_many :participations
   has_many :users, through: :participations
   belongs_to :category

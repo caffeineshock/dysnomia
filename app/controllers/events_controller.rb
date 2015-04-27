@@ -8,9 +8,9 @@ class EventsController < ApplicationController
   # GET /events.ics
   def index
     if params[:start] and params[:end]
-      @events = Event.between(params[:start], params[:end])
+      @events = Event.eager.between(params[:start], params[:end])
     else
-      @events = Event.order(:starts_at)
+      @events = Event.eager.order(:starts_at)
     end
 
     Event.mark_as_read! @events.to_a, :for => current_user

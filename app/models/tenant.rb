@@ -14,6 +14,8 @@ class Tenant < ActiveRecord::Base
   validates :name, uniqueness: {case_sensitive:  false }, presence: true, length: { maximum: 100 }
   validates :hostname, uniqueness: {case_sensitive:  false }, presence: true, length: { maximum: 200 }
 
+  scope :eager, -> { includes(:setting_objects) }
+
   after_save :save_settings
   after_create :seed_tenant
 
