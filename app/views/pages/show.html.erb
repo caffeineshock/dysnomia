@@ -21,13 +21,15 @@
       </tr>
     </table>
   </div>
-  <% end %>
-<h1><%= @page.title %></h1>
-<div class="js-task-list-container">
-  <div class="markdown">
-    <%= @page.postprocessed_content %>
+<% end %>
+<% cache @page do %>
+  <h1><%= @page.title %></h1>
+  <div class="js-task-list-container">
+    <div class="markdown">
+      <%= @page.postprocessed_content %>
+    </div>
+    <%= form_for @page, remote: true, format: :json do |f| %>
+      <%= f.text_area :content, class: "disable-epic-editor js-task-list-field" %>
+    <% end %>
   </div>
-  <%= form_for @page, remote: true, format: :json do |f| %>
-    <%= f.text_area :content, class: "disable-epic-editor js-task-list-field" %>
-  <% end %>
-</div>
+<% end %>

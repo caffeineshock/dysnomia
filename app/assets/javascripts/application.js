@@ -26,6 +26,8 @@
 //= require zeroclipboard
 //= require js-routes
 //= require task_list
+//= require rails-timeago
+//= require locales/jquery.timeago.de.js
 //= require application/turbolinks_init
 //= require application/foundation
 //= require application/keybindings

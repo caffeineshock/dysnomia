@@ -243,5 +243,5 @@ gem 'task_list'
 # Wiki-Links einfacher ermöglichen
 gem 'html-pipeline-wiki-link',  github: 'caffeineshock/html-pipeline-wiki-link', branch: 'master'
 
-# FontAwesome fonts
-gem "font-awesome-rails"
+# Calculate time distances dynamically
+gem 'rails-timeago', '~> 2.0'

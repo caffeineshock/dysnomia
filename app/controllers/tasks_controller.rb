@@ -6,8 +6,8 @@ class TasksController < ApplicationController
   # GET /tasks
   # GET /tasks.json
   def index
-    @tasks = Task.where(completed: params.include?(:completed)).order(:due_at).page(params[:page])
-    Task.mark_as_read! @tasks.to_a, :for => current_user
+    @tasks = Task.eager.where(completed: params.include?(:completed)).order(:due_at).page(params[:page])
+    Task.eager.mark_as_read! @tasks.to_a, :for => current_user
   end
 
   # GET /tasks/1

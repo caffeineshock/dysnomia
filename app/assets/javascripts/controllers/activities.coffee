@@ -16,5 +16,8 @@ showActivitiesClickHandler = ->
   $(this).closest(".grouped-activities").children(".activity").each ->
     $(this).slideDown()
   $(this).parent().hide()
-  
+
 $(".show-activities").click showActivitiesClickHandler
+
+for id of window.unread["activity"]
+  $("#activity-#{id} .unread-flag").show();

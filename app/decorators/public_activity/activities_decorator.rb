@@ -23,4 +23,8 @@ class PublicActivity::ActivitiesDecorator < Draper::CollectionDecorator
   def decorated_objs
     @decorated_objs ||= object.map { |a| a.decorate }
   end
+
+  def cache_key
+    groups.first.first.updated_at
+  end
 end

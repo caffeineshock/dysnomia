@@ -12,6 +12,8 @@ class Task < ActiveRecord::Base
   has_many :assignments
   has_many :users, through: :assignments
 
+  scope :eager, -> { includes(:users) }
+
   def overdue?
     due_at and due_at < Date.today and not completed?
   end

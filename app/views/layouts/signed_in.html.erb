@@ -21,6 +21,7 @@
     <% end %>
     <%= javascript_include_tag "vendor/modernizr" %>
     <%= javascript_include_tag "application" %>
+    <%= timeago_script_tag %>
     <%= javascript_tag do %>
       window.connection_id = "<%= SecureRandom.uuid %>";
       window.current_user = <%= current_user.id %>;
