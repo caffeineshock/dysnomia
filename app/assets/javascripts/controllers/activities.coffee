@@ -19,5 +19,6 @@ showActivitiesClickHandler = ->
 
 $(".show-activities").click showActivitiesClickHandler
 
-for id of window.unread["activity"]
-  $("#activity-#{id} .unread-flag").show();
+$.turboInit ->
+  for k, v of window.unread["activity"]
+    $("#activity-#{v} .unread-flag").show();
