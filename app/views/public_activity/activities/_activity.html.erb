@@ -1,4 +1,4 @@
-<div<% unless activity.trackable.nil? %> id="activity-<%= activity.trackable.id %>"<% end %> class="activity<% unless activity.first? %> hidden<% end %>">
+<div id="activity-<%= activity.id %>" class="activity<% unless activity.first? %> hidden<% end %>">
   <span class="unread-flag"><i class="fi-asterisk unread"></i></span>
   <span class="description"><%= link_to activity.owner.username, activity.owner %> <%= render_activity activity %></span>
 </div>
