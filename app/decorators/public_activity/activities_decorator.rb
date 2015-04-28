@@ -1,4 +1,10 @@
 class PublicActivity::ActivitiesDecorator < Draper::CollectionDecorator
+  attr_writer :filter
+
+  def filter
+    @filter || "all"
+  end
+
   def each_group &blck
     groups.each do |group|
       yield group
@@ -25,6 +31,12 @@ class PublicActivity::ActivitiesDecorator < Draper::CollectionDecorator
   end
 
   def cache_key
-    groups.first.first.updated_at
+    key = "activities-#{filter}"
+
+    groups.tap do |g|
+      key += "-#{groups.first.first.updated_at}" unless g.empty? or g.first.empty?
+    end
+
+    key
   end
 end

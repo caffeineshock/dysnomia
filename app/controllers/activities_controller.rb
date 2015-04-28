@@ -11,6 +11,7 @@ class ActivitiesController < ApplicationController
 
     @activities = PublicActivity::Activity.order(created_at: :desc).where(filter).page(params[:page]).per_page(100)
     @decorated_activities = PublicActivity::ActivitiesDecorator.decorate(@activities)
+    @decorated_activities.filter = params[:filter]
     @unread_activities = PublicActivity::Activity.unread_by(current_user).pluck(:id)
     PublicActivity::Activity.mark_as_read! @activities.to_a, :for => current_user unless @unread_activities.empty?
 
