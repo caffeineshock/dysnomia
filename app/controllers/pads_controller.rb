@@ -7,7 +7,13 @@ class PadsController < ApplicationController
   # GET /pads
   # GET /pads.json
   def index
-    @pads = Pad.order(updated_at: :desc).page(params[:page])
+    if params[:search]
+      @search = Pad.search { fulltext params[:search] }
+      @pads = Pad.where(id: @search.results.map(&:id)).page(params[:page])
+    else
+      @pads = Pad.order(updated_at: :desc).page(params[:page])
+    end
+
     Pad.mark_as_read! @pads.to_a, :for => current_user
   end
 

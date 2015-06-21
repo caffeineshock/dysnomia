@@ -14,6 +14,10 @@ class Channel < ActiveRecord::Base
 
   scope :eager, -> { includes(:messages, :subscriptions) }
 
+  searchable do
+    text :title
+  end
+
   def toggle_muted_for user
     subscription(user).toggle(:muted).save
   end

@@ -6,7 +6,13 @@ class PagesController < ApplicationController
   # GET /pages
   # GET /pages.json
   def index
-    @pages = Page.order(updated_at: :desc).page(params[:page])
+    if params[:search]
+      @search = Page.search { fulltext params[:search] }
+      @pages = Page.where(id: @search.results.map(&:id)).page(params[:page])
+    else
+      @pages = Page.order(updated_at: :desc).page(params[:page])
+    end
+
     Page.mark_as_read! @pages.to_a, :for => current_user
   end
 

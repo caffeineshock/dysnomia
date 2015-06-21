@@ -14,6 +14,10 @@ class Task < ActiveRecord::Base
 
   scope :eager, -> { includes(:users) }
 
+  searchable do
+    text :title
+  end
+
   def overdue?
     due_at and due_at < Date.today and not completed?
   end

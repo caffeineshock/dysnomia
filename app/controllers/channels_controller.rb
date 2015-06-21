@@ -6,7 +6,13 @@ class ChannelsController < ApplicationController
   # GET /channels
   # GET /channels.json
   def index
-    @channels = Channel.visible_for(current_user).eager.order(last_message_at: :desc, created_at: :desc).page(params[:page])
+    if params[:search]
+      @search = Channel.search { fulltext params[:search] }
+      @channels = Channel.where(id: @search.results.map(&:id)).visible_for(current_user).eager.page(params[:page])
+    else
+      @channels = Channel.visible_for(current_user).eager.order(last_message_at: :desc, created_at: :desc).page(params[:page])
+    end
+
   end
 
   # GET /channels/new

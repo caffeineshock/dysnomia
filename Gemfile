@@ -245,3 +245,7 @@ gem 'html-pipeline-wiki-link',  github: 'caffeineshock/html-pipeline-wiki-link',
 
 # Calculate time distances dynamically
 gem 'rails-timeago', '~> 2.0'
+
+# Sunspot/Solr for searchin
+gem 'sunspot_rails'
+gem 'sunspot_solr', group: :development

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150225115001) do
+ActiveRecord::Schema.define(version: 20150621205441) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "trackable_id"
@@ -60,7 +60,7 @@ ActiveRecord::Schema.define(version: 20150225115001) do
 
   add_index "channels", ["slug"], name: "index_channels_on_slug"
   add_index "channels", ["tenant_id"], name: "index_channels_on_tenant_id"
-  add_index "channels", ["title"], name: "index_channels_on_title", unique: true
+  add_index "channels", ["title"], name: "index_channels_on_title"
 
   create_table "events", force: :cascade do |t|
     t.string   "title"

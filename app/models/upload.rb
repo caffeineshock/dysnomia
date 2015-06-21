@@ -11,6 +11,10 @@ class Upload < ActiveRecord::Base
   validates :file, attachment_presence: true
   do_not_validate_attachment_file_type :file
 
+  searchable do
+    text :file_file_name, :extension, :note
+  end
+
   def extension
     file_file_name.match(/\.(\w+)$/)[1]
   end

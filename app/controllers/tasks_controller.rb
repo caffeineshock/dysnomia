@@ -6,7 +6,13 @@ class TasksController < ApplicationController
   # GET /tasks
   # GET /tasks.json
   def index
-    @tasks = Task.eager.where(completed: params.include?(:completed)).order(:due_at).page(params[:page])
+    if params[:search]
+      @search = Task.search { fulltext params[:search] }
+      @tasks = Task.where(id: @search.results.map(&:id), completed: params.include?(:completed)).page(params[:page])
+    else
+      @tasks = Task.eager.where(completed: params.include?(:completed)).order(:due_at).page(params[:page])
+    end
+
     Task.eager.mark_as_read! @tasks.to_a, :for => current_user
   end
 

@@ -29,6 +29,10 @@ class Event < ActiveRecord::Base
 
   composed_of :recurring_until, class_name: 'Date', mapping: %w(Date to_s), constructor: proc{ |o| o }, converter: proc{ |o| o }
 
+  searchable do
+    text :title, :description, :location
+  end
+
   # need to override the json view to return what full_calendar is expecting.
   # http://arshaw.com/fullcalendar/docs/event_data/Event_Object/
   def as_json(options = {})
@@ -89,7 +93,7 @@ class Event < ActiveRecord::Base
 
   def self.between after, before
     after, before = [after, before].map! { |d| Date.parse(d) }
-    events = self.where("starts_at BETWEEN :after AND :before OR ends_at BETWEEN :after AND :before", {
+    self.where("starts_at BETWEEN :after AND :before OR ends_at BETWEEN :after AND :before", {
       after: after.to_formatted_s(:db),
       before: before.to_formatted_s(:db)
     }).reject { |e| e.recurring? } + self.where("starts_at < :before", {before: before.to_formatted_s(:db)}).select { |e| e.recurring? }.map do |e|

@@ -350,6 +350,7 @@ GEM
       cocaine (~> 0.5.3)
       mime-types
     pg (0.18.1)
+    pr_geohash (1.0.0)
     pretender (0.1.0)
     pry (0.10.1)
       coderay (~> 1.1.0)
@@ -435,6 +436,8 @@ GEM
       http-cookie (>= 1.0.2, < 2.0)
       mime-types (>= 1.16, < 3.0)
       netrc (~> 0.7)
+    rsolr (1.0.12)
+      builder (>= 2.1.2)
     rspec (3.2.0)
       rspec-core (~> 3.2.0)
       rspec-expectations (~> 3.2.0)
@@ -513,6 +516,14 @@ GEM
       colorize (>= 0.7.0)
       net-scp (>= 1.1.2)
       net-ssh (>= 2.8.0)
+    sunspot (2.2.0)
+      pr_geohash (~> 1.0)
+      rsolr (~> 1.0.7)
+    sunspot_rails (2.2.0)
+      nokogiri
+      rails (>= 3)
+      sunspot (= 2.2.0)
+    sunspot_solr (2.2.0)
     task_list (1.0.2)
       html-pipeline
     terminal-table (1.4.5)
@@ -639,6 +650,8 @@ DEPENDENCIES
   spring-commands-rspec
   sprockets-rails
   sqlite3
+  sunspot_rails
+  sunspot_solr
   task_list
   therubyracer
   thin

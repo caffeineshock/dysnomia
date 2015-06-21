@@ -9,6 +9,9 @@ class EventsController < ApplicationController
   def index
     if params[:start] and params[:end]
       @events = Event.eager.between(params[:start], params[:end])
+    elsif params[:search]
+      @search = Event.search { fulltext params[:search] }
+      @events = Event.eager.where(id: @search.results.map(&:id))
     else
       @events = Event.eager.order(:starts_at)
     end

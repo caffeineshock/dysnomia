@@ -6,7 +6,13 @@ class UploadsController < ApplicationController
   # GET /uploads
   # GET /uploads.json
   def index
-    @uploads = Upload.order(updated_at: :desc).page(params[:page])
+    if params[:search]
+      @search = Upload.search { fulltext params[:search] }
+      @uploads = Upload.where(id: @search.results.map(&:id)).page(params[:page])
+    else
+      @uploads = Upload.order(updated_at: :desc).page(params[:page])
+    end
+
     Upload.mark_as_read! @uploads.to_a, :for => current_user
   end
 

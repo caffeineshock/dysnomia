@@ -9,16 +9,12 @@ class UsersController < ApplicationController
   def index
     @filter = params[:filter] if params.has_key? :filter and %w{unapproved invited}.include? params[:filter]
 
-    @users = case @filter
-    when "unapproved"
-      authorize_moderator
-      User.unapproved
-    when "invited"
-      authorize_moderator
-      User.invited
+    if params[:search]
+      @search = User.search { fulltext params[:search] }
+      @users = user_query.where(id: @search.results.map(&:id))
     else
-      User.approved
-    end.page(params[:page])
+      @users = user_query.order(updated_at: :desc)
+    end
   end
 
   # GET /users/1
@@ -108,5 +104,18 @@ class UsersController < ApplicationController
 
   def concerns_self
     @user.eql? current_user
+  end
+
+  def user_query
+    case @filter
+    when "unapproved"
+      authorize_moderator
+      User.unapproved
+    when "invited"
+      authorize_moderator
+      User.invited
+    else
+      User.approved
+    end.page(params[:page])
   end
 end

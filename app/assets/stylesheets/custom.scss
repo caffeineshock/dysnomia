@@ -913,3 +913,21 @@ a.user-mention {
 .unread-flag {
   display: none;
 }
+
+#searchbox {
+  width: 30%;
+  float: right;
+  margin: 10px 0;
+}
+
+#searchbox-icon {
+  margin-left: 11px;
+  margin-top: 7px;
+  position: absolute;
+  color: #666;
+}
+
+#searchbox-field {
+  margin: 0;
+  padding-left: 2em;
+}

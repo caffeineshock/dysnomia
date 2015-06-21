@@ -1,6 +1,6 @@
 module ApplicationHelper
-  def icon type
-    content_tag :i, nil, class: "fi-#{type.to_s}"
+  def icon type, id = nil
+    content_tag :i, nil, class: "fi-#{type.to_s}", id: id
   end
 
   def clipboard_button target
@@ -43,6 +43,20 @@ module ApplicationHelper
 
     link_options = options[:shortcut].nil? ? {} : {data: { keybinding: options[:shortcut] }}
     link_to content.html_safe, options[:path], link_options
+  end
+
+  def search_field
+    icon = icon("magnifying-glass", "searchbox-icon")
+    input = text_field_tag(:search, params[:search], placeholder: "Suchen...", id: "searchbox-field")
+    icon + input
+  end
+
+  def searchbox
+    content_tag :div, id: "searchbox" do
+      form_tag nil, method: :get do
+        search_field
+      end
+    end
   end
 
   def app_version

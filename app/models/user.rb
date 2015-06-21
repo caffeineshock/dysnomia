@@ -37,6 +37,10 @@ class User < ActiveRecord::Base
 
   scope :viewable_from_tenant, -> { includes(:tenants).where(tenants: {id: Tenant.current_id}) }
 
+  searchable do
+    text :username, :email
+  end
+
   def self.find_first_by_auth_conditions(warden_conditions)
     conditions = warden_conditions.dup
     if login = conditions.delete(:login)

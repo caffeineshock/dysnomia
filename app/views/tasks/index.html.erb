@@ -5,6 +5,14 @@
     <li><%= link_to "Neue Aufgabe", new_task_path %></li>
   </ul>
 <% end %>
+<div id="searchbox">
+  <%= form_tag tasks_path, method: :get do %>
+    <% if params[:completed] %>
+      <%= hidden_field_tag "completed", params[:completed] %>
+    <% end %>
+    <%= search_field %>
+  <% end %>
+</div>
 <h1>Aufgaben</h1>
 <dl class="sub-nav">
   <dd<% unless params[:completed] %> class="active"<% end %>><%= link_to "Offen", tasks_path %></dd>

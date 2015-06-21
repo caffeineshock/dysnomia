@@ -3,3 +3,4 @@ private_pub: rackup private_pub.ru -s thin -E production
 redis: redis-server
 guard: bundle exec guard -i
 sidekiq: bundle exec sidekiq
+solr: bundle exec rake sunspot:solr:run
