@@ -5,7 +5,7 @@ class Channel < ActiveRecord::Base
 
   friendly_id :title, use: :slugged
 
-  validates :title, presence: true, length: { maximum: 500 }, uniqueness: true
+  validates :title, presence: true, length: { maximum: 500 }, uniqueness: {scope: :tenant_id}
   validates :subscriptions, presence: true, unless: :public?
 
   has_many :subscriptions, dependent: :destroy
