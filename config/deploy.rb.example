@@ -10,7 +10,7 @@ set :rails_env, 'production'
 set :repo_url,  "git@github.com:caffeineshock/dysnomia.git"
 set :scm, :git
 
-set :linked_files, %w(config/database.yml config/secrets.yml config/private_pub.yml config/settings/production.yml)
+set :linked_files, %w(config/database.yml config/secrets.yml config/sunspot.yml config/private_pub.yml config/settings/production.yml)
 set :linked_dirs, %w{public/system public/images}
 set :keep_releases, 3
 
