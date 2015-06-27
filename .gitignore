@@ -24,11 +24,12 @@
 # Ignore paperclip files
 /public/system/*
 
-# Ignore files containing secrets
+# Ignore files containing secrets or setup-specific configuration
 /config/database.yml
 /config/secrets.yml
 /config/private_pub.yml
 /config/redis.yml
+/config/sunspot.yml
 
 # Ignore files containing server-specific bits
 /config/deploy.rb
