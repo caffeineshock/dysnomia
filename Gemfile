@@ -248,4 +248,4 @@ gem 'rails-timeago', '~> 2.0'
 
 # Sunspot/Solr for searchin
 gem 'sunspot_rails'
-gem 'sunspot_solr', group: :development
+gem 'sunspot_solr'
