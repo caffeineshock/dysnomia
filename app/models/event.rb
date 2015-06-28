@@ -151,7 +151,7 @@ class Event < ActiveRecord::Base
   end
 
   def recurring_until= recurring_until
-    @recurring_until = recurring_until
+    @recurring_until = Date.new(recurring_until[1].to_i, recurring_until[2].to_i, recurring_until[3].to_i)
     generate_schedule
   end
 
