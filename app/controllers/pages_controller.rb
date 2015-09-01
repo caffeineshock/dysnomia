@@ -30,6 +30,7 @@ class PagesController < ApplicationController
   # GET /pages/new
   def new
     @page = Page.new
+    @page.title = params[:id].titlecase unless params[:id].nil? or params[:id].match(/^[\d]+$/)
   end
 
   # GET /pages/1/edit
@@ -88,5 +89,7 @@ class PagesController < ApplicationController
 
   def set_instance
     @page = Page.friendly.find(params[:id])
+  rescue ActiveRecord::RecordNotFound
+    redirect_to new_page_path(id: params[:id])
   end
 end

@@ -15,7 +15,6 @@ class Page < ActiveRecord::Base
   before_save :highlander_check
   before_destroy :startpage_undeletable
 
-
   searchable do
     text :title, :content
   end
