@@ -373,7 +373,7 @@ ul.subscribers a {
   cursor: help;
 }
 
-@media all and (max-width: $topbar-breakpoint) {
+@media all and (max-width: #{upper-bound($small-range)}) {
     .hide_on_phone {
         display:none;
         width:0;
@@ -918,6 +918,15 @@ a.user-mention {
   width: 30%;
   float: right;
   margin: 10px 0;
+}
+
+@media #{$screen} and (max-width: #{upper-bound($small-range)}) {
+  #searchbox {
+    width: 100%;
+    float: none;
+    margin: 0;
+    margin-bottom: 0.5rem;
+  }
 }
 
 #searchbox-icon {
