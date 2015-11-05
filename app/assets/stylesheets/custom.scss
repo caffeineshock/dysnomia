@@ -629,6 +629,12 @@ li.select2-search-choice {
   box-shadow: 0 0 5px rgba($alert-color, 0.3);
 }
 
+@media #{$screen} and (max-width: #{upper-bound($small-range)}) {
+ .alert-box {
+    margin: 0;
+  }
+}
+
 /* FullCalendar */
 
 .fc-header {

@@ -1,4 +1,4 @@
 $.turboInit ->
   window.setTimeout ( ->
-    $(".flash").fadeOut 500
+    $(".flash").slideUp 250
   ), 4000
