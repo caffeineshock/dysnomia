@@ -629,6 +629,11 @@ li.select2-search-choice {
   box-shadow: 0 0 5px rgba($alert-color, 0.3);
 }
 
+.alert-box {
+  margin-left: 0.9375rem;
+  margin-right: 0.9375rem;
+}
+
 @media #{$screen} and (max-width: #{upper-bound($small-range)}) {
  .alert-box {
     margin: 0;

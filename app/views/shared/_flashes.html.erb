@@ -1,10 +1,8 @@
 <div class="row">
-  <div class="medium-12">
-    <% flash.each do |name, msg| %>
-      <div data-alert class="flash alert-box <%= name %>">
-        <%= msg %>
-        <a href="#" class="close"><i class="fi-x-circle"></i></a>
-      </div>
-    <% end %>
-  </div>
+  <% flash.each do |name, msg| %>
+    <div data-alert class="flash alert-box <%= name %>">
+      <%= msg %>
+      <a href="#" class="close"><i class="fi-x-circle"></i></a>
+    </div>
+  <% end %>
 </div>
