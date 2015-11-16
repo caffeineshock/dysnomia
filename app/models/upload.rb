@@ -3,6 +3,7 @@ class Upload < ActiveRecord::Base
   include Tenanted
   include Postprocess
   include PublishCrudEvents
+  include PgSearch
 
   acts_as_processable :note
   has_attached_file :file
@@ -11,9 +12,7 @@ class Upload < ActiveRecord::Base
   validates :file, attachment_presence: true
   do_not_validate_attachment_file_type :file
 
-  searchable do
-    text :file_file_name, :extension, :note
-  end
+  multisearchable against: [:file_file_name, :extension, :note]
 
   def extension
     file_file_name.match(/\.(\w+)$/)[1]

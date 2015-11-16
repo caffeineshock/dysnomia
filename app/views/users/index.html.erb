@@ -6,14 +6,6 @@
     <li><%= link_to "Eigenes Profil bearbeiten", edit_user_path(current_user) %></li>
   </ul>
 <% end %>
-<div id="searchbox">
-  <%= form_tag users_path, method: :get do %>
-    <% if params[:filter] %>
-      <%= hidden_field_tag "filter", params[:filter] %>
-    <% end %>
-    <%= search_field %>
-  <% end %>
-</div>
 <h1>Benutzer</h1>
 <% if current_user.moderator_or_admin? %>
   <dl class="sub-nav">

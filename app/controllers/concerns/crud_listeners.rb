@@ -9,13 +9,13 @@ module CrudListeners
         ReadListener.new(current_user)
       ]
 
-      Wisper.with_listeners(*listeners) do
+      Wisper.subscribe(*listeners) do
         action_block.call
       end
     end
 
     around_filter only: %i(show edit) do |controller,action_block|
-      Wisper.with_listeners(ReadListener.new(current_user)) do
+      Wisper.subscribe(ReadListener.new(current_user)) do
         action_block.call
       end
     end

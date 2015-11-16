@@ -2,6 +2,7 @@ class Task < ActiveRecord::Base
   include PublicActivity::Common
   include Tenanted
   include PublishCrudEvents
+  include PgSearch
 
   # Unread
   acts_as_readable on: :created_at
@@ -14,9 +15,7 @@ class Task < ActiveRecord::Base
 
   scope :eager, -> { includes(:users) }
 
-  searchable do
-    text :title
-  end
+  multisearchable against: [:title]
 
   def overdue?
     due_at and due_at < Date.today and not completed?

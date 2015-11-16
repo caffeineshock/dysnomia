@@ -2,6 +2,7 @@ class Pad < ActiveRecord::Base
   include Tenanted
   include PublicActivity::Common
   include PublishCrudEvents
+  include PgSearch
   extend FriendlyId
 
   friendly_id :title, use: :slugged
@@ -10,7 +11,5 @@ class Pad < ActiveRecord::Base
   validates :title, uniqueness: {scope: :tenant_id}, presence: true, length: { maximum: 500 }
   attr_accessor :initial_text, :url
 
-  searchable do
-    text :title
-  end
+  multisearchable against: [:title]
 end

@@ -4,6 +4,7 @@ class Event < ActiveRecord::Base
   include IceCube
   include Postprocess
   include PublishCrudEvents
+  include PgSearch
 
   acts_as_processable :description
 
@@ -28,10 +29,7 @@ class Event < ActiveRecord::Base
   attr_reader :schedule_obj
 
   composed_of :recurring_until, class_name: 'Date', mapping: %w(Date to_s), constructor: proc{ |o| o }, converter: proc{ |o| o }
-
-  searchable do
-    text :title, :description, :location
-  end
+  multisearchable against: [:title, :description, :location]
 
   # need to override the json view to return what full_calendar is expecting.
   # http://arshaw.com/fullcalendar/docs/event_data/Event_Object/

@@ -350,7 +350,10 @@ GEM
       cocaine (~> 0.5.3)
       mime-types
     pg (0.18.1)
-    pr_geohash (1.0.0)
+    pg_search (1.0.5)
+      activerecord (>= 3.1)
+      activesupport (>= 3.1)
+      arel
     pretender (0.1.0)
     pry (0.10.1)
       coderay (~> 1.1.0)
@@ -436,8 +439,6 @@ GEM
       http-cookie (>= 1.0.2, < 2.0)
       mime-types (>= 1.16, < 3.0)
       netrc (~> 0.7)
-    rsolr (1.0.12)
-      builder (>= 2.1.2)
     rspec (3.2.0)
       rspec-core (~> 3.2.0)
       rspec-expectations (~> 3.2.0)
@@ -511,19 +512,11 @@ GEM
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       sprockets (>= 2.8, < 4.0)
-    sqlite3 (1.3.10)
+    sqlite3 (1.3.11)
     sshkit (1.7.1)
       colorize (>= 0.7.0)
       net-scp (>= 1.1.2)
       net-ssh (>= 2.8.0)
-    sunspot (2.2.0)
-      pr_geohash (~> 1.0)
-      rsolr (~> 1.0.7)
-    sunspot_rails (2.2.0)
-      nokogiri
-      rails (>= 3)
-      sunspot (= 2.2.0)
-    sunspot_solr (2.2.0)
     task_list (1.0.2)
       html-pipeline
     terminal-table (1.4.5)
@@ -625,6 +618,7 @@ DEPENDENCIES
   normalize-rails
   paperclip
   pg
+  pg_search
   pretender
   private_pub!
   public_activity!
@@ -650,8 +644,6 @@ DEPENDENCIES
   spring-commands-rspec
   sprockets-rails
   sqlite3
-  sunspot_rails
-  sunspot_solr
   task_list
   therubyracer
   thin

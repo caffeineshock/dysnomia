@@ -33,6 +33,7 @@
     <%= subscribe_to "/onlinestatus/#{current_tenant.id}", publish: true %>
   </head>
   <body>
+    <%= render "shared/search" %>
     <%= render "shared/help" %>
     <%= render "shared/version" %>
     <%= render "shared/navigation" %>

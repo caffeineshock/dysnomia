@@ -3,9 +3,6 @@ source 'https://rubygems.org'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails'
 
-# Use sqlite3 as the database for Active Record
-gem 'sqlite3'
-
 # Use edge version of sprockets-rails
 gem 'sprockets-rails'
 
@@ -54,7 +51,7 @@ gem 'thin'
 gem 'public_activity', github: 'pokonski/public_activity'
 
 # PostgreSQL
-gem 'pg', group: :production
+gem 'pg'
 
 # Brakeman (static code analysis)
 gem 'brakeman', require: false, group: :development
@@ -149,6 +146,7 @@ group :test do
   gem 'factory_girl_rails'
   gem 'capybara'
   gem 'timecop'
+  gem 'sqlite3'
 end
 
 group :development do
@@ -246,6 +244,5 @@ gem 'html-pipeline-wiki-link',  github: 'caffeineshock/html-pipeline-wiki-link',
 # Calculate time distances dynamically
 gem 'rails-timeago', '~> 2.0'
 
-# Sunspot/Solr for searchin
-gem 'sunspot_rails'
-gem 'sunspot_solr'
+# Search
+gem 'pg_search'

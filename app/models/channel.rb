@@ -1,6 +1,7 @@
 class Channel < ActiveRecord::Base
   include PublicActivity::Common
   include Tenanted
+  include PgSearch
   extend FriendlyId
 
   friendly_id :title, use: :slugged
@@ -13,10 +14,7 @@ class Channel < ActiveRecord::Base
   has_many :messages, dependent: :destroy
 
   scope :eager, -> { includes(:messages, :subscriptions) }
-
-  searchable do
-    text :title
-  end
+  multisearchable against: [:title]
 
   def toggle_muted_for user
     subscription(user).toggle(:muted).save

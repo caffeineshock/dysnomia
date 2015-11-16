@@ -1,0 +1,8 @@
+<div class="search-box reveal-modal" data-reveal>
+	<h2>Suche</h2>
+	<%= form_tag search_path, method: :get do %>
+    	<i class="fi-magnifying-glass" id="searchbox-icon"></i>
+    	<input type="text" id="searchbox-field" name="q" value="<%= params[:q] %>" placeholder="Suchen nach..."/>
+    <% end %>
+    <a class="close-reveal-modal">&#215;</a>
+</div>

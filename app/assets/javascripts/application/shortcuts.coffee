@@ -1,4 +1,5 @@
 $.turboInit -> 
+  Mousetrap.bind 's', (e) -> $('.search-box').foundation 'reveal', 'open'
   Mousetrap.bind 'h', (e) -> $('#help').foundation 'reveal', 'open'
   Mousetrap.bind 'l', (e) -> $('#logout').trigger('click')
   Mousetrap.bind 'V', (e) -> $('#version').foundation 'reveal', 'open'

@@ -1,3 +1,3 @@
-rails: bundle exec rails s -e production
-private_pub: rackup private_pub.ru -s thin -E production
+rails: bundle exec rails s -e production -b '0.0.0.0'
+private_pub: rackup private_pub.ru -o 0.0.0.0 -s thin -E production
 sidekiq: bundle exec sidekiq

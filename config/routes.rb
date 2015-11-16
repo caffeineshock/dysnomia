@@ -63,6 +63,7 @@ Dysnomia::Application.routes.draw do
 
   root 'activities#index'
   
+  get 'search' => 'search#index'
   get 'calendar' => 'calendar#index'
   get 'forum' => 'forum#index'
   get 'discourse_sso' => 'discourse_sso#index'

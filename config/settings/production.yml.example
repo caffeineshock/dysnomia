@@ -1,5 +1,5 @@
 hostname_scheme: "http://%{hostname}"
-redis_url: "redis://localhost:6379/5"
+redis_url: "redis://redis:6379/5"
 mail_address: "dysnomia@example.net"
 etherpad_address: "https://etherpad.example.net"
 etherpad_api_version: "1.2.9"

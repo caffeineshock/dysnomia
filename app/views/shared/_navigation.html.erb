@@ -8,7 +8,7 @@
       <section class="top-bar-section">
         <ul>
           <li<% unless other_tenants.empty? %> class="has-dropdown"<% end %>>
-            <%= navbar_link current_tenant.title, {path: root_path, unread: "activity", shortcut: 's'} %>
+            <%= navbar_link current_tenant.title, {path: root_path, unread: "activity"} %>
             <% unless other_tenants.empty? %>
             <ul class="dropdown">
               <% other_tenants.each do |t| %>
@@ -19,6 +19,12 @@
           </li>
         </ul>
         <ul class="right">
+          <li<% if params[:controller].eql? "search" %> class="active"<% end %>>
+            <a class="navbar-search-button" href="#">
+              <i class="fi-magnifying-glass navbar-icon"></i> Suche
+            </a>
+          </li>
+          <li class="divider"></li>
           <% unless forum_url.blank? %>
           <li<% if params[:controller].eql? "forum" %> class="active"<% end %>><%= navbar_link "Forum", {icon: :comment, path: forum_path, shortcut: 'f'} %></li>
           <li class="divider"></li>

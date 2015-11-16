@@ -3,6 +3,7 @@ class Page < ActiveRecord::Base
   include Tenanted
   include Postprocess
   include PublishCrudEvents
+  include PgSearch
   extend FriendlyId
 
   friendly_id :title, use: :slugged
@@ -15,9 +16,7 @@ class Page < ActiveRecord::Base
   before_save :highlander_check
   before_destroy :startpage_undeletable
 
-  searchable do
-    text :title, :content
-  end
+  multisearchable against: [:title, :content]
 
   def self.startpage
     self.where(startpage: true).take!

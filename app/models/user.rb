@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :invitable, :database_authenticatable, :recoverable, :rememberable, :trackable, :validatable, :registerable, :async, :invitable
+  devise :invitable, :database_authenticatable, :recoverable, :rememberable, :trackable, :validatable, :registerable, :async
   include PublicActivity::Common
   include ActiveModel::Dirty
   extend FriendlyId
@@ -36,10 +36,6 @@ class User < ActiveRecord::Base
   enum role: [:user, :moderator, :admin]
 
   scope :viewable_from_tenant, -> { includes(:tenants).where(tenants: {id: Tenant.current_id}) }
-
-  searchable do
-    text :username, :email
-  end
 
   def self.find_first_by_auth_conditions(warden_conditions)
     conditions = warden_conditions.dup
