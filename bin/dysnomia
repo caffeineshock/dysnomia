@@ -1,0 +1,11 @@
+#!/usr/bin/env ruby
+require_relative '../config/environment'
+system "rm tmp/pids/*.pid"
+
+unless ActiveRecord::Base.connection.table_exists? 'tenants' then
+  system "rake db:setup"
+else
+  system "rake db:migrate"
+end
+
+exec "foreman start -f Procfile.production"
