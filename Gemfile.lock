@@ -400,8 +400,6 @@ GEM
     rails-timeago (2.13.0)
       actionpack (>= 3.1)
       activesupport (>= 3.1)
-    rails_config (0.99.0)
-      config (>= 1.0.0.beta1)
     railties (4.2.5)
       actionpack (= 4.2.5)
       activesupport (= 4.2.5)
@@ -421,6 +419,8 @@ GEM
     redis-activesupport (4.1.5)
       activesupport (>= 3, < 5)
       redis-store (~> 1.1.0)
+    redis-namespace (1.5.2)
+      redis (~> 3.0, >= 3.0.4)
     redis-objects (1.2.1)
       redis (>= 3.0.2)
     redis-rack (1.5.0)
@@ -576,6 +576,7 @@ DEPENDENCIES
   capistrano-rbenv (~> 2.0)
   capybara
   coffee-rails
+  config
   cookiejar (= 0.3.0)
   devise
   devise-async
@@ -628,8 +629,8 @@ DEPENDENCIES
   rails
   rails-erd
   rails-timeago (~> 2.0)
-  rails_config
   rb-readline
+  redis-namespace
   redis-objects
   redis-rails
   rspec-rails

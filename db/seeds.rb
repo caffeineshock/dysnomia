@@ -15,11 +15,6 @@ t = Tenant.create({
 
 Tenant.current_id = 1
 
-Category.create(
-  title: "(Keine Kategorie)",
-  color: "#7a7a7a"
-)
-
 User.new do |u|
   u.username = "Admin"
   u.email = "admin@example.net"

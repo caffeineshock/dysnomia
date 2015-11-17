@@ -126,6 +126,9 @@ gem 'redis-rails'
 # Directly map between redis and ruby objects
 gem 'redis-objects'
 
+# Namespaces
+gem 'redis-namespace'
+
 # Access to Discourse API
 gem 'discourse_api'
 
@@ -184,7 +187,7 @@ gem 'draper'
 gem 'exception_notification'
 
 # Access global settings
-gem 'rails_config'
+gem 'config'
 
 # Set settings for AR instances
 gem 'ledermann-rails-settings'
