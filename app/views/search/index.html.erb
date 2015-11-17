@@ -2,6 +2,7 @@
 <table id="tasks">
   <thead>
     <tr>
+      <th class="icon-column"></th>
       <th>Titel</th>
       <th class="hide_on_phone">Letzte &Auml;nderung</th>
     </tr>
@@ -9,6 +10,7 @@
   <tbody>
     <% @results.each do |result| %>
       <tr>
+        <td class="icon-column"><%= icon result.icon %></td>
         <td><%= link_to result.title, result.searchable %></td>
         <td class="hide_on_phone"><%= datetime_column result.searchable.updated_at, relative: true %></td>
       </tr>
