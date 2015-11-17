@@ -1,8 +1,8 @@
 #!/usr/bin/env ruby
 require_relative '../config/environment'
-system "rm tmp/pids/*.pid"
+system "rm tmp/pids/*.pid" if Dir.exist? "tmp/pids"
 
-unless ActiveRecord::Base.connection.table_exists? 'tenants' then
+if ActiveRecord::Base.connection.tables.empty? then
   system "rake db:setup"
 else
   system "rake db:migrate"
