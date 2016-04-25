@@ -66,6 +66,10 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json
   def update
+    if current_user.moderator?
+      unauthorized_access if user_params[:role].eql? :admin
+    end
+
     respond_to do |format|
       if @user.update(user_params)
         format.html { redirect_to @user, notice: 'Benutzer wurde erfolgreich aktualisiert.' }
@@ -97,7 +101,8 @@ class UsersController < ApplicationController
   def user_params
     allowed_params = [:username, :email, :jabber_id, :jabber_otr_fingerprint, :avatar]
     allowed_params << [:password, :password_confirmation] unless params[:user][:password].blank?
-    allowed_params << [:role, :tenant_ids => []] if current_user.admin?
+    allowed_params << [:role] if current_user.moderator_or_admin?
+    allowed_params << [:tenant_ids => []] if current_user.admin?
     allowed_params << [:user_ids => []] if current_user.moderator_or_admin?
     params.require(:user).permit(allowed_params)
   end

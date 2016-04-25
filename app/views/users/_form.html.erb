@@ -6,7 +6,7 @@
   <%= f.input :password_confirmation %>
   <%= f.input :jabber_id %>
   <%= f.input :jabber_otr_fingerprint %>
-  <%= f.input :role, collection: User.roles.keys.map { |k| k.to_sym }, include_blank: false if current_user.admin? and current_user != @user %>
+  <%= f.input :role, collection: User.roles.keys.map { |k| k.to_sym }.delete_if { |k| current_user.moderator? and k.eql? :admin }, include_blank: false if current_user.moderator_or_admin? and current_user != @user and !@user.admin? %>
   <%= f.association :tenants, label_method: :name, collection: Tenant.all if current_user.admin? %>
   <%= f.input :avatar %>
   <%= f.button :submit, @user == current_user ? 'Profil aktualisieren' : nil %>
