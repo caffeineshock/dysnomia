@@ -13,9 +13,10 @@ class PostprocessorService
       HTML::Pipeline::MentionFilter,
       HTML::Pipeline::EmojiFilter
     ], {
-      asset_root:     "/images",
-      base_url:       "/users/",
-      wiki_base_url:  "/pages/"
+      asset_root:        "/images",
+      base_url:          "/users/",
+      wiki_base_url:     "/pages/",
+      username_pattern:  /[A-Za-z0-9][a-z0-9-]*/
     }
 
     pipeline.call(text)[:output].to_s
